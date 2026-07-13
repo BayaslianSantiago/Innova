@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Práctico — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.65; font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .top-stripe { height: 5px; background: linear-gradient(90deg, #f39c12, #e67e22, #d35400); margin-bottom: 22px; }
+
+    .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1.5px solid #e2e8f0; }
+    .school-tag { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #e67e22; margin-bottom: 4px; }
+    .doc-title { font-size: 19pt; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; letter-spacing: -0.4px; }
+    .doc-meta { font-size: 9.5pt; color: #64748b; font-weight: 500; }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; }
+    .unit-badge { display: inline-block; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; background: #fff7ed; color: #ea580c; border: 1px solid #fed7aa; margin-bottom: 6px; }
+    .year-badge { display: block; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
+
+    .objective-box { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #ea580c; border-radius: 6px; padding: 13px 16px; margin-bottom: 26px; }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    
+    h2 { font-size: 12.5pt; font-weight: 800; color: #ea580c; margin: 26px 0 10px 0; padding-bottom: 5px; border-bottom: 1.5px solid #e2e8f0; }
+    p { margin: 0 0 11px 0; font-size: 12pt; }
+    
+    .criteria-list { list-style: none; padding-left: 0; margin: 0 0 16px 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 11.5pt;}
+    .criteria-item::before { content: "▸"; color: #ea580c; font-size: 12pt; position: absolute; left: 0; top: 0; }
+    .criteria-name { font-weight: 700; color: #0f172a; }
+
+    .callout { display: flex; gap: 11px; align-items: flex-start; padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: 11.5pt; }
+    .callout.info { background: #f5f3ff; border: 1px solid #ddd6fe; color: #6d28d9; }
+    .callout.code { background: #0f172a; border: 1px solid #334155; color: #e2e8f0; font-family: 'JetBrains Mono', monospace; font-size: 10pt; line-height: 1.4; white-space: pre;}
+
+    .entrega-box { margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 20px; }
+    .entrega-box h4 { font-size: 10pt; font-weight: 800; text-transform: uppercase; color: #64748b; margin: 0 0 10px 0; }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Manipulación y Limpieza</h1>
+      <p class="doc-meta"><strong>Ciencia de Datos y Análisis</strong> &nbsp;·&nbsp; 6to Año (2do Cuatrimestre)</p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Unidad 5</span>
+      <span class="year-badge">Trabajo Práctico</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>El Contexto:</strong> El Director les envió un archivo de ventas que fue corrompido por un error del sistema (tiene filas en blanco). Deben usar Pandas en GitHub Codespaces para leerlo, borrar la basura, y decirle al Director cuánto dinero exacto hizo cada Sucursal.</p>
+  </div>
+
+  <h2>Misión 1: Preparar la Basura (Setup)</h2>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Entorno:</span> Abran su repositorio <code>innova-data-lab</code> en GitHub y lancen su entorno Codespaces.</li>
+    <li class="criteria-item"><span class="criteria-name">Dataset Corrupto:</span> Creen un archivo nuevo llamado <code>ventas_sucias.csv</code>. Copien y peguen EXACTAMENTE el siguiente texto adentro y guarden:
+      <div class="callout code" style="margin-top:8px; padding: 10px;">Sucursal,Producto,Venta
+Mendoza,Zapatillas,1500
+Cordoba,Remeras,800
+BuenosAires,Pantalones,
+Mendoza,Remeras,700
+Cordoba,,500
+BuenosAires,Zapatillas,2000</div>
+    </li>
+  </ul>
+
+  <h2>Misión 2: El Script de Limpieza</h2>
+  <p>Creen un archivo llamado <code>analisis.py</code>. Escriban un script de Python que haga lo siguiente (usen las diapositivas como guía):</p>
+  <ul class="criteria-list">
+    <li class="criteria-item">Importe la librería <strong>pandas</strong>.</li>
+    <li class="criteria-item">Lea el archivo <code>ventas_sucias.csv</code> usando <code>pd.read_csv()</code> y lo guarde en una variable llamada <code>df</code>.</li>
+    <li class="criteria-item">Aplique el método <code>.dropna()</code> sobre ese DataFrame para eliminar las filas que no tienen datos (la venta de BuenosAires y el producto de Cordoba).</li>
+    <li class="criteria-item">Utilice <code>.groupby('Sucursal').sum()</code> sobre el DataFrame ya limpio para sumar todo el dinero, y finalmente use <code>print()</code> para mostrarlo por pantalla.</li>
+    <li class="criteria-item"><span class="criteria-name">Ejecución:</span> Corran el archivo en la terminal (usando el botón Play arriba a la derecha). Verifiquen que la consola no imprima errores y muestre la suma.</li>
+  </ul>
+
+  <h2>Misión 3: El Analista vs la IA</h2>
+  <div class="callout info">
+    <div class="icon">🤖</div>
+    <p><strong>El Error Frecuente:</strong> Un error muy clásico en Pandas es escribir mal el nombre de la columna.</p>
+  </div>
+  <p>Pídanle a ChatGPT/Gemini el siguiente prompt y anoten la respuesta en su documento: <em>"Estoy programando en Pandas. Si pongo df.groupby('sucursal') con minúscula en lugar de mayúscula, ¿qué error técnico exacto me va a tirar la consola y qué significa de forma sencilla?"</em>.</p>
+
+  <div class="entrega-box">
+    <h4>Formato de Entrega</h4>
+    <p>Acuérdense de hacer el <strong>Stage, Commit y Push</strong> de su archivo <code>analisis.py</code> y su <code>ventas_sucias.csv</code> en Codespaces. Luego, entreguen en el Classroom un documento con la captura de pantalla de la terminal funcionando, y la respuesta de la Misión 3.</p>
+  </div>
+
+</body>
+</html>

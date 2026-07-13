@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hoja de Trucos N°2 — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+      @bottom-right {
+        content: "INNOVA - 1er Año (2do Cuatrimestre)";
+        font-size: 8pt;
+        color: #94a3b8;
+        font-family: 'Inter', Arial, sans-serif;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.5;
+      font-size: 9.5pt;
+      background: #ffffff;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    /* ── BANDA SUPERIOR ── */
+    .top-stripe {
+      height: 4px;
+      background: linear-gradient(90deg, #0088CE, #FDB913, #8CC63F, #F58220);
+      margin-bottom: 20px;
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 14px;
+      margin-bottom: 20px;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+    .school-tag {
+      font-size: 7.5pt; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: #0088CE; margin-bottom: 4px;
+    }
+    .doc-title {
+      font-size: 18pt; font-weight: 800; color: #0d1b2a;
+      line-height: 1.1; margin: 0 0 4px 0; letter-spacing: -0.5px;
+    }
+    .doc-meta { font-size: 9pt; color: #64748b; font-weight: 500; margin: 0; }
+    .doc-meta strong { color: #1e293b; }
+
+    /* ── LAYOUT ── */
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .col { display: flex; flex-direction: column; gap: 16px; }
+
+    /* ── CARDS ── */
+    .note-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      page-break-inside: avoid;
+    }
+    .note-card.green { background: #f0fdf4; border-color: #bbf7d0; }
+    .note-card.blue { background: #eff6ff; border-color: #bfdbfe; }
+    .note-card.yellow { background: #fefce8; border-color: #fef08a; }
+    .note-card.orange { background: #fff7ed; border-color: #fed7aa; }
+
+    .note-card h3 {
+      margin: 0 0 8px 0;
+      font-size: 11pt; font-weight: 700; color: #0d1b2a;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .note-card p {
+      margin: 0 0 10px 0; font-size: 9.5pt; color: #334155;
+    }
+    .note-card strong { color: #0f172a; font-weight: 700; }
+
+    /* ── CODE ── */
+    .code-block {
+      background: #0d1b2a;
+      border-radius: 6px;
+      padding: 12px 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      color: #e2e8f0;
+      line-height: 1.5;
+      border-left: 3px solid #0088CE;
+      page-break-inside: avoid;
+    }
+    .code-block .kw { color: #c678dd; }
+    .code-block .st { color: #98c379; }
+    .code-block .cm { color: #4b5a6e; font-style: italic; }
+    .code-block .fn { color: #61afef; }
+    .code-block .nm { color: #e5c07b; }
+
+    code {
+      background: #f1f5f9;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9pt;
+      color: #0d1b2a;
+      border: 1px solid #e2e8f0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Hoja de Trucos: 2do Cuatrimestre</h1>
+      <p class="doc-meta">
+        <strong>Apuntes Clave de Programación</strong> &nbsp;·&nbsp; Ciclos & Listas
+      </p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="col">
+      
+      <div class="note-card blue">
+        <h3>🔁 Ciclo FOR (La máquina de repetir)</h3>
+        <p>Le enseñamos a la compu a repetir cosas. El <code>range(veces)</code> indica cuántas veces. ¡No te olvides de los <code>:</code> y la sangría!</p>
+        <div class="code-block">
+          <span class="kw">for</span> <span class="nm">i</span> <span class="kw">in</span> <span class="fn">range</span>(<span class="st">5</span>):<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="st">"Esto se imprime 5 veces"</span>)
+        </div>
+      </div>
+
+      <div class="note-card yellow">
+        <h3>🎒 Listas (Tu Inventario)</h3>
+        <p>Sirven para guardar MUCHAS cosas juntas usando corchetes <code>[ ]</code> y separando por <strong>comas</strong>.</p>
+        <div class="code-block">
+          <span class="nm">mochila</span> = [<span class="st">"Espada"</span>, <span class="st">"Poción"</span>, <span class="st">"Llave"</span>]<br>
+          <span class="fn">print</span>(<span class="nm">mochila</span>)
+        </div>
+      </div>
+
+      <div class="note-card">
+        <h3>🤯 El Truco del Cero</h3>
+        <p>Las computadoras son raras y empiezan a contar desde el número <strong>CERO</strong>. El primer objeto de tu mochila es el número 0.</p>
+        <div class="code-block">
+          <span class="fn">print</span>(<span class="nm">mochila</span>[<span class="st">0</span>]) <span class="cm"># Imprime Espada</span><br>
+          <span class="fn">print</span>(<span class="nm">mochila</span>[<span class="st">1</span>]) <span class="cm"># Imprime Poción</span>
+        </div>
+      </div>
+
+    </div>
+    
+    <!-- COLUMNA DERECHA -->
+    <div class="col">
+
+      <div class="note-card green">
+        <h3>✨ Guardar nuevos tesoros (.append)</h3>
+        <p>Para agregar algo nuevo al final de la mochila sin borrar lo demás, usamos <code>.append()</code>.</p>
+        <div class="code-block">
+          <span class="nm">tesoro</span> = <span class="fn">input</span>(<span class="st">"¿Qué agarraste? "</span>)<br>
+          <span class="nm">mochila</span>.<span class="fn">append</span>(<span class="nm">tesoro</span>)<br>
+          <span class="fn">print</span>(<span class="nm">mochila</span>)
+        </div>
+      </div>
+
+      <div class="note-card orange">
+        <h3>🔍 El Escáner Mágico (FOR en LISTAS)</h3>
+        <p>¡El combo final! Usamos el ciclo <code>for</code> para leer todo el inventario, y un <code>if</code> escondido adentro (con doble sangría) para buscar algo en particular.</p>
+        <div class="code-block">
+          <span class="kw">for</span> <span class="nm">objeto</span> <span class="kw">in</span> <span class="nm">mochila</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> <span class="nm">objeto</span> == <span class="st">"Oro"</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="st">"¡Encontré oro!"</span>)
+        </div>
+        <p style="margin-top:10px; margin-bottom:0;"><strong>Ojo:</strong> Si olvidás la sangría, el <code>if</code> se escapa del ciclo.</p>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

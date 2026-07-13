@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Centro de Mando — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --azul:     #0088CE;
+      --azul-b:   #00a8ff;
+      --amarillo: #FDB913;
+      --verde:    #8CC63F;
+      --naranja:  #F58220;
+      
+      /* Modo Claro (Default) */
+      --fondo:    #f4f7f9;
+      --s1:       #ffffff;
+      --s2:       #f9fafb;
+      --borde:    rgba(0,0,0,0.07);
+      --borde2:   rgba(0,0,0,0.12);
+      --texto:    #111827;
+      --texto2:   #4b5563;
+      --blanco:   #000000;
+      --header-bg: rgba(255,255,255,0.85);
+      --sombra:   rgba(0,0,0,0.1);
+    }
+    body.dark-mode {
+      --fondo:    #080e17;
+      --s1:       #0c1421;
+      --s2:       #101b2e;
+      --borde:    rgba(255,255,255,0.07);
+      --borde2:   rgba(255,255,255,0.12);
+      --texto:    #c8dff0;
+      --texto2:   #6a8ca8;
+      --blanco:   #ffffff;
+      --header-bg: rgba(8,14,23,0.85);
+      --sombra:   rgba(0,0,0,0.5);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ══ FONDO ANIMADO ══ */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 80% 10%, rgba(0,136,206,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 10% 80%, rgba(140,198,63,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 30% at 50% 50%, rgba(253,185,19,0.03) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ══ LAYOUT ══ */
+    .wrap {
+      position: relative; z-index: 1;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ══ HEADER ══ */
+    header {
+      border-bottom: 1px solid var(--borde);
+      background: var(--header-bg);
+      backdrop-filter: blur(12px);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .header-inner {
+      display: flex; align-items: center;
+      align-items: center;
+      gap: 1.25rem;
+      padding: 0.9rem 0;
+    }
+    .logo-img {
+      width: 38px; height: 38px;
+      object-fit: contain;
+      flex-shrink: 0;
+      border-radius: 8px; /* Opcional si el logo necesita redondeo suave */
+    }
+    .header-title {
+      font-size: 0.92rem; font-weight: 700; color: var(--texto);
+      letter-spacing: -0.2px;
+    }
+    .header-sub {
+      font-size: 0.72rem; color: var(--texto2); font-weight: 500;
+      margin-top: 1px;
+    }
+    .header-right { margin-left: auto; display: flex; align-items: center; gap: 0.6rem; }
+    .chip-year {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.1em;
+      border: 1px solid rgba(0,136,206,0.35);
+      color: var(--azul-b);
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(0,136,206,0.08);
+    }
+
+    /* ══ HERO ══ */
+    .hero {
+      padding: 4rem 0 3rem;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.2em; color: var(--texto2);
+      display: flex; align-items: center; gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 24px; height: 2px;
+      background: linear-gradient(90deg, var(--azul), var(--amarillo));
+      border-radius: 2px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: var(--blanco);
+      line-height: 1.1;
+      letter-spacing: -1.5px;
+      max-width: 700px;
+    }
+    .hero h1 .hl { 
+      background: linear-gradient(90deg, var(--azul-b), var(--verde));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-desc {
+      font-size: 0.95rem; color: var(--texto2); line-height: 1.7;
+      max-width: 520px; margin-top: 1rem; font-weight: 500;
+    }
+    /* Stats row */
+    .hero-stats {
+      display: flex; gap: 2rem; margin-top: 2.5rem;
+    }
+
+    .hstat .val {
+      font-size: 1.6rem; font-weight: 800; color: var(--blanco);
+      font-variant-numeric: tabular-nums;
+    }
+    .hstat .lbl { font-size: 0.68rem; color: var(--texto2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+    /* ══ SECCIÓN LABEL ══ */
+    .sec-label {
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.18em; color: var(--texto2);
+      margin-bottom: 1.25rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .sec-label::after {
+      content: ''; flex: 1; height: 1px;
+      background: var(--borde);
+    }
+
+    /* ══ COURSES GRID ══ */
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 860px) { .courses-grid { grid-template-columns: 1fr; } }
+
+    .ccard {
+      background: var(--s1);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .ccard:hover {
+      transform: translateY(-5px);
+      border-color: var(--borde2);
+      box-shadow: 0 20px 60px var(--sombra);
+    }
+
+    /* Glow de color por año */
+    .ccard::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      border-radius: 16px 16px 0 0;
+    }
+    .ccard-1 { --accent: #0088CE; }
+    .ccard-3 { --accent: #8CC63F; }
+    .ccard-6 { --accent: #FDB913; }
+    .ccard::after { background: var(--accent); }
+    .ccard:hover { box-shadow: 0 20px 60px var(--sombra), 0 0 0 1px var(--accent), 0 8px 40px color-mix(in srgb, var(--accent) 15%, transparent); }
+
+    .ccard-top {
+      padding: 1.5rem 1.5rem 1.25rem;
+      position: relative;
+    }
+    .ccard-glow {
+      position: absolute; top: -20px; right: -20px;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.07;
+      filter: blur(20px);
+      pointer-events: none;
+    }
+    .ccard-pill {
+      display: inline-block;
+      font-size: 0.65rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.22rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+      color: color-mix(in srgb, var(--accent) 100%, white 30%);
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      margin-bottom: 0.75rem;
+    }
+    .ccard-top h3 {
+      font-size: 1.05rem; font-weight: 800; color: var(--blanco);
+      line-height: 1.3; letter-spacing: -0.3px;
+    }
+    .ccard-top .tags {
+      font-size: 0.7rem; color: var(--texto2); margin-top: 0.3rem;
+      font-weight: 500;
+    }
+
+    .ccard-body { padding: 0 1.5rem 1.5rem; }
+
+    /* Stats row dentro de card */
+    .ccard-stats {
+      display: flex; gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .cstat {
+      flex: 1;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--borde);
+      border-radius: 8px;
+      padding: 0.5rem 0.4rem;
+      text-align: center;
+    }
+    .cstat .cv { font-size: 1.15rem; font-weight: 800; color: var(--blanco); }
+    .cstat .cl { font-size: 0.6rem; color: var(--texto2); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; margin-top: 1px; }
+
+    /* Links */
+    .file-links { list-style: none; }
+    .file-links li { border-top: 1px solid var(--borde); }
+    .file-links li:first-child { border-top: none; }
+    .file-links a {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.6rem 0;
+      text-decoration: none;
+      color: var(--texto); font-size: 0.8rem; font-weight: 600;
+      transition: color 0.18s;
+    }
+    .file-links a:hover { color: var(--blanco); }
+    .file-links .fi { font-size: 0.95rem; flex-shrink: 0; }
+    .file-links .fb {
+      margin-left: auto;
+      font-size: 0.6rem; font-weight: 700; text-transform: uppercase;
+      padding: 0.14rem 0.5rem; border-radius: 999px;
+    }
+    .fb-plan  { background: rgba(0,136,206,0.15); color: #5ab8f0; border: 1px solid rgba(0,136,206,0.3); }
+    .fb-dias  { background: rgba(245,130,32,0.15); color: #f8a870; border: 1px solid rgba(245,130,32,0.3); }
+    .fb-tp    { background: rgba(140,198,63,0.15); color: #a8d870; border: 1px solid rgba(140,198,63,0.3); }
+
+    .ccard-empty {
+      margin-top: 0.75rem;
+      display: flex; align-items: center; justify-content: center; gap: 0.4rem;
+      border: 1px dashed var(--borde);
+      border-radius: 8px;
+      padding: 0.55rem;
+      font-size: 0.75rem; color: var(--texto2); font-weight: 600;
+      cursor: default;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .ccard-empty:hover { border-color: var(--borde2); color: var(--texto); }
+
+    /* ══ TOOLS ══ */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.85rem;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 860px) { .tools-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .tool {
+      background: var(--s1);
+      border: 1px solid var(--borde);
+      border-radius: 12px;
+      padding: 1.1rem;
+      display: flex; flex-direction: column; gap: 0.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .tool:hover { border-color: var(--borde2); transform: translateY(-2px); }
+    .tool-ico { font-size: 1.4rem; }
+    .tool-name { font-size: 0.82rem; font-weight: 700; color: var(--blanco); }
+    .tool-desc { font-size: 0.7rem; color: var(--texto2); line-height: 1.5; font-weight: 500; }
+
+    /* ══ ROADMAP ══ */
+    .roadmap-block { margin-bottom: 3rem; }
+    .cuatri-row {
+      display: flex; align-items: center; gap: 0.6rem;
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--texto2);
+      margin-bottom: 0.75rem;
+    }
+    .cuatri-row .cuatri-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+    }
+    .cuatri-row::after {
+      content: ''; flex: 1; height: 1px; background: var(--borde);
+    }
+    .units-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 860px) { .units-row { grid-template-columns: repeat(3, 1fr); } }
+
+    .uchip {
+      background: var(--s1);
+      border: 1px solid var(--borde);
+      border-radius: 10px;
+      padding: 0.75rem 0.6rem;
+      text-align: center;
+    }
+    .uchip .un {
+      display: block; font-size: 0.58rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--texto2);
+    }
+    .uchip .ut {
+      display: block; font-size: 0.68rem; font-weight: 700;
+      color: var(--texto); margin-top: 0.25rem; line-height: 1.3;
+    }
+    .uchip-int {
+      background: rgba(0,136,206,0.07);
+      border: 1px dashed rgba(0,136,206,0.3);
+      grid-column: span 2;
+    }
+    .uchip-int .un { color: var(--azul-b); }
+    .uchip-int .ut { color: #5ab8f0; }
+
+    /* ══ TABS ══ */
+    .year-tabs {
+      display: flex; gap: 0.5rem;
+      background: rgba(255,255,255,0.03); padding: 0.35rem; border-radius: 999px;
+      border: 1px solid var(--borde);
+    }
+    .year-tab {
+      background: transparent; border: none; color: var(--texto2);
+      font-size: 0.75rem; font-weight: 700; padding: 0.4rem 1rem;
+      border-radius: 999px; cursor: pointer; transition: 0.2s;
+    }
+    .year-tab:hover { color: var(--texto); }
+    .year-tab.active { background: rgba(255,255,255,0.1); color: var(--blanco); box-shadow: 0 2px 8px rgba(0,0,0,0.2); }
+
+    /* ══ FOOTER ══ */
+    footer {
+      border-top: 1px solid var(--borde);
+      padding: 1.5rem 0;
+      text-align: center;
+      font-size: 0.72rem; color: var(--texto2); font-weight: 500;
+      position: relative; z-index: 1;
+    }
+    footer span { color: var(--azul-b); }
+
+    /* ══ SEPARADOR ══ */
+    .spacer { margin-bottom: 2.5rem; }
+  
+    /* ══ MOBILE OPTIMIZATION ══ */
+    @media (max-width: 600px) {
+      .hero { padding: 3rem 0; }
+      .hero h1 { font-size: 2rem; }
+      .hero-desc { font-size: 0.95rem; }
+      .hero-stats { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+      .hero-stats .hstat { min-width: 40%; margin: 0; }
+      .courses-grid, .tools-grid { grid-template-columns: 1fr !important; }
+      .units-row { grid-template-columns: 1fr !important; }
+      .uchip-int { grid-column: span 1 !important; }
+      .wrap { padding: 0 1rem; }
+      .header-title { font-size: 0.9rem; }
+      .header-sub { font-size: 0.6rem; }
+      .ccard-top { padding-bottom: 1.5rem !important; }
+    }
+</style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<header>
+  <div class="wrap">
+    <div class="header-inner">
+      <img src="../logo.png" alt="INNOVA Logo" class="logo-img" />
+      <div>
+        <a href="../index.html" style="color: #0088CE; text-decoration: none; font-size: 0.8rem; font-weight: 700;">← Volver al Inicio</a><div class="header-title" style="margin-top: 5px;">INNOVA — Centro de Mando</div>
+        <div class="header-sub">Materiales de Clase · Herramientas Digitales</div>
+      </div>
+      <div class="header-right">
+        <span class="chip-year">Ciclo 2026</span>
+      </div>
+    </div>
+    
+    </div>
+</header>
+
+
+<main class="wrap" style="padding-top: 40px;">
+  <div class="courses-grid" style="grid-template-columns: 1fr; max-width: 800px; margin: 0 auto;">
+<!-- 3ER AÑO -->
+    <div class="ccard " style="margin-bottom: 2rem;" ccard-3" data-year="3">
+      <div class="ccard-top">
+        <div class="ccard-glow"></div>
+        <div class="ccard-pill">3er Año</div>
+        <h3>Programación</h3>
+        <div class="tags">HTML · Diccionarios · APIs · Criptografía · IA</div>
+      </div>
+      <div class="ccard-body">
+        <div class="ccard-stats">
+          <div class="cstat"><div class="cv">6</div><div class="cl">Unidades</div></div>
+          <div class="cstat"><div class="cv">6</div><div class="cl">TPs</div></div>
+          <div class="cstat"><div class="cv">2</div><div class="cl">Proyectos</div></div>
+        </div>
+        <ul class="file-links">
+          <li>
+            <a href="planificacion_anual.html">
+              <span class="fi">📋</span> Planificación Anual
+              <span class="fb fb-plan">Plan</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 1/diapositivas_u1.html">
+              <span class="fi">🖥️</span> Diapositivas U1: Magia Visual (HTML)
+              <span class="fb fb-dias">Slides</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 1/tp_u1.html">
+              <span class="fi">📝</span> TP U1: El Esqueleto Web
+              <span class="fb fb-tp">TP</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 2/diapositivas_u2.html">
+              <span class="fi">🖥️</span> Diapositivas U2: El Copiloto Hacker
+              <span class="fb fb-dias">Slides</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 2/tp_u2.html">
+              <span class="fi">📝</span> TP U2: Prompt Engineering
+              <span class="fb fb-tp">TP</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 3/diapositivas_u3.html">
+              <span class="fi">🖥️</span> Diapositivas U3: Bases de Datos (Diccionarios)
+              <span class="fb fb-dias">Slides</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 3/tp_u3.html">
+              <span class="fi">📝</span> TP U3: La Scaloneta
+              <span class="fb fb-tp">TP</span>
+            </a>
+          </li>
+          <li style="margin-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 15px;">
+            <a href="Integrador/tp_integrador.html">
+              <span class="fi">🏆</span> TP Integrador: Sistema AFA
+              <span class="fb" style="background:#FDB913; color:#1a1a1a;">Evaluación Final</span>
+            </a>
+          </li>
+          <li>
+            <a href="Integrador/cuadernillo_c1.html">
+              <span class="fi">📖</span> Hoja de Trucos 1er Cuatrimestre
+              <span class="fb" style="background:#8CC63F; color:#1a1a1a;">Apuntes</span>
+            </a>
+          </li>
+          
+        </ul>
+
+        <!-- SEGUNDO CUATRIMESTRE -->
+        <div style="margin: 25px 0 15px 0; padding-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+          <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #a855f7; font-weight: 700;">Segundo Cuatrimestre</span>
+        </div>
+
+        <ul class="file-links" style="margin-bottom: 20px;">
+          <li>
+            <a href="Unidad 4/diapositivas_u4.html">
+              <span class="fi">🖥️</span> Diapositivas U4: El Arsenal (Funciones y Módulos)
+              <span class="fb fb-dias">Slides</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 4/tp_u4.html">
+              <span class="fi">📝</span> TP U4: Creando Herramientas
+              <span class="fb fb-tp">TP</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 5/diapositivas_u5.html">
+              <span class="fi">🖥️</span> Diapositivas U5: APIs y JSON
+              <span class="fb fb-dias">Slides</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 5/tp_u5.html">
+              <span class="fi">📝</span> TP U5: Conexión Satelital
+              <span class="fb fb-tp">TP</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 6/diapositivas_u6.html">
+              <span class="fi">🖥️</span> Diapositivas U6: Mensajes Secretos (Criptografía)
+              <span class="fb fb-dias">Slides</span>
+            </a>
+          </li>
+          <li>
+            <a href="Unidad 6/tp_u6.html">
+              <span class="fi">📝</span> TP U6: Analista Forense
+              <span class="fb fb-tp">TP</span>
+            </a>
+          </li>
+          <li style="margin-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); padding-top: 15px;">
+            <a href="Integrador/tp_integrador_2.html">
+              <span class="fi">🏆</span> TP Integrador C2: Operación Fantasma
+              <span class="fb" style="background:#FDB913; color:#1a1a1a;">Evaluación Final</span>
+            </a>
+          </li>
+          <li>
+            <a href="Integrador/cuadernillo_c2.html">
+              <span class="fi">📖</span> Hoja de Trucos 2do Cuatrimestre
+              <span class="fb" style="background:#8CC63F; color:#1a1a1a;">Apuntes</span>
+            </a>
+          </li>
+        </ul>
+        
+
+      </div>
+    </div>
+
+
+
+    
+  </div>
+  <div style="max-width: 800px; margin: 0 auto; margin-top: 50px;">
+<!-- ROADMAP 3er AÑO -->
+  <div class="sec-label roadmap-title" data-year="3">Roadmap del Año — 3er Año (Programación)</div>
+  <div class="roadmap-block" style="margin-bottom: 40px;" data-year="3">
+    <div class="cuatri-row">
+      <div class="cuatri-dot" style="background:var(--azul);"></div>
+      Primer Cuatrimestre · "De la Web a los Datos"
+    </div>
+    <div class="units-row">
+      <div class="uchip"><span class="un">U1</span><span class="ut">HTML Magia Visual</span></div>
+      <div class="uchip"><span class="un">U2</span><span class="ut">Colab + IA Asistente</span></div>
+      <div class="uchip"><span class="un">U3</span><span class="ut">Diccionarios</span></div>
+      <div class="uchip uchip-int"><span class="un">🎯 Proyecto C1</span><span class="ut">Sistema de Gestión</span></div>
+    </div>
+    <div class="cuatri-row">
+      <div class="cuatri-dot" style="background:var(--verde);"></div>
+      Segundo Cuatrimestre · "Conectados al Mundo"
+    </div>
+    <div class="units-row">
+      <div class="uchip"><span class="un">U4</span><span class="ut">Funciones y Librerías</span></div>
+      <div class="uchip"><span class="un">U5</span><span class="ut">APIs y JSON</span></div>
+      <div class="uchip"><span class="un">U6</span><span class="ut">Strings y Criptografía</span></div>
+      <div class="uchip uchip-int"><span class="un">🎯 Proyecto C2</span><span class="ut">Asistente Virtual</span></div>
+    </div>
+  </div>
+
+  
+  </div>
+</main>
+<footer>
+  <div class="wrap" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+    <div>Centro de Mando · <span>INNOVA</span> · Ciclo Lectivo 2026</div>
+    <button id="theme-btn" title="Alternar Tema" style="background:none; border:none; color:inherit; font-size:1.2rem; cursor:pointer; padding: 0.5rem;">🌙</button>
+  </div>
+</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.year-tab');
+    const cards = document.querySelectorAll('.ccard');
+    const roadmaps = document.querySelectorAll('.roadmap-block');
+    const roadmapTitles = document.querySelectorAll('.roadmap-title');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        const target = tab.getAttribute('data-target');
+        
+        cards.forEach(card => {
+          card.style.display = (target === 'all' || card.getAttribute('data-year') === target) ? 'flex' : 'none';
+        });
+        
+        roadmaps.forEach(rm => {
+          rm.style.display = (target === 'all' || rm.getAttribute('data-year') === target) ? 'block' : 'none';
+        });
+        
+        roadmapTitles.forEach(rt => {
+          rt.style.display = (target === 'all' || rt.getAttribute('data-year') === target) ? 'block' : 'none';
+        });
+      });
+    });
+  });
+</script>
+
+
+<script>
+  // Theme Toggle Logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const themeBtn = document.getElementById('theme-btn');
+    
+    // Check local storage for preference
+    if(localStorage.getItem('innova_theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      if(themeBtn) themeBtn.textContent = '☀️';
+    } else {
+      if(themeBtn) themeBtn.textContent = '🌙';
+    }
+
+    if(themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        if (document.body.classList.contains('dark-mode')) {
+          localStorage.setItem('innova_theme', 'dark');
+          themeBtn.textContent = '☀️';
+        } else {
+          localStorage.setItem('innova_theme', 'light');
+          themeBtn.textContent = '🌙';
+        }
+      });
+    }
+  });
+</script>
+
+</body>
+</html>

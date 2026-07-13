@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Presentación — INNOVA</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --azul: #0088CE;
+      --azul-b: #00aaff;
+      --amarillo: #FDB913;
+      --verde: #8CC63F;
+      --naranja: #F58220;
+      --tinta: #070d16;
+      --tinta2: #0d1b2a;
+      --s2: #101e30;
+      --gris: #4e6a85;
+      --texto: #9bbdd6;
+      --linea: rgba(255, 255, 255, 0.08);
+      --fondo: #0a1520;
+      --blanco: #ffffff;
+      --panel: #0f1e2f;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--tinta);
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      color: var(--texto);
+      overflow: hidden;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── DECK ── */
+    #deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--fondo);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(16px) scale(0.995);
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 48px 72px 36px;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .slide-inner {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* ── RAIL SUPERIOR ── */
+    .rail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg,
+          var(--azul) 25%, var(--amarillo) 25%, var(--amarillo) 50%,
+          var(--verde) 50%, var(--verde) 75%, var(--naranja) 75%);
+    }
+
+    /* ── TAG / EYEBROW ── */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gris);
+      margin-bottom: 14px;
+    }
+
+    .tag .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    h1.slide-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blanco);
+      line-height: 1.1;
+      margin: 0 0 6px 0;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--texto);
+      margin: 0 0 24px 0;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .content {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* ── FOOTER ── */
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--linea);
+    }
+
+    .foot .brand {
+      font-size: 8.5pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+    .foot .brand span {
+      color: var(--azul-b);
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-track {
+      width: 180px;
+      height: 3px;
+      background: var(--linea);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--azul-b);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .page-num {
+      font-size: 8.5pt;
+      color: var(--gris);
+      font-weight: 600;
+    }
+
+    /* ── GRIDS ── */
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      height: 100%;
+    }
+
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--linea);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+      color: var(--blanco);
+      font-weight: 700;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--texto);
+      line-height: 1.55;
+    }
+
+    .accent-left {
+      border-left: 3px solid var(--azul);
+    }
+
+    .accent-left.y {
+      border-left-color: var(--amarillo);
+    }
+
+    .accent-left.g {
+      border-left-color: var(--verde);
+    }
+
+    .accent-left.o {
+      border-left-color: var(--naranja);
+    }
+
+    /* ── CLEAN LIST ── */
+    ul.clean {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    ul.clean li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--texto);
+    }
+
+    ul.clean li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 7px;
+      height: 7px;
+      background: var(--azul);
+      border-radius: 2px;
+    }
+
+    ul.clean li strong {
+      color: var(--blanco);
+    }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #020b14;
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: #abb2bf;
+      line-height: 1.6;
+      border-left: 3px solid var(--azul);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    }
+
+    .code-block .kw {
+      color: #c678dd;
+    }
+
+    .code-block .st {
+      color: #98c379;
+    }
+
+    .code-block .cm {
+      color: #3d5066;
+      font-style: italic;
+    }
+
+    .code-block .fn {
+      color: #61afef;
+    }
+
+    .code-block .nm {
+      color: #e5c07b;
+    }
+
+    /* ── CHALLENGE CARD ── */
+    .challenge-card {
+      background: linear-gradient(135deg, #1a0e00, #291500);
+      border: 1px solid rgba(253, 185, 19, 0.25);
+      border-radius: 12px;
+      padding: 22px 24px;
+      text-align: center;
+      box-shadow: 0 0 40px rgba(253, 185, 19, 0.08);
+    }
+
+    .challenge-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.1rem;
+      color: var(--amarillo);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .challenge-card p {
+      font-size: 0.92rem;
+      font-weight: 500;
+      margin: 0;
+      color: #e0c87a;
+      line-height: 1.5;
+    }
+
+    /* ── CALLOUTS ── */
+    .callout {
+      padding: 12px 16px;
+      border-radius: 8px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .callout .icon {
+      font-size: 1rem;
+      line-height: 1.4;
+      flex-shrink: 0;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .callout.tip {
+      background: rgba(140, 198, 63, 0.1);
+      border: 1px solid rgba(140, 198, 63, 0.25);
+      color: #a8d870;
+    }
+
+    .callout.warning {
+      background: rgba(253, 185, 19, 0.1);
+      border: 1px solid rgba(253, 185, 19, 0.25);
+      color: #e0c87a;
+    }
+
+    .callout.danger {
+      background: rgba(245, 130, 32, 0.1);
+      border: 1px solid rgba(245, 130, 32, 0.25);
+      color: #f8a870;
+    }
+
+    .callout.info {
+      background: rgba(0, 136, 206, 0.1);
+      border: 1px solid rgba(0, 136, 206, 0.25);
+      color: var(--azul-b);
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+      padding-left: 26px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      bottom: 8px;
+      width: 2px;
+      background: var(--linea);
+    }
+
+    .timeline-step {
+      position: relative;
+    }
+
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: -22px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--azul);
+      box-shadow: 0 0 0 3px rgba(0, 136, 206, 0.2);
+    }
+
+    .timeline-step h4 {
+      margin: 0 0 3px 0;
+      font-size: 0.95rem;
+      color: var(--blanco);
+      font-weight: 700;
+    }
+
+    .timeline-step p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--texto);
+    }
+
+    /* ── MEDIA ── */
+    .media-container {
+      text-align: center;
+      background: var(--panel);
+      border: 1px solid var(--linea);
+      border-radius: 10px;
+      padding: 14px;
+    }
+
+    .media-container img {
+      max-width: 100%;
+      max-height: 260px;
+      border-radius: 6px;
+    }
+
+    .media-container .caption {
+      font-size: 0.75rem;
+      color: var(--gris);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ── STAT CARD ── */
+    .stat-card {
+      background: var(--panel);
+      border: 1px solid var(--linea);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .stat-card .val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--blanco);
+      display: block;
+    }
+
+    .stat-card .lbl {
+      font-size: 0.72rem;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* ── TITLE SLIDE ── */
+    .title-slide {
+      background: var(--tinta);
+      justify-content: center;
+      padding: 0 90px;
+    }
+
+    .title-slide .stripe {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--azul), var(--amarillo), var(--verde), var(--naranja));
+      border-radius: 4px;
+      margin-bottom: 32px;
+    }
+
+    .title-slide .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gris);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .title-slide h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin: 0 0 16px 0;
+      max-width: 860px;
+      letter-spacing: -1.5px;
+      color: var(--blanco);
+    }
+
+    .title-slide h1 .hl {
+      background: linear-gradient(90deg, var(--azul-b), var(--verde));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title-slide .desc {
+      font-size: 1.05rem;
+      color: var(--texto);
+      max-width: 620px;
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    .title-slide .meta-row {
+      display: flex;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .title-slide .meta-row .mc {
+      font-size: 0.72rem;
+      color: var(--gris);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+
+    .title-slide .meta-row .mc b {
+      display: block;
+      color: var(--blanco);
+      font-size: 1rem;
+      letter-spacing: -0.3px;
+      text-transform: none;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* ── NAV ── */
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--linea);
+      color: var(--blanco);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.2s;
+      user-select: none;
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      transform: translateY(-50%) scale(1.07);
+    }
+
+    #prevBtn {
+      left: 16px;
+    }
+
+    #nextBtn {
+      right: 16px;
+    }
+
+    .nav-hint {
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 7.5pt;
+      color: var(--gris);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.06em;
+      z-index: 50;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+
+      .nav-btn,
+      .nav-hint {
+        display: none !important;
+      }
+
+      @page {
+        size: landscape;
+        margin: 0;
+      }
+
+      html,
+      body {
+        overflow: visible !important;
+        height: auto !important;
+      }
+
+      #deck {
+        height: auto !important;
+        display: block !important;
+      }
+
+      .slide {
+        position: relative !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        height: 100vh !important;
+        page-break-after: always;
+        break-after: page;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .slide:last-child {
+        page-break-after: auto;
+        break-after: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="deck">
+
+    <!-- Diapositiva 1 -->
+    <section class="slide title-slide active">
+      <div class="stripe"></div>
+      <p class="eyebrow">1er Año · 2do Cuatrimestre</p>
+      <h1>El Escáner <span class="hl">Mágico</span></h1>
+      <p class="desc">Unidad 6: Mezclando Listas y Ciclos (El Poder Total).</p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--amarillo)"></span>Problema</span>
+        <h1 class="slide-title">¿Una mochila infinita?</h1>
+        <p class="subtitle">La forma lenta vs La forma hacker.</p>
+        <div class="content">
+          <div class="card accent-left" style="font-size: 1.3rem; padding: 20px; margin-bottom: 20px; margin-top:20px;">
+            <p>Si tu inventario tiene 3 cosas, usar <code>print(mochila[0])</code> es fácil. Pero... ¿y si estás en nivel 100 y tu mochila tiene <strong>miles de objetos</strong>? ¡Tardarías una eternidad en escribir los prints a mano!</p>
+          </div>
+          <div class="callout warning" style="font-size: 1.3rem; padding: 20px;">
+            <div class="icon">🐢</div>
+            <p>Nosotros NO queremos trabajar de más. Queremos que la compu lo haga. Para eso vamos a <strong>escanear</strong> la lista a toda velocidad usando un ciclo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--verde)"></span>Concepto</span>
+        <h1 class="slide-title">El FOR en la Mochila</h1>
+        <p class="subtitle">Revisando cada bolsillo automáticamente.</p>
+        <div class="content">
+          <div class="code-block" style="font-size: 1.6rem; padding: 30px; text-align:center; margin-top:20px;">
+            <span class="nm">mochila</span> = [<span class="st">"Espada"</span>, <span class="st">"Poción"</span>, <span class="st">"Llave"</span>]<br><br>
+            <span class="kw">for</span> <span class="nm">tesoro</span> <span class="kw">in</span> <span class="nm">mochila</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="nm">tesoro</span>)
+          </div>
+          <div class="callout tip" style="font-size: 1.3rem; padding: 20px; margin-top: 20px;">
+            <div class="icon">✨</div>
+            <p>Le estamos diciendo a la compu: "Para cada <strong>tesoro</strong> que haya adentro de la <strong>mochila</strong>, imprimilo". ¡Magia pura en 2 renglones!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--azul)"></span>Poder Total</span>
+        <h1 class="slide-title">El Combo Definitivo</h1>
+        <p class="subtitle">Ciclos + Listas + Condicionales (IF)</p>
+        <div class="content">
+          <div class="card accent-left g" style="font-size: 1.2rem; padding: 20px; margin-bottom: 20px; margin-top:10px;">
+            <p>Podemos decirle a la compu que busque algo específico adentro de la lista usando un <strong>IF</strong> escondido adentro del <strong>FOR</strong>.</p>
+          </div>
+          <div class="code-block" style="font-size: 1.3rem; padding: 30px;">
+            <span class="kw">for</span> <span class="nm">tesoro</span> <span class="kw">in</span> <span class="nm">mochila</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">if</span> <span class="nm">tesoro</span> == <span class="st">"Poción"</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="st">"¡Encontramos vida! Te salvaste."</span>)
+          </div>
+          <div class="callout warning" style="font-size: 1.2rem; padding: 15px; margin-top: 15px;">
+            <div class="icon">🚨</div>
+            <p>¡Mucha atención a la <strong>doble sangría</strong>! El <code>if</code> tiene su propio espacio (adentro del for), y el <code>print</code> se mete todavía más adentro (adentro del if).</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--verde)"></span>Misión</span>
+        <h1 class="slide-title">¡A programar!</h1>
+        <p class="subtitle">Trabajo Práctico N°6 (El Jefe Final)</p>
+        <div class="content">
+          <div class="card accent-left g" style="font-size: 1.4rem; padding:40px; margin-top:40px;">
+            <p>Abran Google Colab y busquen el <strong>Trabajo Práctico N°6</strong>.</p>
+            <br>
+            <p>Hoy vamos a usar TODO el poder de la computadora junto. ¡Es la prueba definitiva del año!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <button class="nav-btn" id="prevBtn" aria-label="Anterior">‹</button>
+  <button class="nav-btn" id="nextBtn" aria-label="Siguiente">›</button>
+  <div class="nav-hint">← → para navegar</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    function render() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      document.querySelectorAll('.progress-fill').forEach(f => {
+        f.style.width = ((current + 1) / total * 100) + '%';
+      });
+      document.querySelectorAll('.page-num').forEach(p => {
+        p.textContent = (current + 1) + ' / ' + total;
+      });
+    }
+    function go(delta) {
+      current = Math.max(0, Math.min(total - 1, current + delta));
+      render();
+    }
+    document.getElementById('prevBtn').addEventListener('click', () => go(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => go(1));
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') go(1);
+      if (e.key === 'ArrowLeft') go(-1);
+    });
+    render();
+  </script>
+</body>
+
+</html>

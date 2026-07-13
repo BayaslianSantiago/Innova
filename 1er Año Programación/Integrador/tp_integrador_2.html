@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Integrador 2 — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+      @bottom-right {
+        content: "Pág. " counter(page) " / " counter(pages);
+        font-size: 8pt;
+        color: #94a3b8;
+        font-family: 'Inter', Arial, sans-serif;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', -apple-system, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.65;
+      font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    /* ── BANDA SUPERIOR ── */
+    .top-stripe {
+      height: 5px;
+      background: linear-gradient(90deg, #FDB913, #F58220, #e11d48);
+      margin-bottom: 22px;
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+
+    .school-tag {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #F58220;
+      margin-bottom: 4px;
+    }
+    .doc-title {
+      font-size: 19pt;
+      font-weight: 800;
+      color: #0d1b2a;
+      line-height: 1.15;
+      margin: 0 0 6px 0;
+      letter-spacing: -0.4px;
+    }
+    .doc-meta {
+      font-size: 9.5pt;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .doc-meta strong { color: #1e293b; }
+
+    /* Badge de unidad */
+    .header-badge {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .unit-badge {
+      display: inline-block;
+      font-size: 8.5pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #fff7ed;
+      color: #F58220;
+      border: 1px solid #fed7aa;
+      margin-bottom: 6px;
+    }
+    .year-badge {
+      display: block;
+      font-size: 8pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: #94a3b8;
+    }
+
+    /* ── CAJA OBJETIVO ── */
+    .objective-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #F58220;
+      border-radius: 6px;
+      padding: 13px 16px;
+      margin-bottom: 26px;
+    }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    .objective-box strong { color: #1a2e3d; }
+
+    /* ── HEADINGS ── */
+    h2 {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: #0088CE;
+      margin: 26px 0 10px 0;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #e2e8f0;
+      page-break-after: avoid;
+      letter-spacing: -0.2px;
+    }
+
+    p { margin: 0 0 11px 0; font-size: 12pt; line-height: 1.6; }
+
+    ol, ul {
+      margin: 0 0 16px 0;
+      padding-left: 22px;
+    }
+    li { margin-bottom: 7px; font-size: 11.5pt;}
+    strong { color: #0d1b2a; font-weight: 700; }
+
+    /* ── CASE STUDY ── */
+    .case-study {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #FDB913;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 11px;
+      page-break-inside: avoid;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .case-study-title {
+      font-size: 9.5pt;
+      font-weight: 800;
+      color: #0088CE;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .case-study p { margin: 0; font-size: 12pt; color: #475569; margin-bottom: 8px; }
+
+    /* ── CRITERIA LIST ── */
+    .criteria-list { list-style: none; padding-left: 0; }
+    .criteria-item {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    .criteria-item::before {
+      content: "▸";
+      color: #F58220;
+      font-size: 12pt;
+      position: absolute;
+      left: 0; top: 0;
+    }
+    .criteria-name { font-weight: 700; color: #0d1b2a; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      page-break-inside: avoid;
+    }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; line-height: 1.4; }
+    .callout p { margin: 0; font-size: 11.5pt; line-height: 1.55; }
+    .callout.warning { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #0f172a;
+      border-radius: 7px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11pt;
+      color: #e2e8f0;
+      line-height: 1.6;
+      border-left: 3px solid #0088CE;
+      page-break-inside: avoid;
+    }
+
+    /* ── ENTREGA ── */
+    .entrega-box {
+      margin-top: 30px;
+      background: #f8fafc;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      page-break-inside: avoid;
+    }
+    .entrega-box h4 {
+      font-size: 10pt; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: #64748b; margin: 0 0 10px 0;
+    }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Integrador: La Batalla Final</h1>
+      <p class="doc-meta">
+        <strong>Proyecto Final</strong> &nbsp;·&nbsp; 1er Año (2do Cuatrimestre)
+      </p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Evaluación</span>
+      <span class="year-badge">1er Año</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo de hoy:</strong> Aplicar todo lo aprendido en el 2do Cuatrimestre (Ciclos y Listas) para ganar el juego y sobrevivir a la batalla final.</p>
+  </div>
+
+  <h2>Misión 1: Entrenamiento Intensivo</h2>
+  <div class="case-study">
+    <div class="case-study-title">¡A entrenar!</div>
+    <p>Antes de ir a pelear contra el Jefe, tu personaje necesita practicar. Vas a hacer que golpee al muñeco de prueba automáticamente.</p>
+  </div>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">El Ciclo:</span> Usá un <code>for</code> junto con la herramienta <code>range()</code> para que el ciclo se repita exactamente <strong>10 veces</strong>.</li>
+    <li class="criteria-item"><span class="criteria-name">La Acción:</span> Adentro del ciclo, usá <code>print()</code> para imprimir la frase: <em>"¡Golpe fuerte!"</em>.</li>
+  </ul>
+
+  <h2>Misión 2: El Botín del Jefe</h2>
+  <p>¡Derrotaste al jefe del castillo! Cayó una mochila al piso y procedemos a robar el contenido.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Inventario:</span> Creá una lista llamada <code>botin</code> que adentro tenga: <code>"Poción Máxima"</code>, <code>"Gemas"</code>, <code>"Corona"</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">Ojo de Águila:</span> Imprimí en la pantalla SOLAMENTE las <em>Gemas</em>. (Recordá <strong>el truco del cero</strong> al poner el número).</li>
+    <li class="criteria-item"><span class="criteria-name">Saqueo:</span> Preguntale al jugador con un <code>input()</code> qué más quiere agarrar de la sala, y guardalo en la lista usando <code>.append()</code>.</li>
+  </ul>
+
+  <h2>Misión 3: El Checkeo de Vida</h2>
+  <p>La batalla te dejó sin energía. Necesitamos escanear toda la mochila rápidamente para ver si logramos conseguir una poción y salvarnos.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Escáner Mágico:</span> Recorré la lista <code>botin</code> usando el ciclo <code>for objeto in botin:</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">Condición de Vida:</span> Adentro del ciclo, escribí un <code>if</code> para preguntar si el objeto es exactamente igual (<code>==</code>) a <code>"Poción Máxima"</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">Salvación:</span> Si la compu la encuentra, hacé que imprima: <em>"¡Sobreviviste a la batalla!"</em></li>
+  </ul>
+
+  <div class="callout warning">
+    <div class="icon">🚨</div>
+    <p><strong>¿Tira error la Misión 3?</strong> Revisen bien la sangría. El <code>for</code> termina con dos puntos <code>:</code>. El <code>if</code> va adentro (1 tabulación). El <code>print</code> va ADENTRO del if (2 tabulaciones).</p>
+  </div>
+
+  <div class="entrega-box">
+    <h4>¿Qué entregamos hoy?</h4>
+    <p>Este trabajo es la evaluación final. Prueben todo el código dándole a "Play" ▶️ en Colab. Cuando logren robarse los tesoros y sobrevivir a la batalla, llamen al profe. ¡Felicitaciones por llegar hasta acá!</p>
+  </div>
+
+</body>
+</html>

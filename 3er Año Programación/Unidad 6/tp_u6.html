@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Práctico — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.65; font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .top-stripe { height: 5px; background: linear-gradient(90deg, #0088CE, #8CC63F, #10b981); margin-bottom: 22px; }
+
+    .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1.5px solid #e2e8f0; }
+    .school-tag { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #16a34a; margin-bottom: 4px; }
+    .doc-title { font-size: 19pt; font-weight: 800; color: #0d1b2a; margin: 0 0 6px 0; letter-spacing: -0.4px; }
+    .doc-meta { font-size: 9.5pt; color: #64748b; font-weight: 500; }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; }
+    .unit-badge { display: inline-block; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; margin-bottom: 6px; }
+    .year-badge { display: block; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
+
+    .objective-box { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #16a34a; border-radius: 6px; padding: 13px 16px; margin-bottom: 26px; }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    
+    h2 { font-size: 12.5pt; font-weight: 800; color: #16a34a; margin: 26px 0 10px 0; padding-bottom: 5px; border-bottom: 1.5px solid #e2e8f0; }
+    p { margin: 0 0 11px 0; font-size: 12pt; }
+    
+    .criteria-list { list-style: none; padding-left: 0; margin: 0 0 16px 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 11.5pt;}
+    .criteria-item::before { content: "▸"; color: #16a34a; font-size: 12pt; position: absolute; left: 0; top: 0; }
+    .criteria-name { font-weight: 700; color: #0d1b2a; }
+
+    .callout { display: flex; gap: 11px; align-items: flex-start; padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: 11.5pt; }
+    .callout.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+    .callout.danger { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+
+    .code-block { background: #0f172a; border-radius: 7px; padding: 14px 16px; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace; font-size: 10.5pt; color: #e2e8f0; border-left: 3px solid #16a34a; }
+
+    .entrega-box { margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 20px; }
+    .entrega-box h4 { font-size: 10pt; font-weight: 800; text-transform: uppercase; color: #64748b; margin: 0 0 10px 0; }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Mensajes Secretos (Criptografía)</h1>
+      <p class="doc-meta"><strong>Programación y Desarrollo Web</strong> &nbsp;·&nbsp; 3er Año (2do Cuatrimestre)</p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Unidad 6</span>
+      <span class="year-badge">Trabajo Práctico</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo de hoy:</strong> Aplicar procesamiento de texto (limpiar basura) y apoyarse en el uso crítico de la Inteligencia Artificial para implementar un algoritmo de encriptación clásico (Código César).</p>
+  </div>
+
+  <h2>Misión 1: El Filtro de Entrada</h2>
+  <p>Nunca confíes en los datos del teclado. Vamos a crear una función que limpie los errores de tipeo del usuario antes de guardar su contraseña.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">La Función:</span> Crea una función llamada <code>def filtro_seguridad(texto):</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">Limpieza:</span> Usa <code>texto = texto.strip()</code> para borrar los espacios en blanco sobrantes.</li>
+    <li class="criteria-item"><span class="criteria-name">Normalización:</span> Usa <code>texto = texto.lower()</code> para convertir todo a letras minúsculas y devuelve el resultado con un <code>return</code>.</li>
+  </ul>
+
+  <h2>Misión 2: Ingeniería Inversa (Uso de IA)</h2>
+  <div class="callout info">
+    <div class="icon">🤖</div>
+    <p>Programar matemáticamente el Código César desde cero puede ser denso. Esta es una oportunidad perfecta para aprovechar a tu copiloto IA, pero <strong>tu trabajo real será ser un Analista Forense</strong>.</p>
+  </div>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">El Prompt:</span> Pídele a tu IA lo siguiente: <em>"Genérame en Python una función simple llamada encriptar_cesar que reciba un texto y lo encripte moviendo las letras +3 posiciones en el abecedario. Explica brevemente qué hace matemáticamente."</em></li>
+    <li class="criteria-item"><span class="criteria-name">El Análisis:</span> Pega el código en tu Colab. Ahora viene tu trabajo: Al lado o arriba de cada línea clave de ese código, usa el símbolo de comentario (<code>#</code>) para explicar con tus propias palabras qué está pasando ahí. (Ej: <em># Acá está iterando letra por letra</em>, <em># Acá suma 3 posiciones</em>).</li>
+  </ul>
+
+  <h2>Misión 3: Enviando el Paquete</h2>
+  <p>Es hora de unir las dos herramientas en la consola de comandos.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Prueba Final:</span> Crea una variable llamada <code>mensaje = "   SeCrEtO   "</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">Ejecución:</span> Pasa ese mensaje primero por tu función <code>filtro_seguridad()</code>, y luego pasa el texto limpio por la función <code>encriptar_cesar()</code>. Hazle <code>print</code> al resultado final. Debería salirte un texto totalmente encriptado e inentendible.</li>
+  </ul>
+
+  <div class="entrega-box">
+    <h4>¿Qué entregamos hoy?</h4>
+    <p>Guarden su archivo de Google Colab. La mayor parte de la calificación de este TP recaerá en los comentarios (<code>#</code>) que hayan hecho en la Misión 2 demostrando su <strong>pensamiento crítico</strong>. ¡Envíen el enlace a la tarea de Google Classroom!</p>
+  </div>
+
+</body>
+</html>

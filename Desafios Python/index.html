@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Desafíos Python - INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="wrap" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 2rem;">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <img src="../logo.png" alt="INNOVA Logo" style="width: 38px; height: 38px; object-fit: contain; flex-shrink: 0;" />
+        <div>
+          <div style="font-size: 0.92rem; font-weight: 700; color: var(--texto); letter-spacing: -0.2px;">INNOVA — Centro de Mando</div>
+          <div style="font-size: 0.72rem; color: var(--texto2); font-weight: 500; margin-top: 1px;">Laboratorio de Código</div>
+        </div>
+      </div>
+      <div>
+        <a href="../index.html" class="btn-volver">Volver al Inicio</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap main-game">
+    
+    <!-- PANTALLA SELECCION DE NIVEL -->
+    <div id="screen-selection" class="selection-screen">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h1 style="font-size: 2.5rem; font-weight: 900; margin-bottom: 0.5rem;">Elegí tu Nivel</h1>
+        <p style="color: var(--texto2); font-size: 1.1rem;">Seleccioná la dificultad de los desafíos</p>
+      </div>
+      
+      <div class="level-cards">
+        <div class="lcard" data-level="iniciado">
+          <div class="icon">🟢</div>
+          <h3>Iniciado</h3>
+          <div class="target">1er Año</div>
+          <p>Variables, tipos de datos simples, operadores y bucles básicos.</p>
+        </div>
+        
+        <div class="lcard" data-level="programador">
+          <div class="icon">🟡</div>
+          <h3>Programador</h3>
+          <div class="target">3er Año</div>
+          <p>Listas, diccionarios, funciones `def`, bucles while y anidación.</p>
+        </div>
+        
+        <div class="lcard" data-level="experto">
+          <div class="icon">🔴</div>
+          <h3>Experto</h3>
+          <div class="target">6to Año</div>
+          <p>Streamlit, Análisis de Datos (Pandas) y conceptos de Inteligencia Artificial.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- UI DEL JUEGO (Oculto al inicio) -->
+    <div id="game-ui" class="game-ui hidden">
+      <div class="game-header">
+        <div class="lives">
+          <span class="heart">❤️</span>
+          <span class="heart">❤️</span>
+          <span class="heart">❤️</span>
+        </div>
+        <div class="level-badge" id="current-badge">Nivel</div>
+        <div class="score">Puntos: <span id="score-val">0</span></div>
+      </div>
+
+      <div class="game-area">
+        <h2 id="question-title">Cargando desafío...</h2>
+        <p id="question-desc" class="desc"></p>
+        
+        <div class="code-editor" id="code-container">
+          <!-- JS inyectará el código aquí -->
+        </div>
+        
+        <div class="choice-options hidden" id="choice-container">
+          <!-- JS inyectará botones choice aquí -->
+        </div>
+
+        <div class="actions" id="action-container">
+          <button id="btn-check" class="btn-primary">Verificar Código</button>
+        </div>
+
+        
+        <div id="endgame-container" class="hidden" style="text-align: center; margin-top: 1rem;">
+          <h2 id="endgame-title" style="font-size: 2rem; margin-bottom: 0.5rem;">¡Nivel Completado!</h2>
+          <p id="endgame-desc" style="color: var(--texto2); margin-bottom: 2rem; line-height: 1.5;"></p>
+          
+          <div id="cert-inline-container" style="background: var(--s2); padding: 1.5rem; border-radius: 8px; border: 1px solid var(--borde); margin-bottom: 2rem;">
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">¡Guardá tu Récord!</h3>
+            <input type="text" id="player-name-inline" placeholder="Nombre / Apodo" style="padding: 0.6rem; border-radius: 6px; border: 1px solid var(--borde); width: 100%; max-width: 300px; margin-bottom: 1rem; color: #000; font-family: 'Inter', sans-serif;">
+            <br>
+            <button id="btn-download-cert-inline" class="btn-primary" style="background: linear-gradient(135deg, #FDB913 0%, #f39c12 100%); color: #000; width: 100%; max-width: 300px;">Descargar Récord 🎮</button>
+          </div>
+
+          <div style="display: flex; gap: 1rem; justify-content: center;">
+              <button id="btn-restart-inline" class="btn-primary">Jugar de Nuevo</button>
+              <button id="btn-home-inline" class="btn-volver">Cambiar Nivel</button>
+          </div>
+        </div>
+
+        <div id="feedback-msg" class="feedback"></div>
+      </div>
+    </div>
+
+    <!-- PANTALLA SUPERPUESTA -->
+    <img id="logo-for-canvas" src="../logo.png" style="display:none" crossorigin="anonymous" />
+    <div id="screen-overlay" class="overlay hidden">
+      <div class="overlay-content">
+        <h2 id="overlay-title">Game Over</h2>
+        <p id="overlay-desc">Nadie nació sabiendo todo, ¡vos podés!</p>
+        
+        <div id="cert-container" class="hidden" style="margin: 1.5rem 0; padding: 1.5rem; background: rgba(0,0,0,0.05); border-radius: 8px;">
+          <h3 style="margin-bottom: 0.5rem; font-size: 1.1rem;">¡Guardá tu Récord!</h3>
+          <input type="text" id="player-name" placeholder="Nombre / Apodo" style="padding: 0.6rem; border-radius: 6px; border: 1px solid var(--borde); width: 100%; margin-bottom: 1rem; color: #000; font-family: 'Inter', sans-serif;">
+          <button id="btn-download-cert" class="btn-primary" style="background: linear-gradient(135deg, #FDB913 0%, #f39c12 100%); width: 100%; color: #000;">Descargar Récord 🎮</button>
+        </div>
+
+        <button id="btn-restart" class="btn-primary">Jugar de Nuevo</button>
+        <button id="btn-home" class="btn-volver" style="margin-top: 1rem; margin-left: 1rem;">Cambiar Nivel</button>
+      </div>
+    </div>
+    
+  </main>
+
+  <footer>
+    <div class="wrap" style="display: flex; justify-content: space-between; align-items: center; padding: 1rem 2rem; width: 100%;">
+      <div>Laboratorio · <span>INNOVA</span> · Ciclo Lectivo 2026</div>
+      <button id="theme-btn" title="Alternar Tema" style="background:none; border:none; color:inherit; font-size:1.2rem; cursor:pointer; padding: 0.5rem;">🌙</button>
+    </div>
+  </footer>
+
+  <script src="game.js"></script>
+</body>
+</html>

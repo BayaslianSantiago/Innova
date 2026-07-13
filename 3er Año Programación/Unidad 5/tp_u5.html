@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Práctico — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.65; font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .top-stripe { height: 5px; background: linear-gradient(90deg, #0088CE, #8CC63F, #10b981); margin-bottom: 22px; }
+
+    .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1.5px solid #e2e8f0; }
+    .school-tag { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #16a34a; margin-bottom: 4px; }
+    .doc-title { font-size: 19pt; font-weight: 800; color: #0d1b2a; margin: 0 0 6px 0; letter-spacing: -0.4px; }
+    .doc-meta { font-size: 9.5pt; color: #64748b; font-weight: 500; }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; }
+    .unit-badge { display: inline-block; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0; margin-bottom: 6px; }
+    .year-badge { display: block; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
+
+    .objective-box { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #16a34a; border-radius: 6px; padding: 13px 16px; margin-bottom: 26px; }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    
+    h2 { font-size: 12.5pt; font-weight: 800; color: #16a34a; margin: 26px 0 10px 0; padding-bottom: 5px; border-bottom: 1.5px solid #e2e8f0; }
+    p { margin: 0 0 11px 0; font-size: 12pt; }
+    
+    .criteria-list { list-style: none; padding-left: 0; margin: 0 0 16px 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 11.5pt;}
+    .criteria-item::before { content: "▸"; color: #16a34a; font-size: 12pt; position: absolute; left: 0; top: 0; }
+    .criteria-name { font-weight: 700; color: #0d1b2a; }
+
+    .callout { display: flex; gap: 11px; align-items: flex-start; padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: 11.5pt; }
+    .callout.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+    .callout.danger { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+
+    .code-block { background: #0f172a; border-radius: 7px; padding: 14px 16px; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace; font-size: 10.5pt; color: #e2e8f0; border-left: 3px solid #16a34a; }
+
+    .entrega-box { margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 20px; }
+    .entrega-box h4 { font-size: 10pt; font-weight: 800; text-transform: uppercase; color: #64748b; margin: 0 0 10px 0; }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Interceptando Satélites (APIs)</h1>
+      <p class="doc-meta"><strong>Programación y Desarrollo Web</strong> &nbsp;·&nbsp; 3er Año (2do Cuatrimestre)</p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Unidad 5</span>
+      <span class="year-badge">Trabajo Práctico</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo de hoy:</strong> Conectarse de forma segura (HTTPS) a un servidor meteorológico mundial, descargar los datos crudos (JSON) y extraer únicamente la temperatura actual utilizando Diccionarios.</p>
+  </div>
+
+  <h2>Misión 1: La Conexión Segura</h2>
+  <p>Vamos a usar la librería <code>requests</code> que trae Python para simular ser un navegador y pedirle la temperatura a la API gratuita de Open-Meteo.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Preparación:</span> Escriban <code>import requests</code> en la primera celda.</li>
+    <li class="criteria-item"><span class="criteria-name">El Objetivo:</span> Guarden este enlace exacto en una variable llamada <code>url</code>:<br> <code>"https://api.open-meteo.com/v1/forecast?latitude=-34.61&longitude=-58.37&current_weather=true"</code> (¡Asegúrense de que empiece con https!).</li>
+    <li class="criteria-item"><span class="criteria-name">El Pedido GET:</span> Hagan la solicitud usando: <code>respuesta = requests.get(url)</code></li>
+  </ul>
+
+  <h2>Misión 2: Decodificando el JSON</h2>
+  <p>La respuesta que nos da el servidor es un paquete gigante de texto incomprensible. Tenemos que convertirlo al idioma que Python entiende: Los Diccionarios.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Conversión:</span> Escriban <code>datos = respuesta.json()</code> para transformar ese texto en un Diccionario gigante.</li>
+    <li class="criteria-item"><span class="criteria-name">Visualización:</span> Hagan un <code>print(datos)</code> para ver toda la matriz de información meteorológica que acabamos de descargar.</li>
+  </ul>
+
+  <h2>Misión 3: Extracción Quirúrgica</h2>
+  <p>Toda esa información junta no nos sirve. El usuario solo quiere saber qué temperatura hace ahora mismo.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">El Diccionario Anidado:</span> Si miran bien el JSON, adentro del diccionario gigante hay una clave llamada <code>"current_weather"</code>, y adentro de ella hay otra clave llamada <code>"temperature"</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">La Extracción:</span> Creen una variable llamada <code>clima_actual</code> y guarden ahí el dato navegando entre las llaves. <br><em>(Tip: Se usan los corchetes pegados uno al lado del otro, ej: <code>datos["diccionario1"]["diccionario2"]</code>).</em></li>
+    <li class="criteria-item"><span class="criteria-name">El Mensaje Final:</span> Hagan un print amigable usando concatenación: <em>"Atención: La temperatura actual es de [numero] grados."</em></li>
+  </ul>
+
+  <div class="callout info">
+    <div class="icon">💡</div>
+    <p><strong>Aprovecha tu asistente:</strong> Si te trabas tratando de extraer el dato del diccionario anidado en la Misión 3, ¡pregúntale a tu IA! Copia el JSON que te imprimió Colab, pégalo en el chat de la IA y pídele que te explique cómo sacar la temperatura usando Python.</p>
+  </div>
+
+  <div class="entrega-box">
+    <h4>¿Qué entregamos hoy?</h4>
+    <p>Guarden su archivo de Google Colab. Si utilizaron la IA para resolver la extracción del diccionario, agreguen una celda de texto comentando qué prompt usaron. ¡Envíen el enlace a la tarea de Google Classroom!</p>
+  </div>
+
+</body>
+</html>

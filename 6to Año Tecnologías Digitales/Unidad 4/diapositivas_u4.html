@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Presentación — INNOVA (6to Año)</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Estética Corporate Tech / Data Science */
+      --cyan: #00d2ff;
+      --cyan-dim: rgba(0, 210, 255, 0.15);
+      --azul-corp: #3a7bd5;
+      --navy: #0a1128;
+      --navy-panel: #111b3d;
+      --violeta: #8e2de2;
+      --verde: #10b981;
+      
+      --fondo: #050a18;
+      --texto: #b4c5e4;
+      --blanco: #ffffff;
+      --linea: rgba(255, 255, 255, 0.08);
+      --glass: rgba(17, 27, 61, 0.7);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--fondo); }
+    body { font-family: 'Inter', Arial, sans-serif; color: var(--texto); overflow: hidden; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    #deck { width: 100vw; height: 100vh; position: relative; }
+
+    .slide {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      background: radial-gradient(circle at top right, #0a1128 0%, var(--fondo) 100%);
+      opacity: 0; visibility: hidden;
+      transform: translateY(20px) scale(0.98);
+      transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      padding: 50px 80px 40px;
+    }
+    .slide.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+
+    .slide-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+    .rail {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--verde) 50%, var(--violeta) 100%);
+    }
+
+    .tag { display: inline-flex; align-items: center; gap: 8px; font-size: 9pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px; }
+    .tag .dot { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); }
+
+    h1.slide-title { font-size: 2.6rem; font-weight: 800; color: var(--blanco); line-height: 1.1; margin: 0 0 8px 0; letter-spacing: -0.5px; }
+    .subtitle { font-size: 1.1rem; color: var(--texto); margin: 0 0 30px 0; font-weight: 400; line-height: 1.6; }
+    .content { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 20px; }
+
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--linea); border-radius: 16px; padding: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    .card h3 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--blanco); font-weight: 600; letter-spacing: -0.3px; }
+    .card p { margin: 0; font-size: 1rem; color: var(--texto); line-height: 1.6; }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+    .stat-box { border-left: 3px solid var(--cyan); padding-left: 16px; }
+    .stat-box.green { border-left-color: var(--verde); }
+
+    .title-slide { background: var(--fondo); justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+    .title-slide .glow-circle { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, var(--cyan-dim) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; pointer-events: none; }
+    .title-slide-content { position: relative; z-index: 1; }
+    .title-slide .eyebrow { font-size: 0.85rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 20px; display: block; }
+    .title-slide h1 { font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1.05; margin: 0 0 20px 0; letter-spacing: -2px; color: var(--blanco); }
+    .title-slide h1 .hl { background: linear-gradient(135deg, var(--cyan), var(--verde)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .title-slide .desc { font-size: 1.2rem; color: var(--texto); max-width: 600px; margin: 0 auto; line-height: 1.6; font-weight: 300; }
+
+    .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: var(--glass); border: 1px solid var(--linea); color: var(--blanco); font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 50; transition: all 0.2s; backdrop-filter: blur(10px); }
+    .nav-btn:hover { background: var(--cyan-dim); border-color: var(--cyan); transform: translateY(-50%) scale(1.05); }
+    #prevBtn { left: 24px; }
+    #nextBtn { right: 24px; }
+    .nav-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 8pt; color: #5a6e94; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; z-index: 50; text-transform: uppercase; }
+
+    .code-block { background: #010409; padding: 15px; border-radius: 8px; border: 1px solid #30363d; color: #e6edf3; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; }
+    .code-block .keyword { color: #ff7b72; }
+    .code-block .string { color: #a5d6ff; }
+  </style>
+</head>
+
+<body>
+
+  <div id="deck">
+
+    <!-- Diapositiva 1 -->
+    <section class="slide title-slide active">
+      <div class="glow-circle"></div>
+      <div class="title-slide-content">
+        <span class="eyebrow">6to Año · Ciencia de Datos · Cuatrimestre 2</span>
+        <h1>Entornos <span class="hl">Profesionales</span></h1>
+        <p class="desc">Unidad 4: GitHub, Codespaces y por qué los analistas no usan pendrives.</p>
+      </div>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Cultura Tech</span>
+        <h1 class="slide-title">La Tragedia del Archivo ZIP</h1>
+        <p class="subtitle">El final del `dashboard_final_v5_ahorasi.zip`</p>
+        <div class="content">
+          <div class="card">
+            <p>En el colegio y en la universidad, la gente trabaja en equipo mandándose archivos de Word por mail o por WhatsApp. Cuando programás un sistema que vale millones de dólares, si dos personas editan el mismo archivo y lo sobreescriben, la empresa colapsa.</p>
+          </div>
+          <div class="grid-2" style="margin-top: 10px;">
+            <div class="card stat-box" style="border-left-color: #ff4757;">
+              <h3>El Problema Local</h3>
+              <p>Si tu computadora se rompe, el código se pierde. Si otro programador tiene Windows y vos Mac, el código falla ("En mi máquina sí funcionaba").</p>
+            </div>
+            <div class="card stat-box green">
+              <h3>La Solución: Git y GitHub</h3>
+              <p>Un sistema global de Control de Versiones. Cada línea de código queda registrada: quién la escribió, a qué hora y por qué. Y todo vive en la Nube.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Conceptos Clave</span>
+        <h1 class="slide-title">El Ciclo de Vida del Código</h1>
+        <p class="subtitle">Guardar archivos en tecnología tiene 3 pasos.</p>
+        <div class="content">
+          <div class="grid-3">
+            <div class="card stat-box" style="border-left-color: #f39c12;">
+              <h3>1. STAGE (Preparar)</h3>
+              <p>Le avisás al sistema qué archivos querés guardar en el próximo paquete.</p>
+              <div class="code-block" style="margin-top: 10px; padding: 10px;">git add .</div>
+            </div>
+            <div class="card stat-box" style="border-left-color: var(--cyan);">
+              <h3>2. COMMIT (Foto)</h3>
+              <p>Le sacás una "foto" permanente al código con un mensaje explicando qué hiciste.</p>
+              <div class="code-block" style="margin-top: 10px; padding: 10px;">git commit <span class="keyword">-m</span> <span class="string">"Agrego KPI"</span></div>
+            </div>
+            <div class="card stat-box" style="border-left-color: var(--verde);">
+              <h3>3. PUSH (Subir)</h3>
+              <p>Sincronizás esa foto desde tu computadora hacia la nube (GitHub) para que el equipo la vea.</p>
+              <div class="code-block" style="margin-top: 10px; padding: 10px;">git push</div>
+            </div>
+          </div>
+          <div class="card" style="margin-top:0;">
+            <p style="color: #94a3b8; font-size: 0.95rem;"><em>Nota: Nosotros usaremos los botones de la interfaz gráfica de VS Code para hacer esto, ¡pero por debajo la computadora ejecuta exactamente esos comandos!</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Infraestructura</span>
+        <h1 class="slide-title">GitHub Codespaces</h1>
+        <p class="subtitle">Programando desde el navegador.</p>
+        <div class="content">
+          <div class="card">
+            <h3>Tu Máquina Virtual Gratuita</h3>
+            <p>A partir de hoy, <strong>no instalaremos Python en nuestras computadoras</strong>.</p>
+            <br>
+            <p>Usaremos <strong>GitHub Codespaces</strong>. Es una computadora completa ubicada en un servidor de Microsoft en Estados Unidos, a la que accedemos directamente desde nuestro Google Chrome.</p>
+          </div>
+          <div class="card stat-box green" style="margin-top:0;">
+            <p><strong>Ventaja Absoluta:</strong> Si tu computadora de la escuela es lenta, no importa. El código se está ejecutando en los servidores súper rápidos de la nube. Solamente necesitamos internet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Misión Práctica</span>
+        <h1 class="slide-title">Hello Cloud</h1>
+        <p class="subtitle">Trabajo Práctico N°4</p>
+        <div class="content">
+          <div class="card" style="padding:40px; text-align: center; margin-top:20px;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Abran el TP4 de 6to Año</h3>
+            <p>Deberán crear su identidad digital (Cuenta en GitHub).<br>Crearán su primer Repositorio en la nube y lanzarán un entorno Codespaces para escribir su primer programa en Python del año, haciendo luego un "Commit" para guardarlo en la eternidad del internet.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <button class="nav-btn" id="prevBtn" aria-label="Anterior">‹</button>
+  <button class="nav-btn" id="nextBtn" aria-label="Siguiente">›</button>
+  <div class="nav-hint">← → para navegar</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    function render() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    }
+    function go(delta) {
+      current = Math.max(0, Math.min(total - 1, current + delta));
+      render();
+    }
+    document.getElementById('prevBtn').addEventListener('click', () => go(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => go(1));
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') go(1);
+      if (e.key === 'ArrowLeft') go(-1);
+    });
+    render();
+  </script>
+</body>
+
+</html>

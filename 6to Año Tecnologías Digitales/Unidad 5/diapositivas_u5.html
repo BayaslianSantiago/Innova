@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Presentación — INNOVA (6to Año)</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Estética Corporate Tech / Data Science */
+      --cyan: #00d2ff;
+      --cyan-dim: rgba(0, 210, 255, 0.15);
+      --azul-corp: #3a7bd5;
+      --navy: #0a1128;
+      --navy-panel: #111b3d;
+      --violeta: #8e2de2;
+      --naranja: #f39c12;
+      
+      --fondo: #050a18;
+      --texto: #b4c5e4;
+      --blanco: #ffffff;
+      --linea: rgba(255, 255, 255, 0.08);
+      --glass: rgba(17, 27, 61, 0.7);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--fondo); }
+    body { font-family: 'Inter', Arial, sans-serif; color: var(--texto); overflow: hidden; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    #deck { width: 100vw; height: 100vh; position: relative; }
+
+    .slide {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      background: radial-gradient(circle at top right, #0a1128 0%, var(--fondo) 100%);
+      opacity: 0; visibility: hidden;
+      transform: translateY(20px) scale(0.98);
+      transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      padding: 50px 80px 40px;
+    }
+    .slide.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+
+    .slide-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+    .rail {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--naranja) 50%, var(--violeta) 100%);
+    }
+
+    .tag { display: inline-flex; align-items: center; gap: 8px; font-size: 9pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px; }
+    .tag .dot { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); }
+
+    h1.slide-title { font-size: 2.6rem; font-weight: 800; color: var(--blanco); line-height: 1.1; margin: 0 0 8px 0; letter-spacing: -0.5px; }
+    .subtitle { font-size: 1.1rem; color: var(--texto); margin: 0 0 30px 0; font-weight: 400; line-height: 1.6; }
+    .content { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 20px; }
+
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--linea); border-radius: 16px; padding: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    .card h3 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--blanco); font-weight: 600; letter-spacing: -0.3px; }
+    .card p { margin: 0; font-size: 1rem; color: var(--texto); line-height: 1.6; }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+
+    .stat-box { border-left: 3px solid var(--cyan); padding-left: 16px; }
+
+    .title-slide { background: var(--fondo); justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+    .title-slide .glow-circle { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, var(--cyan-dim) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; pointer-events: none; }
+    .title-slide-content { position: relative; z-index: 1; }
+    .title-slide .eyebrow { font-size: 0.85rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 20px; display: block; }
+    .title-slide h1 { font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1.05; margin: 0 0 20px 0; letter-spacing: -2px; color: var(--blanco); }
+    .title-slide h1 .hl { background: linear-gradient(135deg, var(--cyan), var(--naranja)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .title-slide .desc { font-size: 1.2rem; color: var(--texto); max-width: 600px; margin: 0 auto; line-height: 1.6; font-weight: 300; }
+
+    .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: var(--glass); border: 1px solid var(--linea); color: var(--blanco); font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 50; transition: all 0.2s; backdrop-filter: blur(10px); }
+    .nav-btn:hover { background: var(--cyan-dim); border-color: var(--cyan); transform: translateY(-50%) scale(1.05); }
+    #prevBtn { left: 24px; }
+    #nextBtn { right: 24px; }
+    .nav-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 8pt; color: #5a6e94; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; z-index: 50; text-transform: uppercase; }
+
+    .code-block { background: #010409; padding: 15px; border-radius: 8px; border: 1px solid #30363d; color: #e6edf3; font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; line-height: 1.5; }
+    .code-block .keyword { color: #ff7b72; }
+    .code-block .string { color: #a5d6ff; }
+    .code-block .method { color: #d2a8ff; }
+  </style>
+</head>
+
+<body>
+
+  <div id="deck">
+
+    <!-- Diapositiva 1 -->
+    <section class="slide title-slide active">
+      <div class="glow-circle"></div>
+      <div class="title-slide-content">
+        <span class="eyebrow">6to Año · Ciencia de Datos · Cuatrimestre 2</span>
+        <h1>Librería <span class="hl">Pandas</span></h1>
+        <p class="desc">Unidad 5: Manipulación y limpieza de datos con Python.</p>
+      </div>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Concepto</span>
+        <h1 class="slide-title">El Excel con Superpoderes</h1>
+        <p class="subtitle">¿Qué es Pandas y qué es un DataFrame?</p>
+        <div class="content">
+          <div class="grid-2">
+            <div class="card">
+              <p>Pandas es la librería de Python más utilizada en el mundo para Análisis de Datos. Si Excel colapsa al abrir un millón de filas, Pandas lo procesa en milisegundos.</p>
+            </div>
+            <div class="card stat-box" style="border-left-color: var(--naranja);">
+              <h3>El DataFrame</h3>
+              <p>Un DataFrame es simplemente una tabla (con Filas y Columnas). Cuando importamos un CSV a Pandas, Python lo convierte automáticamente en un DataFrame.</p>
+            </div>
+          </div>
+          <div class="code-block" style="margin-top: 10px;">
+            <span class="keyword">import</span> pandas <span class="keyword">as</span> pd<br><br>
+            df = pd.<span class="method">read_csv</span>(<span class="string">'ventas.csv'</span>)<br>
+            <span class="method">print</span>(df.head())
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>El Problema Real</span>
+        <h1 class="slide-title">Limpiando la Basura (Data Cleaning)</h1>
+        <p class="subtitle">Los datos en la vida real vienen rotos.</p>
+        <div class="content">
+          <div class="card">
+            <p>El 80% del tiempo de un Científico de Datos se gasta "limpiando" bases de datos. Si una caja registradora se apaga de golpe, la fila de esa venta queda en blanco en la base de datos. A esos valores vacíos se los llama <strong>Nulos (NaN)</strong>.</p>
+          </div>
+          <div class="card stat-box" style="border-left-color: #ff4757; margin-top:0;">
+            <h3>La Escoba: dropna()</h3>
+            <p>Si intentamos hacer un gráfico con datos que tienen Nulos, el sistema explotará. El comando `dropna()` borra automáticamente todas las filas que tengan casilleros en blanco.</p>
+            <div class="code-block" style="margin-top: 10px;">df_limpio = df.<span class="method">dropna</span>()</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Agrupación</span>
+        <h1 class="slide-title">La Tabla Dinámica: Groupby</h1>
+        <p class="subtitle">Agrupando información masiva.</p>
+        <div class="content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>¿Qué hace groupby()?</h3>
+              <p>Si tenés 10,000 ventas de Zapatillas y 5,000 de Remeras mezcladas, no te sirven para tomar decisiones.</p>
+              <br>
+              <p>`.groupby()` agrupa todas las filas que tienen el mismo nombre y las suma (o promedia) en un solo renglón.</p>
+            </div>
+            <div class="card">
+              <h3>Ejemplo</h3>
+              <div class="code-block">
+                resumen = df_limpio.<span class="method">groupby</span>(<span class="string">'Categoria'</span>).<span class="method">sum</span>()<br>
+                <span class="method">print</span>(resumen)
+              </div>
+              <p style="margin-top: 15px; font-size: 0.9rem; color: #a5d6ff;">Resultado en consola:<br>Remeras: $5000<br>Zapatillas: $10000</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Misión Práctica</span>
+        <h1 class="slide-title">El Analista Limpiador</h1>
+        <p class="subtitle">Trabajo Práctico N°5</p>
+        <div class="content">
+          <div class="card" style="padding:40px; text-align: center; margin-top:20px;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Abran el TP5 de 6to Año</h3>
+            <p>Trabajarán en GitHub Codespaces. Copiarán una tabla CSV intencionalmente corrupta (con Nulos).<br>Deberán crear un script de Python utilizando Pandas para leer ese CSV, limpiar la basura, agrupar las ventas por ciudad e imprimir el resultado correcto por la terminal.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <button class="nav-btn" id="prevBtn" aria-label="Anterior">‹</button>
+  <button class="nav-btn" id="nextBtn" aria-label="Siguiente">›</button>
+  <div class="nav-hint">← → para navegar</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    function render() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    }
+    function go(delta) {
+      current = Math.max(0, Math.min(total - 1, current + delta));
+      render();
+    }
+    document.getElementById('prevBtn').addEventListener('click', () => go(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => go(1));
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') go(1);
+      if (e.key === 'ArrowLeft') go(-1);
+    });
+    render();
+  </script>
+</body>
+
+</html>

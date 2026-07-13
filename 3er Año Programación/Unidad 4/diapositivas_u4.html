@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Presentación — INNOVA</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Estética Tech / Hacker */
+      --verde: #8CC63F;
+      --verde-neon: #00ff41;
+      --azul: #0088CE;
+      --naranja: #F58220;
+      
+      --tinta: #060b08;
+      --tinta2: #09120e;
+      --s2: #0d1a13;
+      --gris: #526b5c;
+      --texto: #9cbda9;
+      --linea: rgba(140, 198, 63, 0.15);
+      --fondo: #08100c;
+      --blanco: #ffffff;
+      --panel: #0b1711;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--tinta);
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      color: var(--texto);
+      overflow: hidden;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── DECK ── */
+    #deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--fondo);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(16px) scale(0.995);
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 48px 72px 36px;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .slide-inner {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* ── RAIL SUPERIOR ── */
+    .rail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg,
+          var(--verde-neon) 0%, var(--verde) 50%, var(--azul) 100%);
+    }
+
+    /* ── TAG / EYEBROW ── */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--verde);
+      margin-bottom: 14px;
+    }
+
+    .tag .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    h1.slide-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blanco);
+      line-height: 1.1;
+      margin: 0 0 6px 0;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--texto);
+      margin: 0 0 24px 0;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .content {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--linea);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+      color: var(--blanco);
+      font-weight: 700;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--texto);
+      line-height: 1.55;
+    }
+
+    .accent-left { border-left: 3px solid var(--verde); }
+    .accent-left.b { border-left-color: var(--azul); }
+    .accent-left.o { border-left-color: var(--naranja); }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #020604;
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: #a3c9b1;
+      line-height: 1.6;
+      border-left: 3px solid var(--verde-neon);
+      box-shadow: inset 0 0 0 1px rgba(0, 255, 65, 0.1);
+    }
+    .code-block .kw { color: #f472b6; font-weight: bold; }
+    .code-block .fn { color: #60a5fa; }
+    .code-block .st { color: #e5c07b; }
+    .code-block .nb { color: #d19a66; }
+    .code-block .cm { color: #5c7566; font-style: italic; }
+
+    /* ── TITLE SLIDE ── */
+    .title-slide {
+      background: var(--tinta);
+      justify-content: center;
+      padding: 0 90px;
+    }
+
+    .title-slide .stripe {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--verde-neon), var(--verde));
+      border-radius: 4px;
+      margin-bottom: 32px;
+      box-shadow: 0 0 15px var(--verde-neon);
+    }
+
+    .title-slide .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--verde);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .title-slide h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin: 0 0 16px 0;
+      max-width: 860px;
+      letter-spacing: -1.5px;
+      color: var(--blanco);
+    }
+
+    .title-slide h1 .hl {
+      background: linear-gradient(90deg, var(--verde-neon), var(--verde));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title-slide .desc {
+      font-size: 1.05rem;
+      color: var(--texto);
+      max-width: 620px;
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    /* ── NAV ── */
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0, 255, 65, 0.05);
+      border: 1px solid var(--linea);
+      color: var(--blanco);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.2s;
+      user-select: none;
+    }
+    .nav-btn:hover { background: rgba(0, 255, 65, 0.15); transform: translateY(-50%) scale(1.07); }
+    #prevBtn { left: 16px; }
+    #nextBtn { right: 16px; }
+    .nav-hint {
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 7.5pt;
+      color: var(--gris);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.06em;
+      z-index: 50;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="deck">
+
+    <!-- Diapositiva 1 -->
+    <section class="slide title-slide active">
+      <div class="stripe"></div>
+      <p class="eyebrow">3er Año · 2do Cuatrimestre</p>
+      <h1>El Arsenal del <span class="hl">Hacker</span></h1>
+      <p class="desc">Unidad 4: Modularización (`def`) y Librerías Externas (`import`).</p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--naranja)"></span>La Regla de Oro</span>
+        <h1 class="slide-title">Principio D.R.Y.</h1>
+        <p class="subtitle">Don't Repeat Yourself (No te repitas a ti mismo).</p>
+        <div class="content">
+          <div class="card accent-left o" style="font-size: 1.2rem; padding: 20px; margin-bottom: 20px; margin-top:20px;">
+            <p>Copiar y pegar el mismo código 50 veces es el error más común de un novato. Si tenés que cambiar algo, vas a tener que corregirlo 50 veces.</p>
+          </div>
+          <div class="card accent-left" style="font-size: 1.2rem; padding: 20px;">
+            <p><strong>La solución:</strong> Envolver ese código en una "caja" y ponerle un nombre. Así, solo lo escribís 1 vez y lo llamás cuando lo necesites.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--verde-neon)"></span>Fabricando</span>
+        <h1 class="slide-title">Las Funciones (`def`)</h1>
+        <p class="subtitle">Creando tus propias herramientas.</p>
+        <div class="content">
+          <div class="card accent-left" style="font-size: 1.1rem; padding: 15px; margin-bottom: 15px; margin-top:10px;">
+            <p>Una función es una pequeña fábrica: le entran materias primas (Parámetros) y sale un producto terminado (`return`). Usamos la palabra <code>def</code> para <em>definirla</em>.</p>
+          </div>
+          <div class="code-block" style="font-size: 1.2rem; padding: 20px;">
+            <span class="cm"># 1. Definimos la herramienta</span><br>
+            <span class="kw">def</span> <span class="fn">escanear_amenaza</span>(nivel):<br>
+            &nbsp;&nbsp;<span class="kw">if</span> nivel > <span class="nb">50</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="st">"¡Peligro!"</span><br>
+            &nbsp;&nbsp;<span class="kw">else</span>:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">return</span> <span class="st">"Sistema Seguro"</span><br><br>
+            <span class="cm"># 2. La usamos cuando queremos</span><br>
+            print(escaner_amenaza(<span class="nb">80</span>)) <span class="cm"># Imprime: ¡Peligro!</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--azul)"></span>El Arsenal Externo</span>
+        <h1 class="slide-title">Librerías (`import`)</h1>
+        <p class="subtitle">No reinventes la rueda.</p>
+        <div class="content">
+          <div class="card accent-left b" style="font-size: 1.1rem; padding: 15px; margin-bottom: 15px; margin-top:10px;">
+            <p>Si necesitás una herramienta matemática compleja, generar números aleatorios, o saber la hora mundial, <strong>alguien ya lo programó por vos</strong>.</p>
+          </div>
+          <div class="code-block" style="font-size: 1.1rem; padding: 20px;">
+            <span class="cm"># Descargamos el módulo "random" (aleatorio)</span><br>
+            <span class="kw">import</span> random<br><br>
+            <span class="cm"># Lo usamos para generar un número del 1 al 10</span><br>
+            dado = random.randint(<span class="nb">1</span>, <span class="nb">10</span>)<br>
+            print(<span class="st">"El dado tiró: "</span> + str(dado))
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--verde-neon)"></span>Misión</span>
+        <h1 class="slide-title">¡A la cancha!</h1>
+        <p class="subtitle">Trabajo Práctico N°4</p>
+        <div class="content">
+          <div class="card accent-left" style="font-size: 1.3rem; padding:40px; margin-top:40px;">
+            <p>Abran su Google Colab para el <strong>Trabajo Práctico N°4</strong>.</p>
+            <br>
+            <p>Van a programar sus propias funciones y van a invocar librerías prefabricadas. Si una librería es muy compleja, recuerden que pueden pedirle a su IA que les explique cómo funciona.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <button class="nav-btn" id="prevBtn" aria-label="Anterior">‹</button>
+  <button class="nav-btn" id="nextBtn" aria-label="Siguiente">›</button>
+  <div class="nav-hint">← → para navegar</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    function render() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    }
+    function go(delta) {
+      current = Math.max(0, Math.min(total - 1, current + delta));
+      render();
+    }
+    document.getElementById('prevBtn').addEventListener('click', () => go(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => go(1));
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') go(1);
+      if (e.key === 'ArrowLeft') go(-1);
+    });
+    render();
+  </script>
+</body>
+
+</html>

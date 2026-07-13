@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Práctica Python - INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+<body>
+
+  <header>
+    <div class="wrap header-flex">
+      <div class="header-left">
+        <img src="../logo.png" alt="INNOVA Logo" class="logo-img" />
+        <div>
+          <div class="logo-title">INNOVA — Centro de Mando</div>
+          <div class="logo-subtitle">Laboratorio de Práctica</div>
+        </div>
+      </div>
+      <div>
+        <a href="../index.html" class="btn-volver">Volver al Inicio</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap main-practica">
+    
+    <div class="practica-header" style="justify-content: center;">
+      <div class="topic-navigation">
+        <button id="btn-prev" class="btn-nav-arrow" title="Tema Anterior">←</button>
+        <div id="current-topic-label" class="topic-label">Cargando...</div>
+        <button id="btn-next" class="btn-nav-arrow" title="Siguiente Tema">→</button>
+      </div>
+    </div>
+
+    <div class="practica-grid">
+      <!-- Col 1: Explicacion -->
+      <div class="col explicacion-col">
+        <div class="col-header header-lee">1. LEÉ (Conceptos) ➔</div>
+        <div id="content-explicacion" class="col-body prose"></div>
+      </div>
+      
+      <!-- Col 2: Ejemplo -->
+      <div class="col ejemplo-col">
+        <div class="col-header header-observa">2. OBSERVÁ (Ejemplo) ➔</div>
+        <div class="col-body code-body">
+          <pre><code id="content-ejemplo"></code></pre>
+        </div>
+      </div>
+      
+      <!-- Col 3: Consola -->
+      <div class="col consola-col">
+        <div class="col-header header-programa">3. PROGRAMÁ (Tu turno)</div>
+        <div class="col-body editor-body">
+          <textarea id="code-editor" spellcheck="false" placeholder="Escribí tu código Python acá..."></textarea>
+          <div class="console-actions">
+            <button id="btn-run" class="btn-run" disabled>Cargando Python...</button>
+          </div>
+          <div class="console-output-wrapper">
+            <div class="console-label">OUTPUT:</div>
+            <pre id="console-output">Iniciando máquina virtual...</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="wrap footer-flex">
+      <div>Laboratorio · <span>INNOVA</span> · Ciclo Lectivo 2026</div>
+      <button id="theme-btn" title="Alternar Tema" class="theme-btn">🌙</button>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

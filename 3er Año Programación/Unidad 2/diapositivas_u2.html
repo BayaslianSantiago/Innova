@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Presentación — INNOVA</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Estética Tech / Hacker para 3er Año */
+      --verde: #8CC63F;
+      --verde-neon: #00ff41;
+      --azul: #0088CE;
+      --naranja: #F58220;
+      
+      --tinta: #060b08;
+      --tinta2: #09120e;
+      --s2: #0d1a13;
+      --gris: #526b5c;
+      --texto: #9cbda9;
+      --linea: rgba(140, 198, 63, 0.15);
+      --fondo: #08100c;
+      --blanco: #ffffff;
+      --panel: #0b1711;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--tinta);
+    }
+
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      color: var(--texto);
+      overflow: hidden;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── DECK ── */
+    #deck {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      background: var(--fondo);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(16px) scale(0.995);
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      padding: 48px 72px 36px;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    .slide-inner {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+
+    /* ── RAIL SUPERIOR ── */
+    .rail {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg,
+          var(--verde-neon) 0%, var(--verde) 50%, var(--azul) 100%);
+    }
+
+    /* ── TAG / EYEBROW ── */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 9.5pt;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--verde);
+      margin-bottom: 14px;
+    }
+
+    .tag .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    h1.slide-title {
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: var(--blanco);
+      line-height: 1.1;
+      margin: 0 0 6px 0;
+      letter-spacing: -1px;
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--texto);
+      margin: 0 0 24px 0;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .content {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* ── FOOTER ── */
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--linea);
+    }
+
+    .foot .brand {
+      font-size: 8.5pt;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: var(--gris);
+      text-transform: uppercase;
+    }
+
+    .foot .brand span {
+      color: var(--verde-neon);
+    }
+
+    .progress-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .progress-track {
+      width: 180px;
+      height: 3px;
+      background: var(--linea);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--verde-neon);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+      box-shadow: 0 0 10px var(--verde-neon);
+    }
+
+    .page-num {
+      font-size: 8.5pt;
+      color: var(--gris);
+      font-weight: 600;
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--linea);
+      border-radius: 12px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .card h3 {
+      margin: 0 0 8px 0;
+      font-size: 1rem;
+      color: var(--blanco);
+      font-weight: 700;
+    }
+
+    .card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--texto);
+      line-height: 1.55;
+    }
+
+    .accent-left {
+      border-left: 3px solid var(--verde);
+    }
+
+    .accent-left.b {
+      border-left-color: var(--azul);
+    }
+
+    .accent-left.o {
+      border-left-color: var(--naranja);
+    }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #020604;
+      border-radius: 10px;
+      padding: 16px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem;
+      color: #a3c9b1;
+      line-height: 1.6;
+      border-left: 3px solid var(--verde-neon);
+      box-shadow: inset 0 0 0 1px rgba(0, 255, 65, 0.1);
+    }
+
+    /* ── CALLOUTS ── */
+    .callout {
+      padding: 12px 16px;
+      border-radius: 8px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .callout .icon {
+      font-size: 1.2rem;
+      line-height: 1.4;
+      flex-shrink: 0;
+    }
+
+    .callout p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .callout.tip {
+      background: rgba(140, 198, 63, 0.1);
+      border: 1px solid rgba(140, 198, 63, 0.25);
+      color: #a8d870;
+    }
+
+    .callout.danger {
+      background: rgba(245, 130, 32, 0.1);
+      border: 1px solid rgba(245, 130, 32, 0.25);
+      color: #f8a870;
+    }
+
+    /* ── TITLE SLIDE ── */
+    .title-slide {
+      background: var(--tinta);
+      justify-content: center;
+      padding: 0 90px;
+    }
+
+    .title-slide .stripe {
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--verde-neon), var(--verde));
+      border-radius: 4px;
+      margin-bottom: 32px;
+      box-shadow: 0 0 15px var(--verde-neon);
+    }
+
+    .title-slide .eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--verde);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .title-slide h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin: 0 0 16px 0;
+      max-width: 860px;
+      letter-spacing: -1.5px;
+      color: var(--blanco);
+    }
+
+    .title-slide h1 .hl {
+      background: linear-gradient(90deg, var(--verde-neon), var(--verde));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title-slide .desc {
+      font-size: 1.05rem;
+      color: var(--texto);
+      max-width: 620px;
+      line-height: 1.65;
+      margin-bottom: 0;
+    }
+
+    /* ── NAV ── */
+    .nav-btn {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(0, 255, 65, 0.05);
+      border: 1px solid var(--linea);
+      color: var(--blanco);
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      transition: background 0.2s, transform 0.2s;
+      user-select: none;
+    }
+
+    .nav-btn:hover {
+      background: rgba(0, 255, 65, 0.15);
+      transform: translateY(-50%) scale(1.07);
+    }
+
+    #prevBtn { left: 16px; }
+    #nextBtn { right: 16px; }
+
+    .nav-hint {
+      position: fixed;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 7.5pt;
+      color: var(--gris);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.06em;
+      z-index: 50;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="deck">
+
+    <!-- Diapositiva 1 -->
+    <section class="slide title-slide active">
+      <div class="stripe"></div>
+      <p class="eyebrow">3er Año · 1er Cuatrimestre</p>
+      <h1>El Copiloto <span class="hl">Hacker</span></h1>
+      <p class="desc">Unidad 2: Repaso de Python y Prompt Engineering con Inteligencia Artificial.</p>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--verde-neon)"></span>La Nueva Era</span>
+        <h1 class="slide-title">Ya no programamos solos</h1>
+        <p class="subtitle">El surgimiento de la IA.</p>
+        <div class="content">
+          <div class="card accent-left" style="font-size: 1.3rem; padding: 20px; margin-bottom: 20px; margin-top:20px;">
+            <p>Hoy en día, ningún desarrollador profesional escribe el 100% de su código desde cero. Usamos asistentes (ChatGPT, Gemini, Copilot) para encontrar errores, sugerir ideas y explicarnos código ajeno.</p>
+          </div>
+          <div class="callout tip" style="font-size: 1.3rem; padding: 20px; margin-top: 20px;">
+            <div class="icon">🤖</div>
+            <p>¡Usar IA no es hacer trampa! Es tener un copiloto. Pero el comandante de la nave seguís siendo vos, y si no sabés darle órdenes a la máquina, se va a estrellar.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--azul)"></span>Técnica</span>
+        <h1 class="slide-title">Prompt Engineering</h1>
+        <p class="subtitle">El arte de hablar con las máquinas.</p>
+        <div class="content">
+          <div class="card accent-left b" style="font-size: 1.2rem; padding: 20px; margin-bottom: 20px; margin-top:10px;">
+            <p>Un <strong>Prompt</strong> es el texto que le enviamos a la IA. Una IA brillante puede darte una respuesta horrible si tu prompt es vago ("arreglá mi código").</p>
+          </div>
+          <h3 style="color:var(--verde-neon); margin-bottom:5px;">La Fórmula Mágica:</h3>
+          <div class="code-block" style="font-size: 1.3rem; padding: 25px;">
+            <span style="color:#c678dd;">[CONTEXTO]</span> + <span style="color:#e5c07b;">[TAREA]</span> + <span style="color:#61afef;">[FORMATO]</span><br><br>
+            <span style="color:#a3c9b1;">"Actuá como un profesor de Python. Encontrá el error en este código. Explicámelo en un solo párrafo corto."</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--naranja)"></span>Ciberseguridad 101</span>
+        <h1 class="slide-title">Alucinaciones de la IA</h1>
+        <p class="subtitle">La IA miente con mucha seguridad.</p>
+        <div class="content">
+          <div class="card accent-left o" style="font-size: 1.2rem; padding: 20px; margin-bottom: 20px; margin-top:10px;">
+            <p>Los modelos de lenguaje no "piensan", solo calculan la palabra más probable. A veces inventan funciones que no existen o dan soluciones que rompen el sistema. A esto se le llama <strong>Alucinación</strong>.</p>
+          </div>
+          <div class="callout danger" style="font-size: 1.2rem; padding: 20px;">
+            <div class="icon">🚨</div>
+            <p><strong>Regla de Oro:</strong> NUNCA copies y pegues código generado por una IA sin leerlo y entenderlo primero. Podrías estar inyectando vulnerabilidades en tu propio sistema.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot" style="background:var(--verde-neon)"></span>Misión</span>
+        <h1 class="slide-title">¡A hackear y programar!</h1>
+        <p class="subtitle">Trabajo Práctico N°2</p>
+        <div class="content">
+          <div class="card accent-left" style="font-size: 1.4rem; padding:40px; margin-top:40px;">
+            <p>Volvemos a Google Colab. Busquen el <strong>Trabajo Práctico N°2</strong>.</p>
+            <br>
+            <p>Hoy van a reparar código roto usando Prompt Engineering. ¡Su primer trabajo como Comandantes de la IA!</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <button class="nav-btn" id="prevBtn" aria-label="Anterior">‹</button>
+  <button class="nav-btn" id="nextBtn" aria-label="Siguiente">›</button>
+  <div class="nav-hint">← → para navegar</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    function render() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+      document.querySelectorAll('.progress-fill').forEach(f => {
+        f.style.width = ((current + 1) / total * 100) + '%';
+      });
+      document.querySelectorAll('.page-num').forEach(p => {
+        p.textContent = (current + 1) + ' / ' + total;
+      });
+    }
+    function go(delta) {
+      current = Math.max(0, Math.min(total - 1, current + delta));
+      render();
+    }
+    document.getElementById('prevBtn').addEventListener('click', () => go(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => go(1));
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') go(1);
+      if (e.key === 'ArrowLeft') go(-1);
+    });
+    render();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consignas Trabajo Práctico - Tecnologías Digitales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 22mm 18mm;
+            background-color: #ffffff;
+            @bottom-right {
+                content: "Página " counter(page) " de " counter(pages);
+                font-size: 9pt;
+                color: #64748b;
+                font-family: 'Montserrat', Arial, sans-serif;
+            }
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            color: #334155;
+            line-height: 1.6;
+            font-size: 10.5pt;
+        }
+        .top-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #0088CE 25%, #FDB913 25%, #FDB913 50%, #8CC63F 50%, #8CC63F 75%, #F58220 75%);
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+        .header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .school-name {
+            font-size: 14pt;
+            font-weight: 700;
+            color: #334155;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+        .school-name span.innova {
+            color: #0088CE;
+        }
+        .institution {
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #F58220;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+        }
+        h1 {
+            font-size: 18pt;
+            color: #0f172a;
+            margin: 0 0 8px 0;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+        .meta-info {
+            font-size: 10pt;
+            color: #64748b;
+            margin: 0;
+        }
+        .objective-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid #8CC63F;
+            padding: 14px 16px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+        }
+        .objective-box p {
+            margin: 0;
+            color: #334155;
+        }
+        h2 {
+            font-size: 13pt;
+            color: #0088CE;
+            margin-top: 26px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 4px;
+            page-break-after: avoid;
+        }
+        h3 {
+            font-size: 11pt;
+            color: #F58220;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            page-break-after: avoid;
+        }
+        p {
+            margin: 0 0 12px 0;
+        }
+        ol, ul {
+            margin: 0 0 18px 0;
+            padding-left: 22px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+            color: #1e293b;
+        }
+        .scenarios-container {
+            margin: 15px 0;
+        }
+        .case-study {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            border-left: 4px solid #FDB913;
+            padding: 12px 15px;
+            margin-bottom: 12px;
+            border-radius: 4px;
+            page-break-inside: avoid;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .case-study-title {
+            font-weight: 700;
+            color: #0088CE;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            font-size: 9pt;
+            letter-spacing: 0.5px;
+        }
+        .case-study p {
+            margin: 0;
+            font-size: 10pt;
+            color: #475569;
+        }
+        .criteria-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .criteria-item {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+        }
+        .criteria-item::before {
+            content: "■";
+            color: #0088CE;
+            font-size: 10pt;
+            position: absolute;
+            left: 0;
+            top: 0px;
+        }
+        .criteria-name {
+            font-weight: 700;
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar"></div>
+    <div class="header">
+        <p class="school-name"><span class="innova">INNOVA</span> Establecimiento Educativo</p>
+        <p class="institution">Nivel Secundario | Tecnologías Digitales — 6to Año</p>
+        <h1>Trabajo Práctico Final: Introducción a la Toma de Decisiones con Datos</h1>
+        <p class="meta-info"><strong>Evaluación de Cierre de Nota</strong> | Orientación en Economía y Administración</p>
+    </div>
+
+    <div class="objective-box">
+        <p><strong>Objetivo general:</strong> Comprender la utilidad práctica de las métricas clave (KPIs) y su integración en tableros de control interactivos (Dashboards) para guiar la toma de decisiones estratégicas dentro de una organización o proyecto tecnológico.</p>
+    </div>
+
+    <h2>Parte 1: Investigación y Desarrollo Teórico</h2>
+    <p>Responde de manera clara, estructurada y utilizando tus propias palabras en base a los contenidos trabajados en clase:</p>
+    <ol>
+        <li><strong>El Tablero de Control:</strong> ¿Qué es un <em>Dashboard</em> en el ámbito de las tecnologías digitales? Explica detalladamente su propósito y menciona al menos tres ventajas que aporta a un equipo directivo.</li>
+        <li><strong>El Pulso de la Organización:</strong> ¿Qué significan las siglas <strong>KPI</strong> (<em>Key Performance Indicator</em>)? Explica por qué se denominan indicadores "clave" en lugar de métricas comunes.</li>
+        <li><strong>Diferenciación de Conceptos:</strong> No todos los datos recopilados son críticos para un negocio. Explica la diferencia fundamental entre una métrica operativa general (ej. <em>"número de visitas totales a una web"</em>) y un KPI estratégico. Propón un ejemplo original de cada uno.</li>
+    </ol>
+
+    <h2>Parte 2: Aplicación Práctica y Estudio de Caso</h2>
+    <p>Asume el rol de <strong>Analista de Tecnologías Digitales</strong>. Deberás seleccionar <strong>uno</strong> de los siguientes escenarios para estructurar tu propuesta de análisis:</p>
+    
+    <div class="scenarios-container">
+        <div class="case-study">
+            <div class="case-study-title">Escenario A: Plataforma de Streaming Musical / Red Social</div>
+            <p>Una nueva startup de contenidos multimedia necesita medir con urgencia la retención de sus usuarios activos mensuales y el rendimiento de las recomendaciones automatizadas.</p>
+        </div>
+        
+        <div class="case-study">
+            <div class="case-study-title">Escenario B: Estudio de Desarrollo de Videojuegos</div>
+            <p>Un equipo de desarrollo acaba de lanzar un videojuego multijugador en línea y requiere monitorear la estabilidad técnica de sus servidores en hora pico y la monetización de pases de batalla.</p>
+        </div>
+    </div>
+
+    <h3>Consignas de Aplicación:</h3>
+    <ol>
+        <li><strong>Definición de Indicadores:</strong> Diseña y fundamenta <strong>tres (3) KPIs</strong> específicos para el escenario que hayas elegido. Cada indicador debe estar ligado a un objetivo concreto (ej. rendimiento técnico, fidelización del usuario o ingresos). Justifica la relevancia de cada uno.</li>
+        <li><strong>Arquitectura Conceptual del Dashboard:</strong> Diseña un boceto estructural (wireframe/mockup) que represente el panel visual destinado a los directivos.
+            <ul>
+                <li>Puedes realizar el diseño a mano alzada (digitalizando la hoja) o utilizar herramientas digitales (PowerPoint, Canva, Figma o similares).</li>
+                <li>Debes especificar de forma explícita qué tipo de gráfico se asignará a cada uno de los tres KPIs (ej. gráficos de líneas temporales, medidores de porcentaje de cumplimiento, barras comparativas) y justificar por qué esa visualización es la óptima para una lectura rápida.</li>
+            </ul>
+        </li>
+    </ol>
+
+    <h2>Criterios de Evaluación</h2>
+    <ul class="criteria-list">
+        <li class="criteria-item"><span class="criteria-name">Precisión Conceptual (40%):</span> Dominio y distinción de los conceptos de Dashboard, KPI y métrica base.</li>
+        <li class="criteria-item"><span class="criteria-name">Coherencia de Negocio (30%):</span> Pertinencia y lógica de los KPIs propuestos de acuerdo al escenario industrial seleccionado.</li>
+        <li class="criteria-item"><span class="criteria-name">Criterio de Visualización (20%):</span> Selección fundamentada de componentes visuales que optimicen la toma de decisiones sin saturar el diseño.</li>
+        <li class="criteria-item"><span class="criteria-name">Formato y Claridad (10%):</span> Estructuración limpia, ortografía y prolijidad general en la documentación entregada.</li>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Cuadernillo de Repaso C2 — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.6; font-size: 10pt;
+      background: #f8fafc;
+    }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+
+    .header { text-align: center; margin-bottom: 30px; }
+    .header h1 { font-size: 24pt; font-weight: 900; color: #0f172a; margin: 0 0 8px 0; letter-spacing: -0.5px; }
+    .header p { font-size: 11pt; color: #64748b; margin: 0; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
+    .header .accent { color: #8CC63F; }
+
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    .card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+    .card-header { padding: 12px 16px; background: #0f172a; color: #ffffff; font-weight: 700; font-size: 11pt; display: flex; align-items: center; gap: 8px; }
+    .card-header.u4 { border-bottom: 3px solid #F58220; }
+    .card-header.u5 { border-bottom: 3px solid #0088CE; }
+    .card-header.u6 { border-bottom: 3px solid #8CC63F; }
+    .card-header.ia { border-bottom: 3px solid #a855f7; }
+    
+    .card-body { padding: 16px; }
+    .card-body p { margin: 0 0 10px 0; color: #475569; }
+
+    .code-block { background: #f1f5f9; border-radius: 6px; padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 9pt; color: #334155; border: 1px solid #e2e8f0; margin-bottom: 10px; }
+    .code-block strong { color: #0f172a; }
+    .code-block .cm { color: #64748b; font-style: italic; }
+    .code-block .kw { color: #c026d3; font-weight: 700; }
+
+    .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px dashed #cbd5e1; font-size: 9pt; color: #94a3b8; font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="header">
+      <h1>HOJA DE TRUCOS <span class="accent">C2</span></h1>
+      <p>3er Año · Funciones, APIs y Criptografía</p>
+    </div>
+
+    <div class="grid">
+      
+      <!-- U4: Funciones y Módulos -->
+      <div class="card">
+        <div class="card-header u4">🛠️ U4: Funciones y Librerías</div>
+        <div class="card-body">
+          <p>Crear nuestra propia herramienta para no repetir código:</p>
+          <div class="code-block">
+            <span class="kw">def</span> sumar(a, b):<br>
+            &nbsp;&nbsp;resultado = a + b<br>
+            &nbsp;&nbsp;<span class="kw">return</span> resultado<br><br>
+            print(sumar(10, 5)) <span class="cm"># Imprime 15</span>
+          </div>
+          <p>Descargar un "arsenal público" (Librerías):</p>
+          <div class="code-block">
+            <span class="kw">import</span> random<br>
+            dado = random.randint(1, 6)
+          </div>
+        </div>
+      </div>
+
+      <!-- U5: APIs y JSON -->
+      <div class="card">
+        <div class="card-header u5">🌐 U5: Conexión Satelital (APIs)</div>
+        <div class="card-body">
+          <p>Hacer una petición GET a un servidor seguro (HTTPS):</p>
+          <div class="code-block">
+            <span class="kw">import</span> requests<br>
+            url = "https://api.clima.com"<br>
+            respuesta = requests.get(url)
+          </div>
+          <p>Extraer de un diccionario JSON anidado:</p>
+          <div class="code-block">
+            datos = respuesta.json()<br>
+            <span class="cm"># Para sacar la temperatura:</span><br>
+            temp = datos["clima_actual"]["temperatura"]
+          </div>
+        </div>
+      </div>
+
+      <!-- U6: Limpieza y Criptografía -->
+      <div class="card">
+        <div class="card-header u6">🔐 U6: Strings y Criptografía</div>
+        <div class="card-body">
+          <p>Limpiar la entrada del teclado:</p>
+          <div class="code-block">
+            texto = "  HOLA MUNDO  "<br>
+            texto = texto.strip() <span class="cm"># Borra espacios</span><br>
+            texto = texto.lower() <span class="cm"># Pasa a minúscula</span>
+          </div>
+          <p><strong>Criptografía Clásica:</strong> El Código César esconde el texto desplazando las letras del alfabeto hacia adelante (+3). <em>A</em> se convierte en <em>D</em>.</p>
+        </div>
+      </div>
+
+      <!-- Protocolo IA -->
+      <div class="card">
+        <div class="card-header ia">🤖 Uso Crítico de IA</div>
+        <div class="card-body">
+          <p>Podés y debés usar IA para que te asista con código complejo. <strong>PERO</strong> para que el punto sea válido, siempre debés agregar comentarios explicando la lógica.</p>
+          <div class="code-block">
+            <span class="cm"># Este bloque itera sobre cada letra del texto</span><br>
+            <span class="kw">for</span> letra <span class="kw">in</span> texto:<br>
+            &nbsp;&nbsp;<span class="cm"># Convierte la letra en número (índice ASCII)</span><br>
+            &nbsp;&nbsp;codigo = ord(letra)<br>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer">
+      INNOVA ESTABLECIMIENTO EDUCATIVO · DEPARTAMENTO DE TECNOLOGÍA
+    </div>
+  </div>
+
+</body>
+</html>

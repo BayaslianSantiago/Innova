@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Práctico Integrador C2 — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.65; font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .top-stripe { height: 5px; background: linear-gradient(90deg, #FDB913, #F58220, #e65c00); margin-bottom: 22px; }
+
+    .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1.5px solid #e2e8f0; }
+    .school-tag { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #ea580c; margin-bottom: 4px; }
+    .doc-title { font-size: 19pt; font-weight: 800; color: #0d1b2a; margin: 0 0 6px 0; letter-spacing: -0.4px; }
+    .doc-meta { font-size: 9.5pt; color: #64748b; font-weight: 500; }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; }
+    .unit-badge { display: inline-block; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; margin-bottom: 6px; }
+    .year-badge { display: block; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
+
+    .objective-box { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #ea580c; border-radius: 6px; padding: 13px 16px; margin-bottom: 26px; }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    
+    h2 { font-size: 12.5pt; font-weight: 800; color: #ea580c; margin: 26px 0 10px 0; padding-bottom: 5px; border-bottom: 1.5px solid #e2e8f0; }
+    p { margin: 0 0 11px 0; font-size: 12pt; }
+    
+    .criteria-list { list-style: none; padding-left: 0; margin: 0 0 16px 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 11.5pt;}
+    .criteria-item::before { content: "▸"; color: #ea580c; font-size: 12pt; position: absolute; left: 0; top: 0; }
+    .criteria-name { font-weight: 700; color: #0d1b2a; }
+
+    .callout { display: flex; gap: 11px; align-items: flex-start; padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: 11.5pt; }
+    .callout.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+    .callout.danger { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+
+    .code-block { background: #0f172a; border-radius: 7px; padding: 14px 16px; margin-bottom: 16px; font-family: 'JetBrains Mono', monospace; font-size: 10.5pt; color: #e2e8f0; border-left: 3px solid #ea580c; }
+
+    .entrega-box { margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 20px; }
+    .entrega-box h4 { font-size: 10pt; font-weight: 800; text-transform: uppercase; color: #64748b; margin: 0 0 10px 0; }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Proyecto: Operación Fantasma</h1>
+      <p class="doc-meta"><strong>Programación y Desarrollo Web</strong> &nbsp;·&nbsp; Trabajo Integrador C2</p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">EVALUACIÓN GRUPAL</span>
+      <span class="year-badge">3er Año</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo:</strong> Construir una herramienta de espionaje meteorológico seguro. Deberán crear funciones (U4) para extraer datos reales de internet (U5), y generar un reporte final que se muestre en pantalla totalmente encriptado para evitar intercepciones (U6).</p>
+  </div>
+
+  <h2>Fase 1: Preparando el Arsenal (U4 y U6)</h2>
+  <p>Vamos a modularizar nuestro código creando las herramientas necesarias.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">La IA Encriptadora:</span> Deberán usar la IA para que les genere la función <code>encriptar_cesar(texto)</code> que hicimos en la Unidad 6. ¡Recuerden! Deben comentar (<code>#</code>) al lado de cada línea qué significa la matemática que generó la IA.</li>
+    <li class="criteria-item"><span class="criteria-name">El Filtro de Texto:</span> Creen ustedes mismos la función <code>limpiar_datos(texto)</code>. Esta función debe agarrar el texto, borrar los espacios vacíos y pasarlo todo a minúsculas usando métodos de String.</li>
+  </ul>
+
+  <h2>Fase 2: Conexión Satelital (U5)</h2>
+  <p>Ahora vamos a pedirle al usuario las coordenadas de su ciudad para buscar su clima en tiempo real.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Entrada del Usuario:</span> Usen <code>input()</code> para pedir la Latitud y luego la Longitud. (Pueden buscar esos datos en Google primero).</li>
+    <li class="criteria-item"><span class="criteria-name">El Llamado a la API:</span> Concatenen esos datos ingresados en la URL de Open-Meteo y utilicen <code>requests.get(url)</code> para traer los datos en crudo.</li>
+    <li class="criteria-item"><span class="criteria-name">Decodificación:</span> Conviertan la respuesta a un diccionario JSON y naveguen por él hasta extraer el número de la temperatura actual.</li>
+  </ul>
+
+  <h2>Fase 3: El Reporte Fantasma (Integración)</h2>
+  <p>El dato final debe ser enviado a la pantalla, pero de forma completamente segura e inentendible.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Armado del Reporte:</span> Guarden en una variable el mensaje final. Ejemplo: <code>"la temperatura en las coordenadas es 22"</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">Limpieza y Encriptación:</span> Pasen ese mensaje por la función <code>limpiar_datos()</code>, y el resultado pásenlo por la función <code>encriptar_cesar()</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">Entrega Segura:</span> Hagan <code>print()</code> del mensaje encriptado.</li>
+  </ul>
+
+  <div class="callout info">
+    <div class="icon">💡</div>
+    <p><strong>Aprovecha tu asistente:</strong> ¿No sabés cómo concatenar las variables de Latitud y Longitud adentro de la URL de la API? ¡Es un gran momento para preguntarle a la IA cómo se hace! Solamente recordá entender el código antes de pegarlo.</p>
+  </div>
+
+  <div class="entrega-box">
+    <h4>Defensa Oral y Entrega</h4>
+    <p>Este trabajo se defenderá frente al curso. Expondrán el código, lo ejecutarán en vivo y deberán ser capaces de explicar cada bloque lógico (incluyendo el código generado por la IA). Envíen el enlace de Colab a Classroom antes de la presentación.</p>
+  </div>
+
+</body>
+</html>

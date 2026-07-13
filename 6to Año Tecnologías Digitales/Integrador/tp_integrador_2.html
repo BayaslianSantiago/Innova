@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyecto Integrador Final — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.65; font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .top-stripe { height: 5px; background: linear-gradient(90deg, #FDB913, #F58220, #e65c00); margin-bottom: 22px; }
+
+    .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1.5px solid #e2e8f0; }
+    .school-tag { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #ea580c; margin-bottom: 4px; }
+    .doc-title { font-size: 19pt; font-weight: 800; color: #0d1b2a; margin: 0 0 6px 0; letter-spacing: -0.4px; }
+    .doc-meta { font-size: 9.5pt; color: #64748b; font-weight: 500; }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; }
+    .unit-badge { display: inline-block; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; margin-bottom: 6px; }
+    .year-badge { display: block; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
+
+    .objective-box { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #ea580c; border-radius: 6px; padding: 13px 16px; margin-bottom: 26px; }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    
+    h2 { font-size: 12.5pt; font-weight: 800; color: #ea580c; margin: 26px 0 10px 0; padding-bottom: 5px; border-bottom: 1.5px solid #e2e8f0; }
+    p { margin: 0 0 11px 0; font-size: 12pt; }
+    
+    .criteria-list { list-style: none; padding-left: 0; margin: 0 0 16px 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 11.5pt;}
+    .criteria-item::before { content: "▸"; color: #ea580c; font-size: 12pt; position: absolute; left: 0; top: 0; }
+    .criteria-name { font-weight: 700; color: #0d1b2a; }
+
+    .callout { display: flex; gap: 11px; align-items: flex-start; padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: 11.5pt; }
+    .callout.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+    .callout.danger { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+
+    .entrega-box { margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 20px; }
+    .entrega-box h4 { font-size: 10pt; font-weight: 800; text-transform: uppercase; color: #64748b; margin: 0 0 10px 0; }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Proyecto: Full-Stack Dashboard</h1>
+      <p class="doc-meta"><strong>Ciencia de Datos y Análisis</strong> &nbsp;·&nbsp; Trabajo Integrador Final (C2)</p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">EVALUACIÓN ANUAL FINAL</span>
+      <span class="year-badge">6to Año</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo:</strong> Construir un Dashboard web interactivo 100% funcional reuniendo los conocimientos del año entero. Van a tomar el boceto que diseñaron en el primer cuatrimestre, crear los datos reales, analizarlos con Pandas y publicarlos usando Streamlit.</p>
+  </div>
+
+  <h2>Fase 1: Los Datos (Pandas)</h2>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">La Base:</span> Creen un archivo CSV inventado en Codespaces (mínimo 20 líneas) con datos que apliquen al negocio que eligieron en el primer cuatrimestre.</li>
+    <li class="criteria-item"><span class="criteria-name">Lectura y Limpieza:</span> En su <code>app.py</code>, importen pandas, lean el archivo y asegúrense de usar <code>.dropna()</code> por si hay celdas vacías.</li>
+  </ul>
+
+  <h2>Fase 2: La Web (Streamlit Top-Down)</h2>
+  <p>Su código de Streamlit DEBE respetar obligatoriamente la regla de las 3 capas.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Capa 1 (KPIs):</span> Usen <code>st.columns()</code> y <code>st.metric()</code> para mostrar arriba de todo los 3 o 4 indicadores clave que definieron hace meses.</li>
+    <li class="criteria-item"><span class="criteria-name">Capa 2 (Tendencias):</span> Usen las funciones de gráficos (ej: <code>st.line_chart</code> o <code>st.bar_chart</code>) pasándoles los datos agrupados con Pandas para contar el problema o tendencia de ventas.</li>
+    <li class="criteria-item"><span class="criteria-name">Capa 3 (Detalles):</span> En el fondo de la pantalla, incluyan un <code>st.dataframe()</code> para mostrar la tabla completa para que el jefe pueda investigar.</li>
+  </ul>
+
+  <div class="callout info">
+    <div class="icon">🚀</div>
+    <p><strong>Bonus Track: Despliegue Público (Opcional)</strong><br>Si quieren lucirse, vinculen su cuenta de GitHub con <em>share.streamlit.io</em> y publiquen el Dashboard gratis en internet para poder mandarle el link real a sus familias y ponerlo en su Curriculum.</p>
+  </div>
+
+  <div class="entrega-box">
+    <h4>Defensa Final</h4>
+    <p>La evaluación es oral. Lanzarán su servidor (<code>streamlit run app.py</code>) frente al proyector del aula y demostrarán cómo su código de Python se transformó en una aplicación profesional, logrando contar una "Data Story" convincente.</p>
+  </div>
+
+</body>
+</html>

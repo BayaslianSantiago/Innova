@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Planificación Anual — INNOVA (3er Año)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 22mm 18mm;
+            background-color: #ffffff;
+
+            @bottom-right {
+                content: "Página " counter(page) " de " counter(pages);
+                font-size: 9pt;
+                color: #64748b;
+                font-family: 'Montserrat', Arial, sans-serif;
+            }
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            color: #334155;
+            line-height: 1.6;
+            font-size: 10.5pt;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+
+        .top-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #0088CE 25%, #FDB913 25%, #FDB913 50%, #8CC63F 50%, #8CC63F 75%, #F58220 75%);
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+
+        .header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .school-name {
+            font-size: 14pt;
+            font-weight: 700;
+            color: #334155;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+
+        .school-name span.innova {
+            color: #0088CE;
+        }
+
+        .institution {
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #F58220;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+        }
+
+        h1 {
+            font-size: 18pt;
+            color: #0f172a;
+            margin: 0 0 8px 0;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+
+        .meta-info {
+            font-size: 10pt;
+            color: #64748b;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 13pt;
+            color: #0088CE;
+            margin-top: 26px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 4px;
+            page-break-after: avoid;
+        }
+
+        h3 {
+            font-size: 11pt;
+            color: #F58220;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            page-break-after: avoid;
+        }
+
+        p {
+            margin: 0 0 12px 0;
+        }
+
+        ol,
+        ul {
+            margin: 0 0 18px 0;
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        strong {
+            color: #1e293b;
+        }
+
+        .criteria-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .criteria-item {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+        }
+
+        .criteria-item::before {
+            content: "■";
+            color: #0088CE;
+            font-size: 10pt;
+            position: absolute;
+            left: 0;
+            top: 0px;
+        }
+
+        .criteria-name {
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .highlight {
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            h2,
+            h3 {
+                page-break-after: avoid;
+            }
+
+            .criteria-list,
+            .criteria-item {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="top-bar"></div>
+        <div class="header">
+            <p class="school-name"><span class="innova">INNOVA</span> Establecimiento Educativo</p>
+            <p class="institution">Nivel Secundario | Programación — 3er Año</p>
+            <h1>Planificación Anual: Programación</h1>
+            <p class="meta-info"><strong>Profesor Bayaslian Santiago</strong></p>
+        </div>
+
+        <h2>1. Fundamentación</h2>
+        <p>Esta materia arrancará con un enfoque visual (HTML) para enganchar su interés, y luego explotará el entorno
+            <span class="highlight">Google Colaboratory (Colab)</span> con Python.</p>
+        <p>Al igual que en 1er año, la currícula mantendrá un <span class="highlight">enfoque transversal</span> sobre
+            tres pilares: los Datos (cómo consumirlos y estructurarlos), la Ciberseguridad (cómo encriptarlos y
+            transmitirlos de forma segura), y la Inteligencia Artificial (uso ético de copilotos de código para acelerar
+            el desarrollo). Aprenderán a crear programas modulares que se comuniquen con el mundo exterior directamente
+            desde la nube.</p>
+
+        <h2>2. Objetivos de Aprendizaje</h2>
+        <ul class="criteria-list">
+            <li class="criteria-item">Comprender la estructura de la Web (HTML) y su relación con la ciberseguridad.
+            </li>
+            <li class="criteria-item">Manejar estructuras de datos complejas (Diccionarios) y entender el formato JSON.
+            </li>
+            <li class="criteria-item">Modularizar el código utilizando Funciones (<code>def</code>) e incorporar
+                Librerías externas (<code>import</code>).</li>
+            <li class="criteria-item">Conectar programas con servicios web mediante APIs públicas.</li>
+            <li class="criteria-item">Usar responsablemente herramientas de IA Generativa para asistir en la escritura y
+                depuración de código.</li>
+        </ul>
+
+        <h2>3. Ejes Temáticos (Formato Cuatrimestral)</h2>
+
+        <h3>Primer Cuatrimestre: "De la Web a los Datos"</h3>
+        <ul class="criteria-list">
+            <li class="criteria-item"><span class="highlight">Unidad 1: Magia Visual (HTML).</span> Etiquetas básicas.
+                Ciberseguridad 101: por qué no guardar información sensible ni contraseñas en el código fuente (HTML
+                estático).
+                <ul>
+                    <li>Evaluación: TP Unidad 1 (Crear una página web estática sencilla).</li>
+                </ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 2: Colab y Repaso Asistido por IA.</span> Repaso de
+                Python. Introducción a los asistentes de código (ej. ChatGPT/Copilot): cómo hacerles buenas preguntas
+                (Prompt Engineering básico) para encontrar errores.
+                <ul>
+                    <li>Evaluación: TP Unidad 2 (Crear un mini-portfolio personal en Colab combinando Markdown y
+                        código).</li>
+                </ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 3: Diccionarios.</span> La estructura Clave-Valor.
+                Cómo se agrupan los datos masivos en la industria de la tecnología.
+                <ul>
+                    <li>Evaluación: TP Unidad 3 (Crear un diccionario de "Ficha de Personaje" o "Pokedex").</li>
+                </ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Proyecto Integrador C1:</span> Sistema de Gestión
+                interactivo en Colab utilizando Diccionarios y documentado con IA.</li>
+        </ul>
+
+        <h3>Segundo Cuatrimestre: "Conectados al Mundo (APIs)"</h3>
+        <ul class="criteria-list">
+            <li class="criteria-item"><span class="highlight">Unidad 4: Modularización y Librerías.</span> Crear
+                herramientas propias (<code>def</code>) y reutilizar herramientas de otros mediante Módulos
+                (<code>import</code>). Qué es una librería externa.
+                <ul>
+                    <li>Evaluación: TP Unidad 4 (Importar una librería estándar como <code>math</code> o
+                        <code>datetime</code> y crear una función que la utilice).</li>
+                </ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 5: Introducción a APIs y JSON.</span> Solicitudes
+                GET con la librería <code>requests</code>. Riesgos básicos de interceptación de datos (HTTP vs HTTPS).
+                <ul>
+                    <li>Evaluación: TP Unidad 5 (Extraer el clima actual de una API).</li>
+                </ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 6: Procesamiento de Strings y Seguridad.</span>
+                Limpiar datos recibidos por internet. Introducción a la criptografía.
+                <ul>
+                    <li>Evaluación: TP Unidad 6 (Desarrollar un encriptador básico tipo Código César para enviar
+                        "mensajes secretos").</li>
+                </ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Proyecto Integrador C2:</span> Un "Asistente Virtual" en
+                texto. El alumno debe pedir un dato, conectarse a una API pública (ej: API de feriados, clima o
+                películas), extraer la información clave del JSON usando diccionarios, y mostrarla. Deberán apoyarse en
+                IA para resolver un problema lógico durante el desarrollo.</li>
+        </ul>
+
+        <h2>4. Criterios de Evaluación</h2>
+        <p>El año lectivo será evaluado íntegramente mediante entregas prácticas, exposiciones y trabajo en el aula:</p>
+        <ul class="criteria-list">
+            <li class="criteria-item"><span class="highlight">Entregas de Unidad:</span> 1 Trabajo Práctico corto por
+                cada una de las 6 unidades.</li>
+            <li class="criteria-item"><span class="highlight">Proyectos Integradores y Defensa Oral:</span> 1 Proyecto
+                integrador en grupo por cuatrimestre. La evaluación incluye obligatoriamente una instancia de exposición
+                oral frente a la clase, donde el grupo debe explicar cómo funciona su código, demostrar que lo
+                comprenden y responder preguntas técnicas.</li>
+            <li class="criteria-item"><span class="highlight">Participación Activa:</span> Se evaluará de forma continua
+                la predisposición, el compañerismo y la participación activa durante las clases (aportar ideas, debatir
+                lógicas y ayudar a otros grupos a encontrar errores en sus códigos).</li>
+            <li class="criteria-item"><span class="highlight">Uso Ético y Crítico de la IA:</span> Se fomenta y espera
+                el uso de herramientas de Inteligencia Artificial como asistentes de programación. Sin embargo, su uso
+                debe estar acompañado de pensamiento crítico: el estudiante debe comprender, explicar y justificar cada
+                concepto implementado por la IA, demostrando una apropiación real del contenido de la materia.</li>
+        </ul>
+    </div>
+</body>
+
+</html>

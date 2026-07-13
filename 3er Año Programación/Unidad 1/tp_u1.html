@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Práctico — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+      @bottom-right {
+        content: "Pág. " counter(page) " / " counter(pages);
+        font-size: 8pt;
+        color: #94a3b8;
+        font-family: 'Inter', Arial, sans-serif;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', -apple-system, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.65;
+      font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    /* ── BANDA SUPERIOR (Estética verde 3er año) ── */
+    .top-stripe {
+      height: 5px;
+      background: linear-gradient(90deg, #0088CE, #8CC63F, #22c55e, #10b981);
+      margin-bottom: 22px;
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+
+    .school-tag {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #16a34a;
+      margin-bottom: 4px;
+    }
+    .doc-title {
+      font-size: 19pt;
+      font-weight: 800;
+      color: #0d1b2a;
+      line-height: 1.15;
+      margin: 0 0 6px 0;
+      letter-spacing: -0.4px;
+    }
+    .doc-meta {
+      font-size: 9.5pt;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .doc-meta strong { color: #1e293b; }
+
+    /* Badge de unidad */
+    .header-badge {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .unit-badge {
+      display: inline-block;
+      font-size: 8.5pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #f0fdf4;
+      color: #16a34a;
+      border: 1px solid #bbf7d0;
+      margin-bottom: 6px;
+    }
+    .year-badge {
+      display: block;
+      font-size: 8pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: #94a3b8;
+    }
+
+    /* ── CAJA OBJETIVO ── */
+    .objective-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #16a34a;
+      border-radius: 6px;
+      padding: 13px 16px;
+      margin-bottom: 26px;
+    }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    .objective-box strong { color: #1a2e3d; }
+
+    /* ── HEADINGS ── */
+    h2 {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: #16a34a;
+      margin: 26px 0 10px 0;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #e2e8f0;
+      page-break-after: avoid;
+      letter-spacing: -0.2px;
+    }
+    h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #0088CE;
+      margin: 18px 0 8px 0;
+      page-break-after: avoid;
+    }
+
+    p { margin: 0 0 11px 0; font-size: 12pt; line-height: 1.6; }
+
+    ol, ul {
+      margin: 0 0 16px 0;
+      padding-left: 22px;
+    }
+    li { margin-bottom: 7px; font-size: 11.5pt;}
+    strong { color: #0d1b2a; font-weight: 700; }
+
+    /* ── CASE STUDY ── */
+    .case-study {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #FDB913;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 11px;
+      page-break-inside: avoid;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .case-study-title {
+      font-size: 9.5pt;
+      font-weight: 800;
+      color: #16a34a;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .case-study p { margin: 0; font-size: 12pt; color: #475569; margin-bottom: 8px; }
+
+    /* ── CRITERIA LIST ── */
+    .criteria-list { list-style: none; padding-left: 0; }
+    .criteria-item {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    .criteria-item::before {
+      content: "▸";
+      color: #16a34a;
+      font-size: 12pt;
+      position: absolute;
+      left: 0; top: 0;
+    }
+    .criteria-name { font-weight: 700; color: #0d1b2a; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      page-break-inside: avoid;
+    }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; line-height: 1.4; }
+    .callout p { margin: 0; font-size: 11.5pt; line-height: 1.55; }
+    .callout.danger  { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+    .callout.info    { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #0f172a;
+      border-radius: 7px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11pt;
+      color: #e2e8f0;
+      line-height: 1.6;
+      border-left: 3px solid #16a34a;
+      page-break-inside: avoid;
+    }
+    .code-block .kw { color: #c678dd; }
+    .code-block .st { color: #98c379; }
+
+    /* ── ENTREGA ── */
+    .entrega-box {
+      margin-top: 30px;
+      background: #f8fafc;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      page-break-inside: avoid;
+    }
+    .entrega-box h4 {
+      font-size: 10pt; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: #64748b; margin: 0 0 10px 0;
+    }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Magia Visual y Ciberseguridad</h1>
+      <p class="doc-meta">
+        <strong>Programación y Desarrollo Web</strong> &nbsp;·&nbsp; 3er Año (1er Cuatrimestre)
+      </p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Unidad 1</span>
+      <span class="year-badge">Trabajo Práctico</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo de hoy:</strong> Construir nuestra primera estructura web usando HTML en CodePen, y comprender por qué inspeccionar el código es una técnica básica de Ciberseguridad.</p>
+  </div>
+
+  <h2>Misión 1: Mi Primera Web</h2>
+  <div class="case-study">
+    <div class="case-study-title">El Arquitecto</div>
+    <p>Para construir una casa, primero necesitamos los ladrillos. En el mundo del desarrollo web, los ladrillos son las etiquetas HTML.</p>
+  </div>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Plataforma:</span> Ingresen a <a href="https://codepen.io/pen/" target="_blank">codepen.io/pen/</a>. Vamos a trabajar <strong>únicamente</strong> en el panel que dice <code>HTML</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">El Título:</span> Creen un título grande usando la etiqueta de encabezado principal: <code>&lt;h1&gt;Mi nombre es [Tu Nombre]&lt;/h1&gt;</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">El Párrafo:</span> Debajo del título, agreguen un párrafo explicando cuál es su tecnología, red social o videojuego favorito: <code>&lt;p&gt;Me encanta...&lt;/p&gt;</code>.</li>
+  </ul>
+
+  <h2>Misión 2: Enlazando la Red</h2>
+  <p>Una página web aburrida no lleva a ningún lado. Vamos a hacer honor al nombre "Hipertexto" conectando nuestra web con otra.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">El Vínculo:</span> Usen la etiqueta de enlace (ancla) para crear un texto clickeable.</li>
+    <li class="criteria-item"><span class="criteria-name">El Código:</span> Escriban debajo del párrafo: <br>
+      <div class="code-block" style="margin-top:8px;">
+        <span class="kw">&lt;a</span> href=<span class="st">"https://instagram.com"</span><span class="kw">&gt;</span>Ir a Instagram<span class="kw">&lt;/a&gt;</span>
+      </div>
+    </li>
+    <li class="criteria-item"><span class="criteria-name">Prueba:</span> Clickeen en el resultado (abajo) para verificar que el enlace funciona y los lleva a la página indicada.</li>
+  </ul>
+
+  <h2>Misión 3: El Analista de Seguridad (Hack)</h2>
+  <p>Como vimos en clase, todo el código HTML de cualquier sitio se puede inspeccionar. Es una vulnerabilidad grave si el programador es descuidado.</p>
+  <div class="callout danger">
+    <div class="icon">🕵️</div>
+    <p>El profesor les va a enviar el archivo <code>boveda_secreta.html</code>. Es una pantalla de Login, pero el programador dejó el usuario y la contraseña escondidos directamente en el código.</p>
+  </div>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Inspección:</span> Abran la Bóveda Secreta, hagan <em>Click Derecho</em> y seleccionen <strong>"Inspeccionar"</strong> o <strong>"Ver código fuente de la página"</strong>.</li>
+    <li class="criteria-item"><span class="criteria-name">La Búsqueda:</span> Busquen en el panel que se abre a la derecha (el DOM) un <strong>comentario en verde</strong> o analicen la parte de <code>&lt;script&gt;</code> para encontrar la contraseña (y el usuario).</li>
+    <li class="criteria-item"><span class="criteria-name">Reporte:</span> En su CodePen, agreguen un nuevo párrafo al final que diga: <code>&lt;p&gt;La contraseña secreta encontrada es: [escribir_contraseña]&lt;/p&gt;</code></li>
+  </ul>
+
+  <div class="entrega-box">
+    <h4>¿Qué entregamos hoy?</h4>
+    <p>Cuando tengan el título, el párrafo, el enlace funcionando y hayan reportado la contraseña secreta, guarden su CodePen y envíen el link URL a la tarea de Google Classroom. ¡Buen trabajo, analistas!</p>
+  </div>
+
+</body>
+</html>

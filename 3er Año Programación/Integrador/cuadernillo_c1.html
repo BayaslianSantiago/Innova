@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hoja de Trucos — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 15mm 15mm;
+      @bottom-right {
+        content: "Apunte de Estudio — 3er Año";
+        font-size: 8pt;
+        color: #94a3b8;
+        font-family: 'Inter', sans-serif;
+      }
+    }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', -apple-system, sans-serif;
+      color: #1e293b;
+      line-height: 1.6;
+      font-size: 10pt;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      border-bottom: 2px solid #8CC63F;
+      padding-bottom: 12px; margin-bottom: 24px;
+    }
+    .h-left h1 { margin: 0; font-size: 24pt; font-weight: 800; color: #0f172a; letter-spacing: -0.5px; }
+    .h-left p { margin: 4px 0 0 0; color: #64748b; font-size: 10pt; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+    .h-right { text-align: right; }
+    .badge {
+      background: #f0fdf4; color: #16a34a; border: 1px solid #bbf7d0;
+      padding: 4px 10px; border-radius: 6px; font-weight: 700; font-size: 8pt; text-transform: uppercase;
+    }
+
+    /* ── COLUMNS ── */
+    .columns {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    }
+
+    /* ── SECTIONS ── */
+    .section {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; margin-bottom: 20px;
+      break-inside: avoid;
+    }
+    .section h2 {
+      margin: 0 0 12px 0; font-size: 12pt; font-weight: 800; color: #8CC63F; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .section h2 span.icon { font-size: 14pt; }
+
+    /* ── CONTENT ── */
+    p { margin: 0 0 8px 0; }
+    ul { margin: 0 0 12px 0; padding-left: 18px; }
+    li { margin-bottom: 4px; }
+    strong { color: #0f172a; }
+
+    /* ── CODE ── */
+    code { font-family: 'JetBrains Mono', monospace; font-size: 9pt; background: #e2e8f0; padding: 2px 4px; border-radius: 4px; color: #db2777; }
+    .code-block {
+      background: #0f172a; color: #e2e8f0; font-family: 'JetBrains Mono', monospace; font-size: 9pt;
+      padding: 12px; border-radius: 6px; border-left: 3px solid #8CC63F; margin-bottom: 12px;
+      white-space: pre-wrap;
+    }
+    .cb-comment { color: #64748b; font-style: italic; }
+    .cb-string { color: #a7f3d0; }
+    .cb-keyword { color: #f472b6; }
+
+    /* ── ALERT ── */
+    .alert {
+      background: #fef2f2; border: 1px solid #fecaca; border-radius: 6px; padding: 10px 12px; display: flex; gap: 10px; margin-bottom: 12px; align-items: center;
+    }
+    .alert .icon { font-size: 14pt; }
+    .alert p { margin: 0; color: #991b1b; font-size: 9.5pt; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="h-left">
+      <h1>Hoja de Trucos</h1>
+      <p>Programación 3er Año · 1er Cuatrimestre</p>
+    </div>
+    <div class="h-right">
+      <span class="badge">INNOVA</span>
+    </div>
+  </div>
+
+  <div class="columns">
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="col">
+      
+      <div class="section">
+        <h2><span class="icon">🖥️</span> 1. Magia Visual (HTML)</h2>
+        <p>HTML no es programación, es un <strong>lenguaje de marcado</strong>. Da estructura a la web.</p>
+        <div class="code-block">
+<span class="cb-keyword">&lt;h1&gt;</span>Título Principal<span class="cb-keyword">&lt;/h1&gt;</span>
+<span class="cb-keyword">&lt;p&gt;</span>Un párrafo normal.<span class="cb-keyword">&lt;/p&gt;</span>
+<span class="cb-keyword">&lt;a</span> href=<span class="cb-string">"url"</span><span class="cb-keyword">&gt;</span>Enlace Clickeable<span class="cb-keyword">&lt;/a&gt;</span></div>
+        <div class="alert">
+          <div class="icon">🚨</div>
+          <p>CIBERSEGURIDAD: El HTML se ejecuta "Client-Side". Cualquiera puede inspeccionar el código. NUNCA ocultes contraseñas en él.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2><span class="icon">🐍</span> 2. Repaso de Python (1er Año)</h2>
+        <p><strong>Variables:</strong> Guardan datos simples en la memoria.</p>
+        <div class="code-block">edad = 15
+nombre = <span class="cb-string">"Neo"</span></div>
+        <p><strong>Condicionales (IF):</strong> Toman decisiones basadas en lógica.</p>
+        <div class="code-block"><span class="cb-keyword">if</span> edad >= 18:
+  print(<span class="cb-string">"Acceso concedido"</span>)</div>
+        <p><strong>Ciclos (FOR):</strong> Repiten acciones, ideal para recorrer listas.</p>
+        <div class="code-block"><span class="cb-keyword">for</span> jugador <span class="cb-keyword">in</span> equipo:
+  print(jugador)</div>
+      </div>
+
+      <div class="section">
+        <h2><span class="icon">🤖</span> 3. El Copiloto IA (Prompts)</h2>
+        <p>La IA (ChatGPT, Copilot, Gemini) funciona mejor si le das instrucciones precisas llamadas <strong>Prompts</strong>.</p>
+        <p><strong>La Fórmula Mágica:</strong></p>
+        <ul>
+          <li><strong>Contexto:</strong> "Actúa como un experto en Python."</li>
+          <li><strong>Tarea:</strong> "Encuentra el error en este código."</li>
+          <li><strong>Formato:</strong> "Explícalo en un solo párrafo corto."</li>
+        </ul>
+        <p><strong>Alucinaciones:</strong> A veces la IA inventa respuestas que parecen reales. NUNCA copies y pegues código sin leerlo y probarlo.</p>
+      </div>
+
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div class="col">
+      
+      <div class="section">
+        <h2><span class="icon">📦</span> 4. Listas vs Diccionarios</h2>
+        <p><strong>Listas []:</strong> Guardan datos por su POSICIÓN. No tienen "nombre".</p>
+        <div class="code-block"><span class="cb-comment"># El 10 es la edad, pero la máquina no lo sabe</span>
+datos = [<span class="cb-string">"Leo"</span>, 10]
+print(datos[0]) <span class="cb-comment"># Imprime "Leo"</span></div>
+
+        <p><strong>Diccionarios {}:</strong> Guardan datos por CLAVE-VALOR. Cada dato tiene una etiqueta.</p>
+        <div class="code-block"><span class="cb-comment"># El dato tiene significado</span>
+jugador = {
+  <span class="cb-string">"nombre"</span>: <span class="cb-string">"Messi"</span>,
+  <span class="cb-string">"dorsal"</span>: 10
+}</div>
+      </div>
+
+      <div class="section">
+        <h2><span class="icon">🛠️</span> 5. Operaciones con Diccionarios</h2>
+        <ul>
+          <li><strong>Leer un dato:</strong> <code>jugador["nombre"]</code></li>
+          <li><strong>Modificar:</strong> <code>jugador["dorsal"] = 30</code></li>
+          <li><strong>Agregar nuevo:</strong> <code>jugador["club"] = "Miami"</code></li>
+        </ul>
+        <p>Se pueden meter diccionarios adentro de una lista para armar una base de datos gigante:</p>
+        <div class="code-block">plantilla = [
+  {<span class="cb-string">"nombre"</span>: <span class="cb-string">"Messi"</span>, <span class="cb-string">"n"</span>: 10},
+  {<span class="cb-string">"nombre"</span>: <span class="cb-string">"Dibu"</span>, <span class="cb-string">"n"</span>: 23}
+]</div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

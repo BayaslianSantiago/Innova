@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Práctico — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.65; font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .top-stripe { height: 5px; background: linear-gradient(90deg, #10b981, #059669, #047857); margin-bottom: 22px; }
+
+    .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1.5px solid #e2e8f0; }
+    .school-tag { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #059669; margin-bottom: 4px; }
+    .doc-title { font-size: 19pt; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; letter-spacing: -0.4px; }
+    .doc-meta { font-size: 9.5pt; color: #64748b; font-weight: 500; }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; }
+    .unit-badge { display: inline-block; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; background: #ecfdf5; color: #059669; border: 1px solid #a7f3d0; margin-bottom: 6px; }
+    .year-badge { display: block; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
+
+    .objective-box { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #059669; border-radius: 6px; padding: 13px 16px; margin-bottom: 26px; }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    
+    h2 { font-size: 12.5pt; font-weight: 800; color: #059669; margin: 26px 0 10px 0; padding-bottom: 5px; border-bottom: 1.5px solid #e2e8f0; }
+    p { margin: 0 0 11px 0; font-size: 12pt; }
+    
+    .criteria-list { list-style: none; padding-left: 0; margin: 0 0 16px 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 11.5pt;}
+    .criteria-item::before { content: "▸"; color: #059669; font-size: 12pt; position: absolute; left: 0; top: 0; }
+    .criteria-name { font-weight: 700; color: #0f172a; }
+
+    .callout { display: flex; gap: 11px; align-items: flex-start; padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: 11.5pt; }
+    .callout.info { background: #f5f3ff; border: 1px solid #ddd6fe; color: #6d28d9; }
+    .callout.code { background: #0f172a; border: 1px solid #334155; color: #e2e8f0; font-family: 'JetBrains Mono', monospace; }
+
+    .entrega-box { margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 20px; }
+    .entrega-box h4 { font-size: 10pt; font-weight: 800; text-transform: uppercase; color: #64748b; margin: 0 0 10px 0; }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Setup en la Nube (GitHub)</h1>
+      <p class="doc-meta"><strong>Ciencia de Datos y Análisis</strong> &nbsp;·&nbsp; 6to Año (2do Cuatrimestre)</p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Unidad 4</span>
+      <span class="year-badge">Trabajo Práctico</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo:</strong> Configurar el entorno de desarrollo profesional. Crearán su cuenta en GitHub, inicializarán un repositorio para la materia, y utilizarán Codespaces para escribir y guardar (Commit) su primer script de Python.</p>
+  </div>
+
+  <h2>Misión 1: Identidad Digital</h2>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Registro:</span> Ingresen a <em>github.com</em> y creen una cuenta gratuita usando su mail del colegio. Su nombre de usuario será su identidad profesional.</li>
+    <li class="criteria-item"><span class="criteria-name">El Repositorio:</span> Creen un nuevo Repositorio Público llamado <code>innova-data-lab</code>. Asegúrense de marcar la casilla que dice "Add a README file".</li>
+  </ul>
+
+  <h2>Misión 2: El Entorno (Codespaces)</h2>
+  <p>Ya no necesitamos instalar programas pesados en la computadora de la escuela. Vamos a usar la nube.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item">Dentro de su repositorio en GitHub, hagan click en el botón verde <strong>"&lt;&gt; Code"</strong>, vayan a la pestaña <strong>"Codespaces"</strong> y hagan click en el botón grande verde para crear uno.</li>
+    <li class="criteria-item">Esperen a que cargue el editor (Visual Studio Code en el navegador).</li>
+    <li class="criteria-item">Creen un nuevo archivo llamado <code>analista.py</code>.</li>
+    <li class="criteria-item">Escriban la siguiente línea de código en Python:
+      <div class="callout code" style="margin-top:8px; padding: 10px;">print("Hola, mi entorno en la nube está configurado")</div>
+    </li>
+  </ul>
+
+  <h2>Misión 3: El Primer Commit</h2>
+  <p>En el mundo real no tocamos "Guardar Como...". Usamos Git.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Source Control:</span> En Codespaces, vayan al menú de la izquierda que tiene un ícono de un nodo con ramas (Source Control).</li>
+    <li class="criteria-item"><span class="criteria-name">Stage:</span> Verán su archivo <code>analista.py</code>. Tóquenle el botón <strong>"+"</strong> para prepararlo (Stage).</li>
+    <li class="criteria-item"><span class="criteria-name">Commit & Push:</span> Escriban un mensaje en la caja de texto (ej: <em>"Mi primer código en Python"</em>) y presionen el botón azul grande <strong>Commit</strong> (Si les pregunta si quieren hacer Sync/Push, díganle que Sí).</li>
+  </ul>
+
+  <h2>Misión 4: Asistencia IA</h2>
+  <div class="callout info">
+    <div class="icon">🤖</div>
+    <p><strong>Uso de IA:</strong> Abran ChatGPT o Gemini. Escríbanle el siguiente prompt exacto y lean la respuesta.</p>
+  </div>
+  <p><em>"Estoy aprendiendo a usar Git y GitHub. Explicame qué significa hacer un 'Commit' usando una analogía con videojuegos (como si fueran puntos de guardado o checkpoints). Explicámelo en 3 líneas."</em></p>
+
+  <div class="entrega-box">
+    <h4>Formato de Entrega</h4>
+    <p>Envíen al Classroom el <strong>Link/URL de su repositorio de GitHub</strong> (ejemplo: github.com/tunombre/innova-data-lab). El profesor entrará a su link para verificar que el archivo <code>analista.py</code> esté subido correctamente con su mensaje de Commit. También adjunten un documento de texto con la analogía que les dio la IA.</p>
+  </div>
+
+</body>
+</html>

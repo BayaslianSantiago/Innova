@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Planificación Anual — INNOVA (1er Año)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 22mm 18mm;
+            background-color: #ffffff;
+            @bottom-right {
+                content: "Página " counter(page) " de " counter(pages);
+                font-size: 9pt;
+                color: #64748b;
+                font-family: 'Montserrat', Arial, sans-serif;
+            }
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            color: #334155;
+            line-height: 1.6;
+            font-size: 10.5pt;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        .top-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #0088CE 25%, #FDB913 25%, #FDB913 50%, #8CC63F 50%, #8CC63F 75%, #F58220 75%);
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+        .header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .school-name {
+            font-size: 14pt;
+            font-weight: 700;
+            color: #334155;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+        .school-name span.innova {
+            color: #0088CE;
+        }
+        .institution {
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #F58220;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+        }
+        h1 {
+            font-size: 18pt;
+            color: #0f172a;
+            margin: 0 0 8px 0;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+        .meta-info {
+            font-size: 10pt;
+            color: #64748b;
+            margin: 0;
+        }
+        h2 {
+            font-size: 13pt;
+            color: #0088CE;
+            margin-top: 26px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 4px;
+            page-break-after: avoid;
+        }
+        h3 {
+            font-size: 11pt;
+            color: #F58220;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            page-break-after: avoid;
+        }
+        p {
+            margin: 0 0 12px 0;
+        }
+        ol, ul {
+            margin: 0 0 18px 0;
+            padding-left: 22px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+            color: #1e293b;
+        }
+        .criteria-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .criteria-item {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+        }
+        .criteria-item::before {
+            content: "■";
+            color: #0088CE;
+            font-size: 10pt;
+            position: absolute;
+            left: 0;
+            top: 0px;
+        }
+        .criteria-name {
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .highlight {
+            font-weight: 600;
+            color: #0f172a;
+        }
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            h2, h3 {
+                page-break-after: avoid;
+            }
+            .criteria-list, .criteria-item {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar"></div>
+        <div class="header">
+            <p class="school-name"><span class="innova">INNOVA</span> Establecimiento Educativo</p>
+            <p class="institution">Nivel Secundario | Programación — 1er Año</p>
+            <h1>Planificación Anual: Introducción a la Programación</h1>
+            <p class="meta-info"><strong>Profesor Bayaslian Santiago</strong></p>
+        </div>
+
+        <h2>1. Fundamentación</h2>
+        <p>Dado que los estudiantes ya cuentan con una base de programación en bloques (Scratch) de la escuela primaria, esta materia dará el salto directamente al código de texto utilizando Python. Se trabajará exclusivamente en el ecosistema <span class="highlight">Google Colaboratory (Colab)</span> aprovechando las Chromebooks institucionales.</p>
+        <p>Aunque la columna vertebral será la programación, la materia tendrá un fuerte <span class="highlight">enfoque transversal</span>: se mecharán continuamente conceptos de ciberseguridad (contraseñas seguras, privacidad), la importancia de los datos en la actualidad y el uso ético de herramientas de Inteligencia Artificial para asistir en el desarrollo de código. Al contar con 1 hora semanal, el enfoque será pausado y guiado.</p>
+
+        <h2>2. Objetivos de Aprendizaje</h2>
+        <ul class="criteria-list">
+            <li class="criteria-item">Consolidar el concepto de algoritmo y dominar la entrada/salida de datos en Python.</li>
+            <li class="criteria-item">Utilizar estructuras de control (condicionales y bucles) para desarrollar juegos en consola.</li>
+            <li class="criteria-item">Integrar prácticas de ciberseguridad y cuidado de datos personales al momento de programar.</li>
+            <li class="criteria-item">Reconocer y empezar a interactuar con asistentes de Inteligencia Artificial para programadores.</li>
+        </ul>
+
+        <h2>3. Ejes Temáticos (Formato Cuatrimestral)</h2>
+        
+        <h3>Primer Cuatrimestre: "Del bloque al texto"</h3>
+        <ul class="criteria-list">
+            <li class="criteria-item"><span class="highlight">Unidad 1: Algoritmos y Ciberseguridad.</span> Transición del bloque al código. ¿Qué hace un algoritmo seguro? Introducción a las contraseñas y datos personales.
+                <ul><li>Evaluación: TP Unidad 1 (Diseñar el algoritmo seguro de un problema cotidiano).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 2: Salida y Entrada de Datos.</span> "Hola Mundo" (<code>print</code>) y <code>input</code>. IA como asistente: pedirle a una IA que explique un error básico.
+                <ul><li>Evaluación: TP Unidad 2 (Programa libre utilizando print, input y variables).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 3: Colecciones de datos (Listas).</span> Guardar información múltiple. Los datos como activo principal de la tecnología.
+                <ul><li>Evaluación: TP Unidad 3 (Crear un registro de inventario).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Proyecto Integrador C1:</span> Un pequeño programa interactivo que pida datos (simulando proteger información sensible) y los almacene en una lista para mostrarlos.</li>
+        </ul>
+
+        <h3>Segundo Cuatrimestre: "Juegos en la Consola"</h3>
+        <ul class="criteria-list">
+            <li class="criteria-item"><span class="highlight">Unidad 4: Decisiones (Condicionales).</span> La instrucción <code>if</code>, <code>elif</code>, <code>else</code>. Validando accesos (Login básico).
+                <ul><li>Evaluación: TP Unidad 4 (Crear un sistema de acceso tipo Login o "Elige tu aventura").</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 5: Introducción a los Bucles.</span> Repetir instrucciones (<code>while</code>).
+                <ul><li>Evaluación: TP Unidad 5 (Programa que pide una contraseña hasta acertarla, bloqueando tras 3 fallos por "seguridad").</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 6: Game Loop y Módulos.</span> Manteniendo un juego vivo. Introducción al concepto de importar módulos básicos (<code>import random</code> o <code>time</code>).
+                <ul><li>Evaluación: TP Unidad 6 (Estructura base de un juego continuo).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Proyecto Integrador C2:</span> Minijuego en consola dentro de un bucle principal (ej. "Piedra, Papel o Tijera") que haga uso del módulo <code>random</code> e integre todos los conocimientos.</li>
+        </ul>
+
+        <h2>4. Criterios de Evaluación</h2>
+        <p>El año lectivo será evaluado íntegramente mediante entregas prácticas, exposiciones y trabajo en el aula:</p>
+        <ul class="criteria-list">
+            <li class="criteria-item"><span class="highlight">Entregas de Unidad:</span> 1 Trabajo Práctico corto por cada una de las 6 unidades.</li>
+            <li class="criteria-item"><span class="highlight">Proyectos Integradores y Defensa Oral:</span> 1 Proyecto integrador en grupo por cuatrimestre, donde los alumnos deberán combinar los conocimientos de las 3 unidades previas. La evaluación de este proyecto incluye obligatoriamente una <strong>instancia de exposición oral</strong> frente a la clase, donde el grupo debe explicar cómo funciona su código, demostrar que lo comprenden y responder preguntas.</li>
+            <li class="criteria-item"><span class="highlight">Participación Activa:</span> Se evaluará de forma continua la predisposición, el compañerismo y la participación activa durante las clases (aportar ideas, debatir soluciones lógicas y ayudar a otros grupos a encontrar errores).</li>
+            <li class="criteria-item"><span class="highlight">Uso Ético y Crítico de la IA:</span> Se fomenta y espera el uso de herramientas de Inteligencia Artificial como asistentes de programación. Sin embargo, su uso debe estar acompañado de pensamiento crítico: el estudiante debe comprender, explicar y justifycar cada concepto implementado por la IA, demostrando una apropiación real del contenido de la materia.</li>
+        </ul>
+    </div>
+</body>
+</html>

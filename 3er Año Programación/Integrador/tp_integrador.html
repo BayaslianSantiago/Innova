@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Integrador — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+      @bottom-right {
+        content: "Pág. " counter(page) " / " counter(pages);
+        font-size: 8pt;
+        color: #94a3b8;
+        font-family: 'Inter', Arial, sans-serif;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', -apple-system, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.65;
+      font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    /* ── BANDA SUPERIOR (Verde y Dorado) ── */
+    .top-stripe {
+      height: 5px;
+      background: linear-gradient(90deg, #FDB913, #8CC63F, #10b981);
+      margin-bottom: 22px;
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+
+    .school-tag {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #16a34a;
+      margin-bottom: 4px;
+    }
+    .doc-title {
+      font-size: 19pt;
+      font-weight: 800;
+      color: #0d1b2a;
+      line-height: 1.15;
+      margin: 0 0 6px 0;
+      letter-spacing: -0.4px;
+    }
+    .doc-meta {
+      font-size: 9.5pt;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; flex-shrink: 0; }
+    .unit-badge {
+      display: inline-block;
+      font-size: 8.5pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #fef9c3;
+      color: #854d0e;
+      border: 1px solid #fef08a;
+      margin-bottom: 6px;
+    }
+    .year-badge {
+      display: block;
+      font-size: 8pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: #94a3b8;
+    }
+
+    /* ── CAJA OBJETIVO ── */
+    .objective-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #16a34a;
+      border-radius: 6px;
+      padding: 13px 16px;
+      margin-bottom: 26px;
+    }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    .objective-box strong { color: #1a2e3d; }
+
+    /* ── HEADINGS ── */
+    h2 {
+      font-size: 12.5pt; font-weight: 800; color: #16a34a;
+      margin: 26px 0 10px 0; padding-bottom: 5px;
+      border-bottom: 1.5px solid #e2e8f0; page-break-after: avoid; letter-spacing: -0.2px;
+    }
+
+    p { margin: 0 0 11px 0; font-size: 12pt; line-height: 1.6; }
+
+    ul { margin: 0 0 16px 0; padding-left: 22px; }
+    li { margin-bottom: 7px; font-size: 11.5pt;}
+    strong { color: #0d1b2a; font-weight: 700; }
+
+    /* ── CRITERIA LIST ── */
+    .criteria-list { list-style: none; padding-left: 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; }
+    .criteria-item::before {
+      content: "▸"; color: #16a34a; font-size: 12pt;
+      position: absolute; left: 0; top: 0;
+    }
+    .criteria-name { font-weight: 700; color: #0d1b2a; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      display: flex; gap: 11px; align-items: flex-start;
+      padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; page-break-inside: avoid;
+    }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; line-height: 1.4; }
+    .callout p { margin: 0; font-size: 11.5pt; line-height: 1.55; }
+    .callout.info    { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+    .callout.danger  { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+
+    /* ── ENTREGA ── */
+    .entrega-box {
+      margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1;
+      border-radius: 8px; padding: 20px; page-break-inside: avoid;
+    }
+    .entrega-box h4 {
+      font-size: 10pt; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em;
+      color: #64748b; margin: 0 0 10px 0;
+    }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Director Técnico: Sistema AFA</h1>
+      <p class="doc-meta">
+        <strong>Programación y Desarrollo Web</strong> &nbsp;·&nbsp; 3er Año (1er Cuatrimestre)
+      </p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Evaluación</span>
+      <span class="year-badge">Trabajo Integrador</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo:</strong> Demostrar el dominio de Google Colab creando un sistema de gestión de jugadores utilizando Listas y Diccionarios (U3), apoyándose en el Prompt Engineering con IA (U2), y controlando el flujo con Ciclos FOR y Condicionales IF (repaso).</p>
+  </div>
+
+  <h2>Misión 1: La Base de Datos (Diccionarios)</h2>
+  <p>Ustedes son los encargados de digitalizar a la Selección Argentina. Abran un nuevo Colab y comiencen la programación.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">La Lista Maestra:</span> Creen una lista vacía llamada <code>equipo = []</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">Jugadores a Mano:</span> Creen 2 diccionarios manualmente. Cada uno debe representar a un jugador distinto y tener las claves: <code>"nombre"</code>, <code>"posicion"</code> y <code>"es_capitan"</code> (este último debe ser <code>True</code> o <code>False</code>).</li>
+    <li class="criteria-item"><span class="criteria-name">Fichaje:</span> Agreguen esos dos diccionarios a la lista <code>equipo</code>.</li>
+  </ul>
+
+  <h2>Misión 2: Reclutamiento Libre (Opcional IA)</h2>
+  <div class="callout info">
+    <div class="icon">🤖</div>
+    <p>Para cargar el resto del equipo tienen dos opciones: <strong>escribir el código de los 3 jugadores a mano</strong>, o <strong>usar a su asistente IA para ahorrar tiempo.</strong></p>
+  </div>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Si eligen IA (El Prompt):</span> Entren a ChatGPT o Gemini y usando la fórmula mágica pidan lo siguiente: <br><em>Contexto: Eres un experto en Python deportivo. Tarea: Genérame el código en Python para 3 diccionarios de jugadores de la Selección. Formato: Solo entrégame el código de Python, asegurándote de que los diccionarios tengan las claves "nombre", "posicion" y "es_capitan".</em></li>
+    <li class="criteria-item"><span class="criteria-name">Copia y Pega:</span> Peguen el código generado por la IA en su Colab y asegúrense de agregar esos 3 nuevos diccionarios a la lista <code>equipo</code>. (Deben tener 5 jugadores en total en la lista).</li>
+    <li class="criteria-item"><span class="criteria-name">Evidencia (Si usaron IA):</span> Creen una celda de Texto (Markdown) en Colab y peguen el prompt exacto que utilizaron. Si lo hicieron a mano, escriban "Hecho a mano".</li>
+  </ul>
+
+  <h2>Misión 3: El Escáner del Director (For + If)</h2>
+  <p>El Director Técnico quiere repasar la lista e identificar rápidamente quién es el líder del equipo.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Iteración:</span> Abran un ciclo <code>for jugador in equipo:</code> para recorrer la lista entera (recuerden dejar la sangría/identación debajo).</li>
+    <li class="criteria-item"><span class="criteria-name">Condición Lógica:</span> Dentro del ciclo FOR, agreguen un <code>if</code> para preguntar si <code>jugador["es_capitan"] == True:</code></li>
+    <li class="criteria-item"><span class="criteria-name">Impresión Dinámica:</span> Si es el capitán, impriman: <em>"¡El gran líder es [nombre]!"</em>. De lo contrario (<code>else</code>), impriman: <em>"Jugador normal: [nombre]"</em>.</li>
+  </ul>
+
+  <div class="callout danger">
+    <div class="icon">🚨</div>
+    <p>Revisen bien las sangrías. El <code>if</code> va adentro del <code>for</code>. Y los <code>print</code> van adentro del <code>if</code> y del <code>else</code>.</p>
+  </div>
+
+  <div class="entrega-box">
+    <h4>¿Qué entregamos hoy?</h4>
+    <p>Deben tener su archivo de Google Colab funcionando sin ningún <em>SyntaxError</em>. Si le dan Play al código final, debe imprimir la lista de los 5 jugadores destacando al capitán. Envíen el link al Google Classroom marcando la tarea como Completada.</p>
+  </div>
+
+</body>
+</html>

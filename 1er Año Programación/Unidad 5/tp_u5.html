@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Práctico — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+      @bottom-right {
+        content: "Pág. " counter(page) " / " counter(pages);
+        font-size: 8pt;
+        color: #94a3b8;
+        font-family: 'Inter', Arial, sans-serif;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', -apple-system, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.65;
+      font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    /* ── BANDA SUPERIOR ── */
+    .top-stripe {
+      height: 5px;
+      background: linear-gradient(90deg,
+        #0088CE 0%, #0088CE 25%,
+        #FDB913 25%, #FDB913 50%,
+        #8CC63F 50%, #8CC63F 75%,
+        #F58220 75%, #F58220 100%
+      );
+      margin-bottom: 22px;
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+
+    .school-tag {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #0088CE;
+      margin-bottom: 4px;
+    }
+    .doc-title {
+      font-size: 19pt;
+      font-weight: 800;
+      color: #0d1b2a;
+      line-height: 1.15;
+      margin: 0 0 6px 0;
+      letter-spacing: -0.4px;
+    }
+    .doc-meta {
+      font-size: 9.5pt;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .doc-meta strong { color: #1e293b; }
+
+    /* Badge de unidad */
+    .header-badge {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .unit-badge {
+      display: inline-block;
+      font-size: 8.5pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #e8f4fb;
+      color: #0088CE;
+      border: 1px solid #bfdbf7;
+      margin-bottom: 6px;
+    }
+    .year-badge {
+      display: block;
+      font-size: 8pt; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: #94a3b8;
+    }
+
+    /* ── CAJA OBJETIVO ── */
+    .objective-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #8CC63F;
+      border-radius: 6px;
+      padding: 13px 16px;
+      margin-bottom: 26px;
+    }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    .objective-box strong { color: #1a2e3d; }
+
+    /* ── HEADINGS ── */
+    h2 {
+      font-size: 12.5pt;
+      font-weight: 800;
+      color: #0088CE;
+      margin: 26px 0 10px 0;
+      padding-bottom: 5px;
+      border-bottom: 1.5px solid #e2e8f0;
+      page-break-after: avoid;
+      letter-spacing: -0.2px;
+    }
+    h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: #F58220;
+      margin: 18px 0 8px 0;
+      page-break-after: avoid;
+    }
+
+    p { margin: 0 0 11px 0; font-size: 12pt; line-height: 1.6; }
+
+    ol, ul {
+      margin: 0 0 16px 0;
+      padding-left: 22px;
+    }
+    li { margin-bottom: 7px; font-size: 11.5pt;}
+    strong { color: #0d1b2a; font-weight: 700; }
+
+    /* ── CASE STUDY ── */
+    .case-study {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-left: 4px solid #FDB913;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 11px;
+      page-break-inside: avoid;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    }
+    .case-study-title {
+      font-size: 9.5pt;
+      font-weight: 800;
+      color: #0088CE;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .case-study p { margin: 0; font-size: 12pt; color: #475569; margin-bottom: 8px; }
+
+    /* ── CRITERIA LIST ── */
+    .criteria-list { list-style: none; padding-left: 0; }
+    .criteria-item {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    .criteria-item::before {
+      content: "▸";
+      color: #0088CE;
+      font-size: 12pt;
+      position: absolute;
+      left: 0; top: 0;
+    }
+    .criteria-name { font-weight: 700; color: #0d1b2a; }
+
+    /* ── CALLOUT ── */
+    .callout {
+      display: flex;
+      gap: 11px;
+      align-items: flex-start;
+      padding: 16px 18px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      page-break-inside: avoid;
+    }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; line-height: 1.4; }
+    .callout p { margin: 0; font-size: 11.5pt; line-height: 1.55; }
+    .callout.tip     { background: #f0f9e8; border: 1px solid #d4edbc; color: #386a1a; }
+    .callout.warning { background: #fffbeb; border: 1px solid #fde68a; color: #92400e; }
+    .callout.danger  { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+    .callout.info    { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #0f172a;
+      border-radius: 7px;
+      padding: 14px 16px;
+      margin-bottom: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11pt;
+      color: #e2e8f0;
+      line-height: 1.6;
+      border-left: 3px solid #0088CE;
+      page-break-inside: avoid;
+    }
+    .code-block .kw { color: #c678dd; }
+    .code-block .st { color: #98c379; }
+    .code-block .cm { color: #4b5a6e; font-style: italic; }
+    .code-block .fn { color: #61afef; }
+    .code-block .nm { color: #e5c07b; }
+
+    /* ── ENTREGA ── */
+    .entrega-box {
+      margin-top: 30px;
+      background: #f8fafc;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      page-break-inside: avoid;
+    }
+    .entrega-box h4 {
+      font-size: 10pt; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: #64748b; margin: 0 0 10px 0;
+    }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">El Inventario Mágico (Listas)</h1>
+      <p class="doc-meta">
+        <strong>Introducción a la Programación</strong> &nbsp;·&nbsp; 1er Año (2do Cuatrimestre)
+      </p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Unidad 5</span>
+      <span class="year-badge">Trabajo Práctico</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo de hoy:</strong> Crear Listas en Python para guardar muchos elementos en un solo lugar (como si fuera una mochila de un videojuego) y aprender a usar el comando <code>.append()</code>.</p>
+  </div>
+
+  <h2>Misión 1: Preparando el Viaje</h2>
+  <div class="case-study">
+    <div class="case-study-title">¡Equipate!</div>
+    <p>Vas a salir a una expedición peligrosa por la selva. Tenés que armar una mochila (Lista) con 3 cosas esenciales para sobrevivir.</p>
+  </div>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Código:</span> Creen un bloque y copien este código, poniendo adentro de las comillas los 3 objetos de supervivencia que ustedes quieran:<br>
+    <div class="code-block" style="margin-top:10px;">
+      mochila = ["Brújula", "Botella de agua", "Linterna"]<br>
+      print("Acá está tu mochila completa:")<br>
+      print(mochila)
+    </div>
+    </li>
+    <li class="criteria-item"><span class="criteria-name">Atención:</span> Las listas se arman con <strong>corchetes</strong> <code>[ ]</code> y los textos se separan siempre con una <strong>coma</strong>.</li>
+  </ul>
+
+  <h2>Misión 2: El Bolsillo Específico</h2>
+  <p>Resulta que se hace de noche y necesitas sacar la <em>Linterna</em> rápidamente (que en el ejemplo de arriba es el <strong>tercer objeto</strong>). Vamos a pedirle a la compu que nos dé solo ese objeto.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Prueba:</span> En un bloque nuevo, escriban:<br>
+    <div class="code-block" style="margin-top:10px;">
+      print("Sacas rápido de tu mochila:")<br>
+      print(mochila[2])
+    </div>
+    </li>
+    <li class="criteria-item"><span class="criteria-name">El Desafío Mental:</span> ¿Por qué pusimos el número 2 si la linterna es la TERCERA cosa que guardamos? ¡Llamá al profe y explicale en voz alta el <strong>Truco del Cero</strong> para pasar a la siguiente misión!</li>
+  </ul>
+
+  <h2>Misión 3: El Cofre del Tesoro</h2>
+  <p>Caminando por la selva te encontraste un cofre misterioso brillante. ¡Vamos a ver qué hay adentro y guardarlo en la mochila!</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Pregunta:</span> Usen <code>input()</code> para preguntarle al jugador: <em>"Abrís el cofre. ¿Qué tesoro encontraste? "</em> y guárdenlo en una variable llamada <code>tesoro</code>.</li>
+    <li class="criteria-item"><span class="criteria-name">Magia pura:</span> Usen <code>mochila.append(tesoro)</code> para meter el objeto nuevo adentro de la mochila.</li>
+    <li class="criteria-item"><span class="criteria-name">Final:</span> Hagan un último <code>print(mochila)</code> para demostrar que el tesoro ahora está seguro en el inventario.</li>
+  </ul>
+
+  <div class="entrega-box">
+    <h4>¿Qué entregamos hoy?</h4>
+    <p>Prueben el código completo. Cuando al darle Play logren agregar el tesoro y que se imprima la mochila con los 4 objetos, avisen al profe. Luego, suban el enlace al Classroom.</p>
+  </div>
+
+</body>
+</html>

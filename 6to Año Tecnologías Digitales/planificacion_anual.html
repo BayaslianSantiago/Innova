@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Planificación Anual — INNOVA (6to Año)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        @page {
+            size: A4;
+            margin: 22mm 18mm;
+            background-color: #ffffff;
+            @bottom-right {
+                content: "Página " counter(page) " de " counter(pages);
+                font-size: 9pt;
+                color: #64748b;
+                font-family: 'Montserrat', Arial, sans-serif;
+            }
+        }
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+            color: #334155;
+            line-height: 1.6;
+            font-size: 10.5pt;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+        }
+        .top-bar {
+            height: 6px;
+            background: linear-gradient(90deg, #0088CE 25%, #FDB913 25%, #FDB913 50%, #8CC63F 50%, #8CC63F 75%, #F58220 75%);
+            margin-bottom: 20px;
+            border-radius: 3px;
+        }
+        .header {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+        .school-name {
+            font-size: 14pt;
+            font-weight: 700;
+            color: #334155;
+            margin: 0 0 4px 0;
+            letter-spacing: 0.5px;
+        }
+        .school-name span.innova {
+            color: #0088CE;
+        }
+        .institution {
+            font-size: 10pt;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #F58220;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+        }
+        h1 {
+            font-size: 18pt;
+            color: #0f172a;
+            margin: 0 0 8px 0;
+            line-height: 1.25;
+            font-weight: 700;
+        }
+        .meta-info {
+            font-size: 10pt;
+            color: #64748b;
+            margin: 0;
+        }
+        h2 {
+            font-size: 13pt;
+            color: #0088CE;
+            margin-top: 26px;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 4px;
+            page-break-after: avoid;
+        }
+        h3 {
+            font-size: 11pt;
+            color: #F58220;
+            margin-top: 16px;
+            margin-bottom: 8px;
+            page-break-after: avoid;
+        }
+        p {
+            margin: 0 0 12px 0;
+        }
+        ol, ul {
+            margin: 0 0 18px 0;
+            padding-left: 22px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        strong {
+            color: #1e293b;
+        }
+        .criteria-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .criteria-item {
+            position: relative;
+            padding-left: 18px;
+            margin-bottom: 10px;
+        }
+        .criteria-item::before {
+            content: "■";
+            color: #0088CE;
+            font-size: 10pt;
+            position: absolute;
+            left: 0;
+            top: 0px;
+        }
+        .criteria-name {
+            font-weight: 700;
+            color: #0f172a;
+        }
+        .highlight {
+            font-weight: 600;
+            color: #0f172a;
+        }
+        @media print {
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+            .container {
+                max-width: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            h2, h3 {
+                page-break-after: avoid;
+            }
+            .criteria-list, .criteria-item {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar"></div>
+        <div class="header">
+            <p class="school-name"><span class="innova">INNOVA</span> Establecimiento Educativo</p>
+            <p class="institution">Nivel Secundario | Tecnologías Digitales — 6to Año</p>
+            <h1>Planificación Anual: Ciencia de Datos y Análisis</h1>
+            <p class="meta-info"><strong>Profesor Bayaslian Santiago</strong></p>
+        </div>
+
+        <h2>1. Fundamentación</h2>
+        <p>Dado el tiempo respectivo de las clases (1 hora semanal), la materia se centrará en la <span class="highlight">Alfabetización y Visualización de Datos</span> utilizando herramientas profesionales de la industria.</p>
+        <p>Aprovechando las Chromebooks institucionales, los alumnos de último año trabajarán con entornos de desarrollo en la nube (<strong>GitHub Codespaces</strong> / VS Code Web) en lugar de herramientas estáticas. Aprenderán a leer gráficos, entender métricas reales (KPIs) y construirán Tableros de Control interactivos y profesionales utilizando Python y la librería <strong>Streamlit</strong>. El objetivo es que se lleven habilidades de desarrollo moderno directamente aplicables a su futuro laboral.</p>
+
+        <h2>2. Objetivos de Aprendizaje</h2>
+        <ul class="criteria-list">
+            <li class="criteria-item">Diferenciar entre datos crudos e información útil mediante el análisis de KPIs.</li>
+            <li class="criteria-item">Manejar el control de versiones básico en la nube utilizando GitHub.</li>
+            <li class="criteria-item">Utilizar entornos de desarrollo cloud (Codespaces / Visual Studio Code Web).</li>
+            <li class="criteria-item">Desarrollar aplicaciones web interactivas orientadas a datos utilizando Streamlit en Python.</li>
+            <li class="criteria-item">Utilizar IA de forma ética para acelerar la escritura de código y el análisis de datos.</li>
+        </ul>
+
+        <h2>3. Ejes Temáticos (Formato Cuatrimestral)</h2>
+        
+        <h3>Primer Cuatrimestre: "Del Dato al Tablero de Control"</h3>
+        <ul class="criteria-list">
+            <li class="criteria-item"><span class="highlight">Unidad 1: El mundo de los Datos y KPIs.</span> Dato vs Información. ¿Qué es un KPI? La regla SMART. Por qué los "Likes" suelen ser métricas vanidosas.
+                <ul><li>Evaluación: TP Unidad 1 (Definir 3 KPIs para un negocio ficticio).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 2: Fundamentos de Dashboards.</span> ¿Qué es un Tablero de Control? Lectura visual rápida. Elegir el gráfico correcto según lo que se quiere mostrar.
+                <ul><li>Evaluación: TP Unidad 2 (Criticar un gráfico mal hecho y proponer uno mejor).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 3: Arquitectura de la Información.</span> Cómo estructurar un Dashboard antes de programarlo. Wireframing y bocetado.
+                <ul><li>Evaluación: TP Unidad 3 (Diseñar la estructura lógica de un tablero utilizando post-its o herramientas de dibujo web).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Proyecto Integrador C1:</span> Diseño de un Dashboard "Unplugged". Los alumnos deberán analizar el desempeño de un negocio ficticio diseñando un Tablero de Control en papel, Excel o PowerPoint, dejando la lógica e idea de interfaz preparadas para programar en el futuro.</li>
+        </ul>
+
+        <h3>Segundo Cuatrimestre: "Visualización Web con Streamlit"</h3>
+        <ul class="criteria-list">
+            <li class="criteria-item"><span class="highlight">Unidad 4: GitHub y Entornos Cloud.</span> Qué es un repositorio. Creando nuestra primera cuenta de GitHub y explorando GitHub Codespaces. Primeros pasos con Pandas en la nube.
+                <ul><li>Evaluación: TP Unidad 4 (Crear un perfil de GitHub, abrir Codespaces y ejecutar un script leyendo un CSV con Pandas).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 5: Dashboards Web con Streamlit.</span> Introducción a la librería Streamlit. Cómo transformar el script en una aplicación web interactiva (botones, sliders, gráficos).
+                <ul><li>Evaluación: TP Unidad 5 (Levantar una app web básica con Streamlit que muestre un gráfico simple en el navegador).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Unidad 6: Storytelling y Copilotos.</span> Uso de extensiones de IA Generativa en VS Code Web para ayudar a programar. Sesgos en los datos. Cómo presentar el Dashboard final.
+                <ul><li>Evaluación: TP Unidad 6 (Armar el guion de presentación de su aplicación).</li></ul>
+            </li>
+            <li class="criteria-item"><span class="highlight">Proyecto Integrador C2:</span> Presentación Oral ("Pitch"). Los alumnos presentarán un <strong>Dashboard interactivo real</strong> (programado con Streamlit y desplegado desde GitHub Codespaces) sobre un tema de su interés, argumentando una "decisión a tomar" frente a la clase.</li>
+        </ul>
+
+        <h2>4. Criterios de Evaluación</h2>
+        <p>El año lectivo será evaluado íntegramente mediante entregas prácticas, exposiciones y trabajo en el aula:</p>
+        <ul class="criteria-list">
+            <li class="criteria-item"><span class="highlight">Entregas de Unidad:</span> 1 Trabajo Práctico corto por cada una de las 6 unidades (Entregando links a repositorios de GitHub cuando aplique).</li>
+            <li class="criteria-item"><span class="highlight">Proyectos Integradores y Defensa Oral (Pitch):</span> 1 Proyecto integrador en grupo por cuatrimestre. La evaluación del Proyecto Integrador final culmina obligatoriamente con una presentación oral ("Pitch") frente a la clase.</li>
+            <li class="criteria-item"><span class="highlight">Participación Activa:</span> Se evaluará de forma continua la predisposición, el compañerismo y la participación activa durante las clases (aportar ideas, debatir sobre ética y ayudar a otros grupos).</li>
+            <li class="criteria-item"><span class="highlight">Uso Ético y Crítico de la IA:</span> Se fomenta y espera el uso de herramientas de Inteligencia Artificial como asistentes de programación y análisis. Sin embargo, su uso debe estar acompañado de pensamiento crítico: el estudiante debe comprender, explicar y justificar cada concepto implementado por la IA, demostrando una apropiación real del contenido de la materia.</li>
+        </ul>
+    </div>
+</body>
+</html>

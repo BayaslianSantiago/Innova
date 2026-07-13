@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Presentación — INNOVA (6to Año)</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      /* Estética Corporate Tech / Data Science */
+      --cyan: #00d2ff;
+      --cyan-dim: rgba(0, 210, 255, 0.15);
+      --azul-corp: #3a7bd5;
+      --navy: #0a1128;
+      --navy-panel: #111b3d;
+      --violeta: #8e2de2;
+      
+      --fondo: #050a18;
+      --texto: #b4c5e4;
+      --blanco: #ffffff;
+      --linea: rgba(255, 255, 255, 0.08);
+      --glass: rgba(17, 27, 61, 0.7);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--fondo); }
+    body { font-family: 'Inter', Arial, sans-serif; color: var(--texto); overflow: hidden; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    #deck { width: 100vw; height: 100vh; position: relative; }
+
+    .slide {
+      position: absolute; inset: 0; display: flex; flex-direction: column;
+      background: radial-gradient(circle at top right, #0a1128 0%, var(--fondo) 100%);
+      opacity: 0; visibility: hidden;
+      transform: translateY(20px) scale(0.98);
+      transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+      padding: 50px 80px 40px;
+    }
+    .slide.active { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+
+    .slide-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; flex: 1; min-height: 0; }
+
+    .rail {
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--azul-corp) 50%, var(--violeta) 100%);
+    }
+
+    .tag { display: inline-flex; align-items: center; gap: 8px; font-size: 9pt; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--cyan); margin-bottom: 16px; }
+    .tag .dot { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; box-shadow: 0 0 8px var(--cyan); }
+
+    h1.slide-title { font-size: 2.6rem; font-weight: 800; color: var(--blanco); line-height: 1.1; margin: 0 0 8px 0; letter-spacing: -0.5px; }
+    .subtitle { font-size: 1.1rem; color: var(--texto); margin: 0 0 30px 0; font-weight: 400; line-height: 1.6; }
+    .content { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 20px; }
+
+    .card {
+      background: var(--glass);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--linea); border-radius: 16px; padding: 24px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    .card h3 { margin: 0 0 10px 0; font-size: 1.1rem; color: var(--blanco); font-weight: 600; letter-spacing: -0.3px; }
+    .card p { margin: 0; font-size: 1rem; color: var(--texto); line-height: 1.6; }
+    
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+    .stat-box { border-left: 3px solid var(--cyan); padding-left: 16px; }
+    .stat-box.purple { border-left-color: var(--violeta); }
+
+    .title-slide { background: var(--fondo); justify-content: center; align-items: center; text-align: center; padding: 0 20px; }
+    .title-slide .glow-circle { position: absolute; width: 600px; height: 600px; background: radial-gradient(circle, var(--cyan-dim) 0%, transparent 70%); top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0; pointer-events: none; }
+    .title-slide-content { position: relative; z-index: 1; }
+    .title-slide .eyebrow { font-size: 0.85rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 20px; display: block; }
+    .title-slide h1 { font-size: clamp(3rem, 6vw, 5rem); font-weight: 900; line-height: 1.05; margin: 0 0 20px 0; letter-spacing: -2px; color: var(--blanco); }
+    .title-slide h1 .hl { background: linear-gradient(135deg, var(--cyan), var(--azul-corp)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .title-slide .desc { font-size: 1.2rem; color: var(--texto); max-width: 600px; margin: 0 auto; line-height: 1.6; font-weight: 300; }
+
+    .nav-btn { position: fixed; top: 50%; transform: translateY(-50%); width: 48px; height: 48px; border-radius: 50%; background: var(--glass); border: 1px solid var(--linea); color: var(--blanco); font-size: 1.2rem; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 50; transition: all 0.2s; backdrop-filter: blur(10px); }
+    .nav-btn:hover { background: var(--cyan-dim); border-color: var(--cyan); transform: translateY(-50%) scale(1.05); }
+    #prevBtn { left: 24px; }
+    #nextBtn { right: 24px; }
+    .nav-hint { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); font-size: 8pt; color: #5a6e94; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.1em; z-index: 50; text-transform: uppercase; }
+  </style>
+</head>
+
+<body>
+
+  <div id="deck">
+
+    <!-- Diapositiva 1 -->
+    <section class="slide title-slide active">
+      <div class="glow-circle"></div>
+      <div class="title-slide-content">
+        <span class="eyebrow">6to Año · Ciencia de Datos</span>
+        <h1>Fundamentos de <span class="hl">Dashboards</span></h1>
+        <p class="desc">Unidad 2: De la hoja de cálculo al tablero de control profesional.</p>
+      </div>
+    </section>
+
+    <!-- Diapositiva 2 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Concepto Base</span>
+        <h1 class="slide-title">¿Qué es un Tablero de Control?</h1>
+        <p class="subtitle">La interfaz visual entre el CEO y los datos.</p>
+        <div class="content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>La Analogía del Avión</h3>
+              <p>Piensen en la cabina de un avión de pasajeros. Hay millones de procesos sucediendo en los motores y las alas, pero los pilotos no leen código binario ni planillas de Excel para volar.</p>
+              <br>
+              <p>Miran un <strong>Tablero de Control (Dashboard)</strong> con medidores visuales que resumen el estado del sistema en milisegundos.</p>
+            </div>
+            <div class="card">
+              <h3>El Dashboard de Negocios</h3>
+              <p>Es una pantalla interactiva (que pronto programaremos con Streamlit) que contiene los KPIs más importantes de la empresa.</p>
+              <br>
+              <div class="stat-box" style="border-left-color: #00d2ff;">
+                <p>Su objetivo principal es permitir a los gerentes <strong>tomar decisiones de negocio en menos de 5 segundos</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 3 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Diseño Visual</span>
+        <h1 class="slide-title">La Carga Cognitiva</h1>
+        <p class="subtitle">En Ciencia de Datos, Menos es Más.</p>
+        <div class="content">
+          <div class="card">
+            <p>La <strong>Carga Cognitiva</strong> es el esfuerzo mental que requiere procesar la información de la pantalla. Si tu gráfico requiere que el usuario lea durante 1 minuto para entenderlo, fracasaste como analista.</p>
+          </div>
+          <div class="card stat-box purple">
+            <h3>¿Cómo reducir el esfuerzo mental?</h3>
+            <ul style="margin-top:10px; line-height: 1.8;">
+              <li><strong>Elimina colores basura:</strong> Usa gris para todo, excepto para el dato que quieres destacar (usa Cyan o Rojo).</li>
+              <li><strong>No uses efectos 3D:</strong> Distorsionan la percepción del tamaño real de las barras.</li>
+              <li><strong>Quita líneas de fondo innecesarias:</strong> El "ruido" visual cansa la vista.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 4 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Elección Estratégica</span>
+        <h1 class="slide-title">Eligiendo el Gráfico Correcto</h1>
+        <p class="subtitle">No existe un gráfico que sirva para todo.</p>
+        <div class="content">
+          <div class="grid-2">
+            <div class="card">
+              <h3>📈 Líneas</h3>
+              <p><strong>Uso:</strong> Evolución en el Tiempo.</p>
+              <p style="font-size: 0.9rem; color:#5a6e94;">Ejemplo: Ventas de enero a diciembre.</p>
+            </div>
+            <div class="card">
+              <h3>📊 Barras</h3>
+              <p><strong>Uso:</strong> Comparación de Categorías.</p>
+              <p style="font-size: 0.9rem; color:#5a6e94;">Ejemplo: Quién vendió más (Zapatillas vs Remeras).</p>
+            </div>
+          </div>
+          <div class="card" style="margin-top:0;">
+            <h3>🥧 Torta (Pie Chart)</h3>
+            <p><strong>Uso:</strong> Mostrar proporciones de un TODO (Composición al 100%).</p>
+            <p style="color: #ff4757; font-weight: bold; margin-top: 10px;">⚠️ ADVERTENCIA PROFESIONAL:</p>
+            <p style="font-size: 0.95rem;">El ojo humano es pésimo calculando ángulos. Si el gráfico de torta tiene más de 3 porciones, se vuelve ilegible. Los verdaderos analistas casi nunca usan gráficos de torta.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Diapositiva 5 -->
+    <section class="slide">
+      <div class="rail"></div>
+      <div class="slide-inner">
+        <span class="tag"><span class="dot"></span>Misión Forense</span>
+        <h1 class="slide-title">Mintiendo con Estadísticas</h1>
+        <p class="subtitle">Trabajo Práctico N°2</p>
+        <div class="content">
+          <div class="card" style="padding:40px; text-align: center; margin-top:20px;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 20px;">Abran el TP2 de 6to Año</h3>
+            <p>Se les presentará un "Caso Clínico" textual de un gráfico que fue diseñado intencionalmente mal para engañar al directorio de una empresa.<br><br>Deberán actuar como Peritos Informáticos para destruir los argumentos de ese gráfico y proponer la alternativa correcta.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <button class="nav-btn" id="prevBtn" aria-label="Anterior">‹</button>
+  <button class="nav-btn" id="nextBtn" aria-label="Siguiente">›</button>
+  <div class="nav-hint">← → para navegar</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+
+    function render() {
+      slides.forEach((s, i) => s.classList.toggle('active', i === current));
+    }
+    function go(delta) {
+      current = Math.max(0, Math.min(total - 1, current + delta));
+      render();
+    }
+    document.getElementById('prevBtn').addEventListener('click', () => go(-1));
+    document.getElementById('nextBtn').addEventListener('click', () => go(1));
+    window.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ') go(1);
+      if (e.key === 'ArrowLeft') go(-1);
+    });
+    render();
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Proyecto Integrador — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.65; font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .top-stripe { height: 5px; background: linear-gradient(90deg, #FDB913, #F58220, #e65c00); margin-bottom: 22px; }
+
+    .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1.5px solid #e2e8f0; }
+    .school-tag { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #ea580c; margin-bottom: 4px; }
+    .doc-title { font-size: 19pt; font-weight: 800; color: #0d1b2a; margin: 0 0 6px 0; letter-spacing: -0.4px; }
+    .doc-meta { font-size: 9.5pt; color: #64748b; font-weight: 500; }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; }
+    .unit-badge { display: inline-block; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; background: #fff7ed; color: #ea580c; border: 1px solid #ffedd5; margin-bottom: 6px; }
+    .year-badge { display: block; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
+
+    .objective-box { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #ea580c; border-radius: 6px; padding: 13px 16px; margin-bottom: 26px; }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    
+    h2 { font-size: 12.5pt; font-weight: 800; color: #ea580c; margin: 26px 0 10px 0; padding-bottom: 5px; border-bottom: 1.5px solid #e2e8f0; }
+    p { margin: 0 0 11px 0; font-size: 12pt; }
+    
+    .criteria-list { list-style: none; padding-left: 0; margin: 0 0 16px 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 11.5pt;}
+    .criteria-item::before { content: "▸"; color: #ea580c; font-size: 12pt; position: absolute; left: 0; top: 0; }
+    .criteria-name { font-weight: 700; color: #0d1b2a; }
+
+    .callout { display: flex; gap: 11px; align-items: flex-start; padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: 11.5pt; }
+    .callout.info { background: #eff6ff; border: 1px solid #bfdbfe; color: #1e40af; }
+    .callout.danger { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; }
+
+    .entrega-box { margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 20px; }
+    .entrega-box h4 { font-size: 10pt; font-weight: 800; text-transform: uppercase; color: #64748b; margin: 0 0 10px 0; }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Proyecto: Dashboard Unplugged</h1>
+      <p class="doc-meta"><strong>Ciencia de Datos y Análisis</strong> &nbsp;·&nbsp; Trabajo Integrador C1</p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">EVALUACIÓN GRUPAL</span>
+      <span class="year-badge">6to Año</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Objetivo:</strong> Diseñar un Tablero de Control de Alta Fidelidad simulando un entorno profesional. Demostrar dominio en la definición de métricas (U1), la elección correcta de gráficos (U2) y una arquitectura Analítica Top-Down (U3), preparándose para programarlo el cuatrimestre siguiente.</p>
+  </div>
+
+  <h2>Fase 1: El Negocio y las Métricas (U1)</h2>
+  <p>Elijan una empresa o temática real (MercadoLibre, una clínica médica, un videojuego). Van a inventar los datos, pero la lógica debe ser realista.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">KPIs SMART:</span> Definan cuáles serán los 4 indicadores numéricos principales que el dueño necesita ver apenas abre el Dashboard.</li>
+    <li class="criteria-item"><span class="criteria-name">Auditoría IA:</span> Pídanle a la IA que revise sus KPIs diciéndole: <em>"Somos consultores de datos. Para la empresa [X], elegimos medir estos 4 KPIs: [Detalle]. ¿Crees que son la mejor opción para mostrar la salud general del negocio o cambiarías alguno?"</em></li>
+  </ul>
+
+  <h2>Fase 2: Data Storytelling y Diseño (U2 y U3)</h2>
+  <p>Utilizando una herramienta de diseño gráfico (Se sugiere enfáticamente utilizar <strong>Figma</strong> por ser el estándar de la industria tecnológica, pero Canva o PowerPoint son aceptables), construyan el tablero final.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">La Jerarquía (Top-Down):</span> Su tablero <strong>DEBE</strong> dividirse visualmente en 3 capas. Arriba de todo (Capa 1) deben ir los 4 KPIs. En el medio (Capa 2) irán los gráficos. Abajo de todo (Capa 3) irá una tabla con datos de ejemplo.</li>
+    <li class="criteria-item"><span class="criteria-name">Gráficos Analíticos:</span> En la Capa 2 agreguen al menos 2 gráficos. Uno debe mostrar la evolución de algo a lo largo del tiempo (Líneas) y otro debe servir para comparar categorías (Barras).</li>
+    <li class="criteria-item"><span class="criteria-name">Baja Carga Cognitiva:</span> Utilicen una paleta de colores sobria y minimalista. Que la información brille, no el fondo. No usen efectos 3D.</li>
+  </ul>
+
+  <div class="callout info">
+    <div class="icon">💡</div>
+    <p><strong>Herramienta Profesional:</strong> Anímense a usar Figma. Si no saben cómo, pídanle a la IA: <em>"Explícame los pasos básicos para dibujar un cuadrado y poner un texto dentro de Figma"</em>.</p>
+  </div>
+
+  <div class="entrega-box">
+    <h4>Defensa Oral (Pitch)</h4>
+    <p>Se proyectará su diseño en pantalla frente a toda la clase. Deberán actuar como Consultores justificando qué "historia" cuentan los gráficos, por qué eligieron esos KPIs, y cómo la disposición visual en 3 capas facilita la toma de decisiones rápidas del cliente.</p>
+  </div>
+
+</body>
+</html>

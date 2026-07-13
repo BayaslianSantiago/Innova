@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Hoja de Trucos — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4;
+      margin: 18mm 16mm;
+      @bottom-right {
+        content: "INNOVA - 1er Año";
+        font-size: 8pt;
+        color: #94a3b8;
+        font-family: 'Inter', Arial, sans-serif;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', -apple-system, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.65;
+      font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    /* ── BANDA SUPERIOR ── */
+    .top-stripe {
+      height: 5px;
+      background: linear-gradient(90deg,
+        #0088CE 0%, #0088CE 25%,
+        #FDB913 25%, #FDB913 50%,
+        #8CC63F 50%, #8CC63F 75%,
+        #F58220 75%, #F58220 100%
+      );
+      margin-bottom: 22px;
+    }
+
+    /* ── HEADER ── */
+    .doc-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: start;
+      padding-bottom: 18px;
+      margin-bottom: 24px;
+      border-bottom: 1.5px solid #e2e8f0;
+    }
+
+    .school-tag {
+      font-size: 8pt;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #0088CE;
+      margin-bottom: 4px;
+    }
+    .doc-title {
+      font-size: 19pt;
+      font-weight: 800;
+      color: #0d1b2a;
+      line-height: 1.15;
+      margin: 0 0 6px 0;
+      letter-spacing: -0.4px;
+    }
+    .doc-meta {
+      font-size: 9.5pt;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .doc-meta strong { color: #1e293b; }
+
+    p { margin: 0 0 11px 0; font-size: 11pt; line-height: 1.6; }
+    ul { margin: 0 0 12px 0; padding-left: 20px; }
+    li { margin-bottom: 4px; font-size: 10.5pt;}
+    strong { color: #0d1b2a; font-weight: 700; }
+
+    /* ── GRID & CARDS ── */
+    .grid2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .note-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      page-break-inside: avoid;
+      border-top: 4px solid #0088CE;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    .note-card.green { border-top-color: #8CC63F; }
+    .note-card.yellow { border-top-color: #FDB913; }
+    .note-card.orange { border-top-color: #F58220; }
+    
+    .note-card h3 {
+      font-size: 13pt;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      color: #0d1b2a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #0f172a;
+      border-radius: 6px;
+      padding: 10px 14px;
+      margin: 8px 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5pt;
+      color: #e2e8f0;
+      line-height: 1.5;
+      border-left: 3px solid #0088CE;
+      page-break-inside: avoid;
+    }
+    .code-block .kw { color: #c678dd; }
+    .code-block .st { color: #98c379; }
+    .code-block .cm { color: #4b5a6e; font-style: italic; }
+    .code-block .fn { color: #61afef; }
+    .code-block .nm { color: #e5c07b; }
+
+    code {
+      background: #f1f5f9;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9.5pt;
+      color: #0d1b2a;
+      border: 1px solid #e2e8f0;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Hoja de Trucos: 1er Cuatrimestre</h1>
+      <p class="doc-meta">
+        <strong>Apuntes Clave de Programación</strong> &nbsp;·&nbsp; Google Colab & Python
+      </p>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div class="col">
+      
+      <div class="note-card">
+        <h3>💬 Hablar y Escuchar</h3>
+        <p><strong>Para hablar (mostrar en pantalla):</strong> Usamos <code>print</code>.</p>
+        <div class="code-block">
+          <span class="fn">print</span>(<span class="st">"Hola, soy la compu"</span>)
+        </div>
+        <p><strong>Para escuchar (hacer preguntas):</strong> Usamos <code>input</code>.</p>
+        <div class="code-block">
+          <span class="fn">input</span>(<span class="st">"¿Cómo te llamás? "</span>)
+        </div>
+      </div>
+
+      <div class="note-card yellow">
+        <h3>📦 Variables (Cajas Mágicas)</h3>
+        <p>Las usamos para guardar lo que responde el usuario y no olvidarlo.</p>
+        <div class="code-block">
+          <span class="nm">nombre</span> = <span class="fn">input</span>(<span class="st">"Dime tu nombre: "</span>)<br>
+          <span class="fn">print</span>(<span class="st">"Hola"</span>, <span class="nm">nombre</span>)
+        </div>
+      </div>
+
+      <div class="note-card orange">
+        <h3>🔤 Tipos de Cajas (Tipos de Datos)</h3>
+        <p><strong>Texto (String):</strong> Va siempre con comillas.<br>Ejemplo: <code>"Hola"</code>, <code>"Mago"</code>, <code>"123"</code></p>
+        <p><strong>Números (Integer):</strong> Sin comillas, para hacer cuentas.<br>Ejemplo: <code>15</code>, <code>100</code></p>
+        <p><em>¡Truco mágico!</em> Para convertir un texto en un número de verdad, usamos <code>int()</code>:</p>
+        <div class="code-block">
+          <span class="nm">edad</span> = <span class="fn">input</span>(<span class="st">"Edad: "</span>)<br>
+          <span class="nm">edad</span> = <span class="fn">int</span>(<span class="nm">edad</span>) <span class="cm"># Ahora sí es un número</span>
+        </div>
+      </div>
+
+    </div>
+    
+    <div class="col">
+
+      <div class="note-card green">
+        <h3>🔀 Decisiones (IF / ELIF / ELSE)</h3>
+        <p>Le enseñamos a la compu a elegir caminos. <strong>elif</strong> agrega más opciones intermedias. ¡Ojo a la <strong>sangría</strong> (los espacios adentro)!</p>
+        <div class="code-block">
+          <span class="kw">if</span> <span class="nm">clase</span> == <span class="st">"Mago"</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="st">"Magia"</span>)<br>
+          <span class="kw">elif</span> <span class="nm">clase</span> == <span class="st">"Orco"</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="st">"Fuerza"</span>)<br>
+          <span class="kw">else</span>:<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="fn">print</span>(<span class="st">"Error: No existe"</span>)
+        </div>
+      </div>
+
+      <div class="note-card">
+        <h3>⚖️ Operadores de Comparación</h3>
+        <p>Los usamos junto con el <code>if</code> para comparar cosas:</p>
+        <ul>
+          <li><code>==</code> <strong>Exactamente igual</strong> (¡DOBLE IGUAL!)</li>
+          <li><code>!=</code> <strong>Diferente a</strong></li>
+          <li><code>&gt;</code> <strong>Mayor que</strong> (Ej: 18 > 12)</li>
+          <li><code>&lt;</code> <strong>Menor que</strong> (Ej: 10 < 15)</li>
+          <li><code>&gt;=</code> <strong>Mayor o igual que</strong></li>
+          <li><code>&lt;=</code> <strong>Menor o igual que</strong></li>
+        </ul>
+      </div>
+
+      <div class="note-card orange">
+        <h3>🛡️ Contraseña Perfecta</h3>
+        <p>Recordá las 3 reglas de oro para la Ciberseguridad:</p>
+        <ul>
+          <li><strong>Larga:</strong> Más de 8 letras.</li>
+          <li><strong>Rara:</strong> Mezclar MAYÚSCULAS, números y símbolos (como @, !).</li>
+          <li><strong>Sin datos personales:</strong> No usar nombres ni fechas.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

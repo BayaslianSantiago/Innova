@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Práctico — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.65; font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .top-stripe { height: 5px; background: linear-gradient(90deg, #ff4b4b, #ff7676, #ff4b4b); margin-bottom: 22px; }
+
+    .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1.5px solid #e2e8f0; }
+    .school-tag { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #ff4b4b; margin-bottom: 4px; }
+    .doc-title { font-size: 19pt; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; letter-spacing: -0.4px; }
+    .doc-meta { font-size: 9.5pt; color: #64748b; font-weight: 500; }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; }
+    .unit-badge { display: inline-block; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; background: #fff0f0; color: #ff4b4b; border: 1px solid #ffd0d0; margin-bottom: 6px; }
+    .year-badge { display: block; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
+
+    .objective-box { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #ff4b4b; border-radius: 6px; padding: 13px 16px; margin-bottom: 26px; }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    
+    h2 { font-size: 12.5pt; font-weight: 800; color: #ff4b4b; margin: 26px 0 10px 0; padding-bottom: 5px; border-bottom: 1.5px solid #e2e8f0; }
+    p { margin: 0 0 11px 0; font-size: 12pt; }
+    
+    .criteria-list { list-style: none; padding-left: 0; margin: 0 0 16px 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 11.5pt;}
+    .criteria-item::before { content: "▸"; color: #ff4b4b; font-size: 12pt; position: absolute; left: 0; top: 0; }
+    .criteria-name { font-weight: 700; color: #0f172a; }
+
+    .callout { display: flex; gap: 11px; align-items: flex-start; padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: 11.5pt; }
+    .callout.info { background: #f5f3ff; border: 1px solid #ddd6fe; color: #6d28d9; }
+    .callout.code { background: #0f172a; border: 1px solid #334155; color: #e2e8f0; font-family: 'JetBrains Mono', monospace; font-size: 10pt; line-height: 1.4; white-space: pre;}
+
+    .entrega-box { margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 20px; }
+    .entrega-box h4 { font-size: 10pt; font-weight: 800; text-transform: uppercase; color: #64748b; margin: 0 0 10px 0; }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Hello Streamlit (Setup Web)</h1>
+      <p class="doc-meta"><strong>Ciencia de Datos y Análisis</strong> &nbsp;·&nbsp; 6to Año (2do Cuatrimestre)</p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Unidad 6</span>
+      <span class="year-badge">Trabajo Práctico</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>El Contexto:</strong> Antes de construir el mega proyecto final del cuatrimestre, debemos comprobar que los servidores de GitHub pueden levantar una página web en vivo. Crearán una aplicación web de 3 líneas de código.</p>
+  </div>
+
+  <h2>Misión 1: Escribir la Web</h2>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Entorno:</span> Abran su repositorio <code>innova-data-lab</code> en Codespaces.</li>
+    <li class="criteria-item"><span class="criteria-name">El Archivo:</span> Creen un archivo nuevo llamado <code>app.py</code>. Copien y peguen EXACTAMENTE este código:
+      <div class="callout code" style="margin-top:8px; padding: 10px;">import streamlit as st
+
+st.title("Mi primera Web de Datos")
+st.write("¡Los servidores están en línea!")</div>
+    </li>
+  </ul>
+
+  <h2>Misión 2: Lanzar el Servidor</h2>
+  <p>En el trabajo práctico anterior, usábamos el botón de "Play" para ejecutar cosas en la terminal. Ahora tenemos que decirle a la computadora que actúe como un Servidor Web que mantenga la página abierta.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item">Abran la <strong>Terminal</strong> en la parte inferior de la pantalla de Codespaces.</li>
+    <li class="criteria-item">Escriban el siguiente comando y presionen Enter:
+      <div class="callout code" style="margin-top:8px; padding: 10px;">streamlit run app.py</div>
+    </li>
+    <li class="criteria-item"><span class="criteria-name">El Milagro:</span> GitHub detectará el servidor y les abrirá automáticamente una nueva pestaña en el navegador con su página web funcionando.</li>
+  </ul>
+
+  <h2>Misión 3: El Diseño Interactivo (Preview)</h2>
+  <div class="callout info">
+    <div class="icon">✨</div>
+    <p><strong>Magia Instantánea:</strong> Mantengan la pestaña de su nueva web abierta, vuelvan al código, agreguen debajo un <code>st.balloons()</code>, guarden el archivo y vean qué pasa en la web.</p>
+  </div>
+
+  <div class="entrega-box">
+    <h4>Formato de Entrega</h4>
+    <p>Acuérdense de hacer el <strong>Stage, Commit y Push</strong> de su archivo <code>app.py</code>. Entreguen en el Classroom una captura de pantalla de la página web funcionando con los globos.</p>
+  </div>
+
+</body>
+</html>

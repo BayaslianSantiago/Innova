@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Trabajo Práctico — INNOVA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 18mm 16mm; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: #1e293b; line-height: 1.65; font-size: 10.5pt;
+      background: #ffffff;
+    }
+
+    .top-stripe { height: 5px; background: linear-gradient(90deg, #00d2ff, #3a7bd5, #8e2de2); margin-bottom: 22px; }
+
+    .doc-header { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; padding-bottom: 18px; margin-bottom: 24px; border-bottom: 1.5px solid #e2e8f0; }
+    .school-tag { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #3a7bd5; margin-bottom: 4px; }
+    .doc-title { font-size: 19pt; font-weight: 800; color: #0f172a; margin: 0 0 6px 0; letter-spacing: -0.4px; }
+    .doc-meta { font-size: 9.5pt; color: #64748b; font-weight: 500; }
+    .doc-meta strong { color: #1e293b; }
+
+    .header-badge { text-align: right; }
+    .unit-badge { display: inline-block; font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 12px; border-radius: 999px; background: #eff6ff; color: #3a7bd5; border: 1px solid #bfdbfe; margin-bottom: 6px; }
+    .year-badge { display: block; font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #94a3b8; }
+
+    .objective-box { background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #3a7bd5; border-radius: 6px; padding: 13px 16px; margin-bottom: 26px; }
+    .objective-box p { margin: 0; font-size: 10.5pt; color: #334155; }
+    
+    h2 { font-size: 12.5pt; font-weight: 800; color: #3a7bd5; margin: 26px 0 10px 0; padding-bottom: 5px; border-bottom: 1.5px solid #e2e8f0; }
+    p { margin: 0 0 11px 0; font-size: 12pt; }
+    
+    .criteria-list { list-style: none; padding-left: 0; margin: 0 0 16px 0; }
+    .criteria-item { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 11.5pt;}
+    .criteria-item::before { content: "▸"; color: #3a7bd5; font-size: 12pt; position: absolute; left: 0; top: 0; }
+    .criteria-name { font-weight: 700; color: #0f172a; }
+
+    .callout { display: flex; gap: 11px; align-items: flex-start; padding: 16px 18px; border-radius: 6px; margin-bottom: 16px; }
+    .callout .icon { font-size: 14pt; flex-shrink: 0; }
+    .callout p { margin: 0; font-size: 11.5pt; }
+    .callout.info { background: #f5f3ff; border: 1px solid #ddd6fe; color: #6d28d9; }
+
+    .entrega-box { margin-top: 30px; background: #f8fafc; border: 1.5px dashed #cbd5e1; border-radius: 8px; padding: 20px; }
+    .entrega-box h4 { font-size: 10pt; font-weight: 800; text-transform: uppercase; color: #64748b; margin: 0 0 10px 0; }
+    .entrega-box p { margin: 0; font-size: 11.5pt; color: #475569; }
+  </style>
+</head>
+<body>
+
+  <div class="top-stripe"></div>
+
+  <div class="doc-header">
+    <div class="header-left">
+      <p class="school-tag">INNOVA Establecimiento Educativo</p>
+      <h1 class="doc-title">Definiendo KPIs y Métricas</h1>
+      <p class="doc-meta"><strong>Ciencia de Datos y Análisis</strong> &nbsp;·&nbsp; 6to Año (1er Cuatrimestre)</p>
+    </div>
+    <div class="header-badge">
+      <span class="unit-badge">Unidad 1</span>
+      <span class="year-badge">Trabajo Práctico</span>
+    </div>
+  </div>
+
+  <div class="objective-box">
+    <p><strong>Rol Asignado:</strong> Eres un Analista de Datos Junior. Tu objetivo es definir qué números le importan a un cliente, crear indicadores (KPIs) inteligentes y defender tus decisiones ante el Director (IA).</p>
+  </div>
+
+  <h2>Misión 1: El Cliente Comercial</h2>
+  <p>Deben elegir o inventar una empresa para analizar. Escriban en un documento de texto:</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">Nombre y Rubro:</span> (Ejemplo: "StreamPlus" - Servicio de streaming por suscripción).</li>
+    <li class="criteria-item"><span class="criteria-name">Problema de Negocio:</span> Definan brevemente qué necesita mejorar esa empresa. (Ejemplo: <em>Tienen muchas suscripciones nuevas, pero la gente se da de baja al segundo mes</em>).</li>
+  </ul>
+
+  <h2>Misión 2: Diseño de KPIs (Regla SMART)</h2>
+  <p>En base al problema del cliente, diseñen y escriban exactamente 3 Indicadores Clave de Rendimiento (KPIs). Todos deben cumplir obligatoriamente la regla SMART.</p>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">S - Específico:</span> ¿Qué medirán exactamente?</li>
+    <li class="criteria-item"><span class="criteria-name">M - Medible:</span> ¿Cómo se cuantifica? (Porcentaje, dólares, cantidad neta).</li>
+    <li class="criteria-item"><span class="criteria-name">A - Alcanzable:</span> ¿Es una meta realista?</li>
+    <li class="criteria-item"><span class="criteria-name">R - Relevante:</span> Justifiquen en un renglón por qué este KPI solucionará el problema de la Misión 1.</li>
+    <li class="criteria-item"><span class="criteria-name">T - Temporal:</span> ¿En qué período de tiempo se medirá? (Diario, mensual, semestral).</li>
+  </ul>
+
+  <h2>Misión 3: Pensamiento Crítico Asistido (IA)</h2>
+  <div class="callout info">
+    <div class="icon">💼</div>
+    <p><strong>Reunión con el Director:</strong> Ahora que tienen sus 3 KPIs, es momento de someterlos a prueba con una Inteligencia Artificial, actuando como su supervisor exigente.</p>
+  </div>
+  <ul class="criteria-list">
+    <li class="criteria-item"><span class="criteria-name">El Prompt:</span> Pídanle a ChatGPT/Gemini lo siguiente: <em>"Actúa como un Director de Datos estricto. Soy un analista junior y este es mi cliente comercial: [Misión 1]. Estos son los 3 KPIs que propongo: [Misión 2]. Critica mis KPIs diciéndome si cumplen la regla SMART o si caí en métricas vanidosas."</em></li>
+    <li class="criteria-item"><span class="criteria-name">La Defensa:</span> Copien el feedback que les dio la IA en su documento. Debajo de él, escriban su conclusión final: ¿Están de acuerdo con la crítica de la IA? ¿Modificarían sus KPIs tras escucharla?</li>
+  </ul>
+
+  <div class="entrega-box">
+    <h4>¿Qué entregamos hoy?</h4>
+    <p>Guarden su documento (Google Docs o Word) conteniendo el cliente, los 3 KPIs, la respuesta del "Director" (IA) y su conclusión final de la defensa. Envíen el archivo a la tarea de Google Classroom.</p>
+  </div>
+
+</body>
+</html>
