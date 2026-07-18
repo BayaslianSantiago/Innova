@@ -403,6 +403,69 @@
       .header-sub { font-size: 0.6rem; }
       .ccard-top { padding-bottom: 1.5rem !important; }
     }
+
+    /* ══ BARRA DE BÚSQUEDA ══ */
+    .search-container {
+      margin: 1.5rem 0 2.5rem 0;
+      width: 100%;
+    }
+    .search-box-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .search-icon {
+      position: absolute;
+      left: 1.25rem;
+      font-size: 1.1rem;
+      pointer-events: none;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .search-input {
+      width: 100%;
+      padding: 0.95rem 3rem 0.95rem 3rem;
+      border-radius: 14px;
+      border: 1px solid var(--borde);
+      background: var(--s1);
+      color: var(--texto);
+      font-family: inherit;
+      font-size: 0.92rem;
+      font-weight: 500;
+      outline: none;
+      box-shadow: 0 4px 15px var(--sombra);
+      transition: all 0.25s ease;
+    }
+    .search-input:focus {
+      border-color: var(--azul-b);
+      box-shadow: 0 4px 20px color-mix(in srgb, var(--azul) 25%, transparent), 0 0 0 3px color-mix(in srgb, var(--azul) 15%, transparent);
+      transform: translateY(-1px);
+    }
+    .search-input:focus ~ .search-icon {
+      opacity: 0.9;
+    }
+    .clear-btn {
+      position: absolute;
+      right: 1.25rem;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      color: var(--texto2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .clear-btn:hover {
+      background-color: var(--borde);
+      color: var(--blanco);
+    }
 </style>
 </head>
 <body>
@@ -480,8 +543,31 @@
 <!-- ══ MAIN ══ -->
 <main class="wrap">
 
-  <!-- MATERIAS (BOTONES PRINCIPALES) -->
-  <div class="sec-label" style="margin-bottom: 1.5rem; margin-top: 1rem;">Mis Materias</div>
+  <!-- BARRA DE BÚSQUEDA -->
+  <div class="search-container">
+    <div class="search-box-wrapper">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="global-search" class="search-input" placeholder="Buscar unidades, TPs, diapositivas, temas... (ej. bucles, kpi, api)" autocomplete="off" />
+      <button id="clear-search" class="clear-btn" style="display: none;" title="Limpiar búsqueda">✕</button>
+    </div>
+  </div>
+
+  <!-- RESULTADOS DE BÚSQUEDA -->
+  <div id="search-results-section" style="display: none; margin-bottom: 3rem;">
+    <div class="sec-label" style="margin-bottom: 1.5rem;">Resultados de Búsqueda (<span id="results-count">0</span>)</div>
+    <div id="search-results-grid" class="courses-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));">
+      <!-- Se llenará dinámicamente -->
+    </div>
+    <div id="no-results-message" style="display: none; text-align: center; padding: 3rem 1.5rem; border: 1px dashed var(--borde); border-radius: 16px; background: var(--s1); max-width: 600px; margin: 0 auto;">
+      <div style="font-size: 2.2rem; margin-bottom: 0.75rem;">🔍📭</div>
+      <h4 style="font-weight: 700; color: var(--blanco); margin-bottom: 0.5rem; font-size: 1.1rem;">No se encontraron resultados</h4>
+      <p style="font-size: 0.82rem; color: var(--texto2); line-height: 1.4;">Probá buscando otra palabra clave como "bucles", "html", "kpi", "api" o "git".</p>
+    </div>
+  </div>
+
+  <div id="default-homepage-sections">
+    <!-- MATERIAS (BOTONES PRINCIPALES) -->
+    <div class="sec-label" style="margin-bottom: 1.5rem; margin-top: 1rem;">Mis Materias</div>
   <div class="courses-grid" style="grid-template-columns: repeat(3, 1fr);">
 
     <!-- 1er Año -->
@@ -575,6 +661,7 @@
     </a>
   </div>
 
+  </div> <!-- /default-homepage-sections -->
 </main>
 
 <footer>
@@ -588,7 +675,7 @@
 
 
 <script>
-  // Theme Toggle Logic
+  // Theme Toggle & Global Search Logic
   document.addEventListener('DOMContentLoaded', () => {
     const themeBtn = document.getElementById('theme-btn');
     
@@ -611,6 +698,174 @@
           themeBtn.textContent = '🌙';
         }
       });
+    }
+
+    // --- BÚSQUEDA GLOBAL ---
+    const resources = [
+      // 1er Año
+      { course: "1er Año", type: "Planificación", name: "Planificación Anual", url: "1er Año Programación/planificacion_anual.html", tags: ["planificacion", "anual", "introduccion", "programacion", "ciberseguridad", "ia", "python"] },
+      { course: "1er Año", type: "Slides", name: "Diapositivas U1: Bloques al Código", url: "1er Año Programación/Unidad 1/diapositivas_u1.html", tags: ["u1", "bloques", "codigo", "algoritmos", "seguridad", "ciberseguridad"] },
+      { course: "1er Año", type: "TP", name: "TP U1: Algoritmo Seguro", url: "1er Año Programación/Unidad 1/tp_u1.html", tags: ["u1", "algoritmo", "seguro", "practica"] },
+      { course: "1er Año", type: "Slides", name: "Diapositivas U2: Hablando con la Compu", url: "1er Año Programación/Unidad 2/diapositivas_u2.html", tags: ["u2", "consola", "entradas", "salidas", "pantalla", "teclado", "python", "input", "print"] },
+      { course: "1er Año", type: "TP", name: "TP U2: Entradas y Salidas", url: "1er Año Programación/Unidad 2/tp_u2.html", tags: ["u2", "input", "print", "variables", "python"] },
+      { course: "1er Año", type: "Slides", name: "Diapositivas U3: Tomando Decisiones", url: "1er Año Programación/Unidad 3/diapositivas_u3.html", tags: ["u3", "condicionales", "decisiones", "if", "else", "elif", "python"] },
+      { course: "1er Año", type: "TP", name: "TP U3: IF / ELSE", url: "1er Año Programación/Unidad 3/tp_u3.html", tags: ["u3", "if", "else", "condiciones", "python"] },
+      { course: "1er Año", type: "TP", name: "TP Integrador: Creador RPG", url: "1er Año Programación/Integrador/tp_integrador.html", tags: ["integrador", "juego", "rpg", "evaluacion", "c1", "python"] },
+      { course: "1er Año", type: "Apuntes", name: "Hoja de Trucos 1er Cuatrimestre", url: "1er Año Programación/Integrador/cuadernillo_c1.html", tags: ["trucos", "apuntes", "resumen", "conceptos", "hoja", "machete"] },
+      { course: "1er Año", type: "Slides", name: "Diapositivas U4: El Poder de Repetir", url: "1er Año Programación/Unidad 4/diapositivas_u4.html", tags: ["u4", "bucles", "repetir", "for", "while", "ciclos", "python"] },
+      { course: "1er Año", type: "TP", name: "TP U4: Ciclo FOR", url: "1er Año Programación/Unidad 4/tp_u4.html", tags: ["u4", "ciclo", "for", "bucles", "python"] },
+      { course: "1er Año", type: "Slides", name: "Diapositivas U5: El Inventario (Listas)", url: "1er Año Programación/Unidad 5/diapositivas_u5.html", tags: ["u5", "listas", "inventario", "datos", "colecciones", "append", "python"] },
+      { course: "1er Año", type: "TP", name: "TP U5: Mochila Mágica", url: "1er Año Programación/Unidad 5/tp_u5.html", tags: ["u5", "listas", "mochila", "juego", "python", "append"] },
+      { course: "1er Año", type: "Slides", name: "Diapositivas U6: El Escáner (For en Listas)", url: "1er Año Programación/Unidad 6/diapositivas_u6.html", tags: ["u6", "recorrer", "for", "listas", "escaner", "recorrido", "python"] },
+      { course: "1er Año", type: "TP", name: "TP U6: Jefe Final", url: "1er Año Programación/Unidad 6/tp_u6.html", tags: ["u6", "jefe", "final", "listas", "for", "python"] },
+      { course: "1er Año", type: "TP", name: "TP Integrador: Batalla Final", url: "1er Año Programación/Integrador/tp_integrador_2.html", tags: ["integrador", "batalla", "final", "evaluacion", "c2", "python"] },
+      { course: "1er Año", type: "Apuntes", name: "Hoja de Trucos 2do Cuatrimestre", url: "1er Año Programación/Integrador/cuadernillo_c2.html", tags: ["trucos", "apuntes", "resumen", "listas", "bucles", "hoja", "machete"] },
+
+      // 3er Año
+      { course: "3er Año", type: "Planificación", name: "Planificación Anual", url: "3er Año Programación/planificacion_anual.html", tags: ["planificacion", "anual", "programacion", "html", "apis", "criptografia"] },
+      { course: "3er Año", type: "Slides", name: "Diapositivas U1: Magia Visual (HTML)", url: "3er Año Programación/Unidad 1/diapositivas_u1.html", tags: ["u1", "html", "web", "visual", "etiquetas", "maquetado", "estructuras"] },
+      { course: "3er Año", type: "TP", name: "TP U1: El Esqueleto Web", url: "3er Año Programación/Unidad 1/tp_u1.html", tags: ["u1", "esqueleto", "web", "html", "estructura"] },
+      { course: "3er Año", type: "Slides", name: "Diapositivas U2: El Copiloto Hacker", url: "3er Año Programación/Unidad 2/diapositivas_u2.html", tags: ["u2", "copiloto", "hacker", "ia", "prompt", "engineering", "inteligencia artificial", "chatgpt"] },
+      { course: "3er Año", type: "TP", name: "TP U2: Prompt Engineering", url: "3er Año Programación/Unidad 2/tp_u2.html", tags: ["u2", "prompt", "engineering", "chatgpt", "ia"] },
+      { course: "3er Año", type: "Slides", name: "Diapositivas U3: Bases de Datos (Diccionarios)", url: "3er Año Programación/Unidad 3/diapositivas_u3.html", tags: ["u3", "diccionarios", "datos", "clave", "valor", "estructuras", "python"] },
+      { course: "3er Año", type: "TP", name: "TP U3: La Scaloneta", url: "3er Año Programación/Unidad 3/tp_u3.html", tags: ["u3", "scaloneta", "diccionarios", "futbol", "afa", "python"] },
+      { course: "3er Año", type: "TP", name: "TP Integrador: Sistema AFA", url: "3er Año Programación/Integrador/tp_integrador.html", tags: ["integrador", "afa", "futbol", "sistema", "evaluacion", "c1", "diccionarios", "python"] },
+      { course: "3er Año", type: "Apuntes", name: "Hoja de Trucos 1er Cuatrimestre", url: "3er Año Programación/Integrador/cuadernillo_c1.html", tags: ["trucos", "apuntes", "resumen", "diccionarios", "html", "hoja", "machete"] },
+      { course: "3er Año", type: "Slides", name: "Diapositivas U4: El Arsenal (Funciones y Módulos)", url: "3er Año Programación/Unidad 4/diapositivas_u4.html", tags: ["u4", "funciones", "modulos", "def", "parametros", "reusabilidad", "python"] },
+      { course: "3er Año", type: "TP", name: "TP U4: Creando Herramientas", url: "3er Año Programación/Unidad 4/tp_u4.html", tags: ["u4", "funciones", "herramientas", "def", "python"] },
+      { course: "3er Año", type: "Slides", name: "Diapositivas U5: APIs y JSON", url: "3er Año Programación/Unidad 5/diapositivas_u5.html", tags: ["u5", "api", "json", "web", "peticiones", "requests", "servicios", "datos", "python"] },
+      { course: "3er Año", type: "TP", name: "TP U5: Conexión Satelital", url: "3er Año Programación/Unidad 5/tp_u5.html", tags: ["u5", "api", "satelital", "peticion", "json", "python"] },
+      { course: "3er Año", type: "Slides", name: "Diapositivas U6: Mensajes Secretos (Criptografía)", url: "3er Año Programación/Unidad 6/diapositivas_u6.html", tags: ["u6", "criptografia", "seguridad", "cifrado", "cesar", "mensajes", "secretos", "python"] },
+      { course: "3er Año", type: "TP", name: "TP U6: Analista Forense", url: "3er Año Programación/Unidad 6/tp_u6.html", tags: ["u6", "analista", "forense", "cifrado", "seguridad", "python"] },
+      { course: "3er Año", type: "TP", name: "TP Integrador C2: Operación Fantasma", url: "3er Año Programación/Integrador/tp_integrador_2.html", tags: ["integrador", "operacion", "fantasma", "c2", "criptografia", "seguridad", "python"] },
+      { course: "3er Año", type: "Apuntes", name: "Hoja de Trucos 2do Cuatrimestre", url: "3er Año Programación/Integrador/cuadernillo_c2.html", tags: ["trucos", "apuntes", "resumen", "apis", "funciones", "hoja", "machete"] },
+
+      // 6to Año
+      { course: "6to Año", type: "Planificación", name: "Planificación Anual", url: "6to Año Tecnologías Digitales/planificacion_anual.html", tags: ["planificacion", "anual", "tecnologias", "digitales", "kpis", "streamlit", "dashboards"] },
+      { course: "6to Año", type: "Slides", name: "Diapositivas U1: El Valor del Dato (KPIs)", url: "6to Año Tecnologías Digitales/Unidad 1/diapositivas_u1.html", tags: ["u1", "kpi", "dato", "valor", "metricas", "negocio", "indicadores"] },
+      { course: "6to Año", type: "TP", name: "TP U1: Definiendo Métricas", url: "6to Año Tecnologías Digitales/Unidad 1/tp_u1.html", tags: ["u1", "metricas", "kpi", "definicion", "indicadores"] },
+      { course: "6to Año", type: "Slides", name: "Diapositivas U2: Fundamentos Dashboards", url: "6to Año Tecnologías Digitales/Unidad 2/diapositivas_u2.html", tags: ["u2", "dashboard", "tablero", "visualizacion", "graficos", "dataviz"] },
+      { course: "6to Año", type: "TP", name: "TP U2: Analista Forense (DataViz)", url: "6to Año Tecnologías Digitales/Unidad 2/tp_u2.html", tags: ["u2", "dataviz", "forense", "analisis", "graficos", "visualizacion"] },
+      { course: "6to Año", type: "Slides", name: "Diapositivas U3: Arquitectura de Información", url: "6to Año Tecnologías Digitales/Unidad 3/diapositivas_u3.html", tags: ["u3", "arquitectura", "informacion", "wireframe", "diseño", "esquema", "wireframing"] },
+      { course: "6to Año", type: "TP", name: "TP U3: Ingeniería Inversa (Wireframing)", url: "6to Año Tecnologías Digitales/Unidad 3/tp_u3.html", tags: ["u3", "wireframing", "ingenieria", "inversa", "diseño", "esquema"] },
+      { course: "6to Año", type: "TP", name: "TP Integrador C1: Dashboard Unplugged", url: "6to Año Tecnologías Digitales/Integrador/tp_integrador_1.html", tags: ["integrador", "dashboard", "unplugged", "c1", "evaluacion", "papel"] },
+      { course: "6to Año", type: "Apuntes", name: "Hoja de Trucos 1er Cuatrimestre", url: "6to Año Tecnologías Digitales/Integrador/cuadernillo_c1.html", tags: ["trucos", "apuntes", "resumen", "kpis", "dashboards", "hoja", "machete"] },
+      { course: "6to Año", type: "Slides", name: "Diapositivas U4: Entornos Profesionales", url: "6to Año Tecnologías Digitales/Unidad 4/diapositivas_u4.html", tags: ["u4", "git", "github", "codespaces", "entornos", "desarrollo", "profesional", "control", "versiones"] },
+      { course: "6to Año", type: "TP", name: "TP U4: Setup en la Nube (GitHub)", url: "6to Año Tecnologías Digitales/Unidad 4/tp_u4.html", tags: ["u4", "github", "git", "setup", "nube", "codespaces"] },
+      { course: "6to Año", type: "Slides", name: "Diapositivas U5: Pandas & Manipulación", url: "6to Año Tecnologías Digitales/Unidad 5/diapositivas_u5.html", tags: ["u5", "pandas", "dataframe", "manipulacion", "datos", "limpieza", "python", "analisis"] },
+      { course: "6to Año", type: "TP", name: "TP U5: Manipulación y Limpieza", url: "6to Año Tecnologías Digitales/Unidad 5/tp_u5.html", tags: ["u5", "pandas", "limpieza", "datos", "python"] },
+      { course: "6to Año", type: "Slides", name: "Diapositivas U6: Despliegue con Streamlit", url: "6to Año Tecnologías Digitales/Unidad 6/diapositivas_u6.html", tags: ["u6", "streamlit", "despliegue", "web", "python", "dashboard", "nube"] },
+      { course: "6to Año", type: "TP", name: "TP U6: Hello Streamlit", url: "6to Año Tecnologías Digitales/Unidad 6/tp_u6.html", tags: ["u6", "streamlit", "hello", "python"] },
+      { course: "6to Año", type: "TP", name: "Proyecto Final Anual C2", url: "6to Año Tecnologías Digitales/Integrador/tp_integrador_2.html", tags: ["proyecto", "final", "anual", "streamlit", "dashboard", "c2", "evaluacion", "pandas", "python"] },
+      { course: "6to Año", type: "Apuntes", name: "Hoja de Trucos 2do Cuatrimestre", url: "6to Año Tecnologías Digitales/Integrador/cuadernillo_c2.html", tags: ["trucos", "apuntes", "resumen", "pandas", "streamlit", "git", "hoja", "machete"] }
+    ];
+
+    const searchInput = document.getElementById('global-search');
+    const clearBtn = document.getElementById('clear-search');
+    const defaultSections = document.getElementById('default-homepage-sections');
+    const searchSection = document.getElementById('search-results-section');
+    const resultsGrid = document.getElementById('search-results-grid');
+    const resultsCount = document.getElementById('results-count');
+    const noResultsMsg = document.getElementById('no-results-message');
+
+    // Helper to clean search query (remove accents, to lowercase)
+    const cleanText = text => text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
+
+    // Map course to accent colors
+    const courseAccents = {
+      "1er Año": "#0088CE",
+      "3er Año": "#8CC63F",
+      "6to Año": "#FDB913"
+    };
+
+    // Map resource type to badge style class or styles
+    function getBadgeDetails(type) {
+      const t = type.toLowerCase();
+      if (t === 'plan' || t === 'planificación') {
+        return { className: 'fb-plan', style: '' };
+      } else if (t === 'slides' || t === 'diapositivas') {
+        return { className: 'fb-dias', style: '' };
+      } else if (t === 'tp' || t === 'trabajo práctico') {
+        return { className: 'fb-tp', style: '' };
+      } else if (t === 'apuntes' || t === 'hoja de trucos') {
+        return { className: '', style: 'background:rgba(140,198,63,0.15); color:#a8d870; border:1px solid rgba(140,198,63,0.3);' };
+      } else if (t.includes('evaluación') || t.includes('proyecto')) {
+        return { className: '', style: 'background:rgba(253,185,19,0.15); color:#e2ae35; border:1px solid rgba(253,185,19,0.3);' };
+      }
+      return { className: '', style: 'background:var(--borde); color:var(--texto2); border:1px solid var(--borde2);' };
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        const query = cleanText(searchInput.value);
+
+        if (query.length === 0) {
+          // Hide search results, show home
+          searchSection.style.display = 'none';
+          defaultSections.style.display = 'block';
+          clearBtn.style.display = 'none';
+          return;
+        }
+
+        // Show clear button
+        clearBtn.style.display = 'block';
+
+        // Filter resources
+        const filtered = resources.filter(res => {
+          const nameClean = cleanText(res.name);
+          const typeClean = cleanText(res.type);
+          const tagsMatch = res.tags.some(tag => cleanText(tag).includes(query));
+          return nameClean.includes(query) || typeClean.includes(query) || tagsMatch;
+        });
+
+        // Toggle visibility
+        defaultSections.style.display = 'none';
+        searchSection.style.display = 'block';
+        resultsCount.innerText = filtered.length;
+
+        if (filtered.length === 0) {
+          resultsGrid.style.display = 'none';
+          noResultsMsg.style.display = 'block';
+        } else {
+          noResultsMsg.style.display = 'none';
+          resultsGrid.style.display = 'grid';
+
+          // Render results
+          resultsGrid.innerHTML = filtered.map(item => {
+            const accentColor = courseAccents[item.course] || 'var(--azul)';
+            const badge = getBadgeDetails(item.type);
+            const badgeAttr = badge.className ? `class="fb ${badge.className}"` : `class="fb" style="${badge.style}"`;
+
+            return `
+              <a href="${item.url}" class="ccard" style="text-decoration: none; display: block; border-radius: 12px; overflow: hidden; height: 100%; transition: transform 0.2s, box-shadow 0.2s; position: relative;">
+                <!-- Border top matching course accent -->
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 3px; background: ${accentColor};"></div>
+                <div style="padding: 1.25rem; display: flex; flex-direction: column; justify-content: space-between; height: calc(100% - 3px); box-sizing: border-box; margin-top: 3px;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem;">
+                      <span class="ccard-pill" style="font-size: 0.6rem; padding: 0.15rem 0.5rem; margin-bottom: 0; border: 1px solid color-mix(in srgb, ${accentColor} 40%, transparent); color: color-mix(in srgb, ${accentColor} 100%, white 30%); background: color-mix(in srgb, ${accentColor} 12%, transparent);">${item.course}</span>
+                      <span ${badgeAttr} style="font-size: 0.55rem; font-weight: 700; text-transform: uppercase; padding: 0.12rem 0.45rem; border-radius: 999px;">${item.type}</span>
+                    </div>
+                    <h4 style="font-size: 0.88rem; font-weight: 700; color: var(--blanco); line-height: 1.35; margin-top: 0.4rem; font-family: 'Inter', sans-serif;">${item.name}</h4>
+                  </div>
+                  <div style="margin-top: 1rem; font-size: 0.72rem; color: ${accentColor}; display: flex; align-items: center; gap: 0.3rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+                    Abrir Recurso <span>→</span>
+                  </div>
+                </div>
+              </a>
+            `;
+          }).join('');
+        }
+      });
+
+      // Clear search button behavior
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          searchInput.value = '';
+          searchInput.dispatchEvent(new Event('input'));
+          searchInput.focus();
+        });
+      }
     }
   });
 </script>
