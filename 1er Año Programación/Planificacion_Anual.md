@@ -1,4 +1,4 @@
-# Planificación Anual: Introducción a la Programación (1er Año)
+# Planificación Anual: Programación (1er Año)
 
 ## 1. Fundamentación
 Dado que los estudiantes ya cuentan con una base de programación en bloques (Scratch) de la escuela primaria, esta materia dará el salto directamente al código de texto utilizando Python. Se trabajará exclusivamente en el ecosistema **Google Colaboratory (Colab)** aprovechando las Chromebooks institucionales. Aunque la columna vertebral será la programación, la materia tendrá un fuerte **enfoque transversal**: se mecharán continuamente conceptos de ciberseguridad (contraseñas seguras, privacidad), la importancia de los datos en la actualidad y el uso ético de herramientas de Inteligencia Artificial para asistir en el desarrollo de código. Al contar con 1 hora semanal, el enfoque será pausado y guiado.
